@@ -39,6 +39,17 @@ Launching the server :
 php bin/console server:run
 ````
 
+How to contribute to the project
+--------------------------------
+
+Commit synthax : 
+* [ADD] your message - *When you add anything in the project*
+* [REMOVE] your message - *When you remove anything in the project*
+* [UPDATE] your message  - *When you update anything in the project*
+* [WORKFLOW] your message - *When you are impacting the project workflow*
+
+Commit when you want and what is necessary to the project
+
 
 Credentials
 -----------
