@@ -1,69 +1,56 @@
-Symfony Standard Edition
+Welcome to the Sodidarité Sida - Trombinoscope project
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+This repository is made for the versioning of the web application of Solidarité Sida - Trombinoscope.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
-
-What's inside?
+Who work on it ?
 --------------
+[**Anne Maurice-Peroumal**][1] - *Head of Project*
 
-The Symfony Standard Edition is configured with the following defaults:
+[**Jennyfer Millet**][2] - *Designer UX/UI*
 
-  * An AppBundle you can use to start coding;
+[**Aymeric Chappuy**][3] - *Designer UX/UI*
 
-  * Twig as the only configured template engine;
+[**Timothée Blanco**][4] - *Marketing Correspondant*
 
-  * Doctrine ORM/DBAL;
+[**Nicolas Castells**][5] - *Front-end Developer*
 
-  * Swiftmailer;
+[**Antoine Gourtay**][6] - *Back-end Developer*
 
-  * Annotations enabled for everything.
+How to install the project
+--------------------------
 
-It comes pre-configured with the following bundles:
+First installation :
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+````
+git clone https://github.com/AntoineGourtayHetic/solidarite-sida-webapp.git
+cd solidarite-sida-webapp
+composer install
+php bin/symfony_requirements
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+php bin/console doctrine:database:create
+php bin/console doctrine:schema:update --dump-sql
+php bin/console doctrine:schema:update --force
+````
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+Launching the server :
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+````
+php bin/console server:run
+````
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
+Credentials
+-----------
 
 All libraries and bundles included in the Symfony Standard Edition are
 released under the MIT or BSD license.
 
-Enjoy!
+Sortez couverts !
 
-[1]:  https://symfony.com/doc/2.8/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/2.8/doctrine.html
-[8]:  https://symfony.com/doc/2.8/templating.html
-[9]:  https://symfony.com/doc/2.8/security.html
-[10]: https://symfony.com/doc/2.8/email.html
-[11]: https://symfony.com/doc/2.8/logging.html
-[12]: https://symfony.com/doc/2.8/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+[1]: https://github.com/annemp
+[2]: https://github.com/Jennyfer-M
+[3]: https://github.com/nico0290
+[4]: https://github.com/timothe3192
+[5]: https://github.com/nico0290
+[6]: https://github.com/AntoineGourtayHetic
