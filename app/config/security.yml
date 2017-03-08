@@ -23,26 +23,26 @@ security:
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
 
-      encoders:
-          FOS\UserBundle\Model\UserInterface: bcrypt
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
-      role_hierarchy:
-          ROLE_TEAM_CHIEF: ROLE_TEAM_CHIEF
-          ROLE_ZONE_COORDINATOR: ROLE_ZONE_COORDINATOR
-          ROLE_ADMIN: ROLE_ADMIN
+    role_hierarchy:
+        ROLE_TEAM_CHIEF: ROLE_TEAM_CHIEF
+        ROLE_ZONE_COORDINATOR: ROLE_ZONE_COORDINATOR
+        ROLE_ADMIN: ROLE_ADMIN
 
-      providers:
-          fos_userbundle:
-              id: fos_user.user_provider.username
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
-      firewalls:
-          main:
-              pattern: ^/
-              form_login:
-                  provider: fos_userbundle
-                  csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-              logout:       true
-              anonymous:    true
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
+            logout:       true
+            anonymous:    true
 
-      access_control:
-          - { path: ^/admin/, role: ROLE_ADMIN }
+    access_control:
+        - { path: ^/admin/, role: ROLE_ADMIN }
