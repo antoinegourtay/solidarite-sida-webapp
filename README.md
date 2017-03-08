@@ -39,6 +39,11 @@ Launching the server :
 php bin/console server:run
 ````
 
+Bundles used
+------------
+[FOSUserBundle][7]- *User Management*
+[KnpSnappyBundle][8]- *Bundle for pdf generation*
+
 How to contribute to the project
 --------------------------------
 
@@ -65,3 +70,5 @@ Sortez couverts !
 [4]: https://github.com/timothe3192
 [5]: https://github.com/nico0290
 [6]: https://github.com/AntoineGourtayHetic
+[7]: https://github.com/FriendsOfSymfony/FOSUserBundle
+[8]: https://github.com/KnpLabs/KnpSnappyBundle
