@@ -26,17 +26,16 @@ First installation :
 git clone https://github.com/AntoineGourtayHetic/solidarite-sida-webapp.git
 cd solidarite-sida-webapp
 composer install
-php bin/symfony_requirements
 
-php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --dump-sql
-php bin/console doctrine:schema:update --force
+php app/console doctrine:database:create
+php app/console doctrine:schema:update --dump-sql
+php app/console doctrine:schema:update --force
 ````
 
 Launching the server :
 
 ````
-php bin/console server:run
+php app/console server:run
 ````
 
 Bundles used
