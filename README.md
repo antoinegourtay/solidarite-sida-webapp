@@ -26,6 +26,7 @@ First installation :
 git clone https://github.com/AntoineGourtayHetic/solidarite-sida-webapp.git
 cd solidarite-sida-webapp
 composer install
+php app/check.php
 
 php app/console doctrine:database:create
 php app/console doctrine:schema:update --dump-sql
@@ -41,6 +42,7 @@ php app/console server:run
 Bundles used
 ------------
 [FOSUserBundle][7]- *User Management*
+
 [KnpSnappyBundle][8]- *Bundle for pdf generation*
 
 How to contribute to the project
