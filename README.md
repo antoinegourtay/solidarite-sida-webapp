@@ -13,7 +13,7 @@ Who work on it ?
 
 [**Timothée Blanco**][4] - *Marketing Correspondant*
 
-[**Nicolas Castells**][5] - *Front-end Developer*
+[**Nicolas Castells**][5] - *God Developer*
 
 [**Antoine Gourtay**][6] - *Back-end Developer*
 
@@ -25,18 +25,19 @@ First installation :
 ````
 git clone https://github.com/AntoineGourtayHetic/solidarite-sida-webapp.git
 cd solidarite-sida-webapp
-composer install
-php app/check.php
-
-php app/console doctrine:database:create
-php app/console doctrine:schema:update --dump-sql
-php app/console doctrine:schema:update --force
+make install
 ````
 
 Launching the server :
 
 ````
-php app/console server:run
+make run
+````
+
+Stopping the server :
+
+````
+make stop
 ````
 
 Bundles used
