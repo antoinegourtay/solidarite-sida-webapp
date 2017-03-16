@@ -13,7 +13,7 @@ Who work on it ?
 
 [**Timothée Blanco**][4] - *Marketing Correspondant*
 
-[**Nicolas Castells**][5] - *Front-end Developer*
+[**Nicolas Castells**][5] - *God Developer*
 
 [**Antoine Gourtay**][6] - *Back-end Developer*
 
@@ -25,23 +25,25 @@ First installation :
 ````
 git clone https://github.com/AntoineGourtayHetic/solidarite-sida-webapp.git
 cd solidarite-sida-webapp
-composer install
-php bin/symfony_requirements
-
-php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --dump-sql
-php bin/console doctrine:schema:update --force
+make install
 ````
 
 Launching the server :
 
 ````
-php bin/console server:run
+make run
+````
+
+Stopping the server :
+
+````
+make stop
 ````
 
 Bundles used
 ------------
 [FOSUserBundle][7]- *User Management*
+
 [KnpSnappyBundle][8]- *Bundle for pdf generation*
 
 How to contribute to the project
