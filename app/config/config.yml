@@ -74,11 +74,12 @@ fos_user:
 
 #Config for knp_snappy bundle
 knp_snappy:
+    temporary_folder: %kernel.cache_dir%/snappy
     pdf:
         enabled:    true
-        binary:     /usr/local/bin/wkhtmltopdf #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\"" for Windows users
+        binary:     /usr/local/bin/wkhtmltopdf
         options:    []
     image:
         enabled:    true
-        binary:     /usr/local/bin/wkhtmltoimage #"\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\"" for Windows users
+        binary:     /usr/local/bin/wkhtmltoimage
         options:    []
