@@ -16,6 +16,7 @@ class PdfController extends Controller
     public function indexAction()
     {
         $snappy = $this->get('knp_snappy.pdf');
+        $snappy->setOption('page-size', 'A3');
 
         $html = $this->renderView('pdf/index.html.twig', array(
             'title' => 'bonjour'
