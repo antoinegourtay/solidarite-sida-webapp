@@ -15,9 +15,11 @@ class PdfController extends Controller
      */
     public function indexAction()
     {
+
         //TODO: Get informations from the volunteers table with Doctrine
 
-        $snappy = $this->get('knp_snappy.pdf');
+        $pdf = $this->get('knp_snappy.pdf');
+        $pdf->setOption('page-size', 'A3');
 
         /**
          * In the array, we put the data we want to pass to the twig template
@@ -29,7 +31,7 @@ class PdfController extends Controller
         $filename = 'Trombinoscope';
 
         return new Response(
-            $snappy->getOutputFromHtml($html),
+            $pdf->getOutputFromHtml($html),
             200,
             array(
                 'Content-Type'          => 'application/pdf',
