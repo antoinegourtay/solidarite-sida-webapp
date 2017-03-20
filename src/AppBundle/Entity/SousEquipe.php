@@ -24,7 +24,7 @@ class SousEquipe
     /**
      * @var string
      *
-     * @ORM\Column(name="sous_equipe_intule", type="string")
+     * @ORM\Column(name="sous_equipe_intule", type="string", length=255)
      */
     private $intituleSousEquipe;
 
