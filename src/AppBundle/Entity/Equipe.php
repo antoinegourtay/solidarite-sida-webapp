@@ -24,30 +24,16 @@ class Equipe
     /**
      * @var string
      *
-     * @ORM\Column(name="equipe_zone", type="string", length=255)
+     * @ORM\Column(name="equipe_nom", type="string", length=255)
      */
-    private $equipeZone;
+    private $equipeNom;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(name="equipe_equipe_nom", type="string", length=255)
+     * @ORM\Column(name="zone_id", type="integer")
      */
-    private $equipeEquipeNom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="equipe_pole", type="string", length=255)
-     */
-    private $equipePole;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="equipe_sous_equipe", type="string", length=255)
-     */
-    private $equipeSousEquipe;
+    private $zoneId;
 
     /**
      * @return int
@@ -68,65 +54,33 @@ class Equipe
     /**
      * @return string
      */
-    public function getEquipeZone()
+    public function getEquipeNom()
     {
-        return $this->equipeZone;
+        return $this->equipeNom;
     }
 
     /**
-     * @param string $equipeZone
+     * @param string $equipeNom
      */
-    public function setEquipeZone($equipeZone)
+    public function setEquipeNom($equipeNom)
     {
-        $this->equipeZone = $equipeZone;
+        $this->equipeNom = $equipeNom;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getEquipeEquipeNom()
+    public function getZoneId()
     {
-        return $this->equipeEquipeNom;
+        return $this->zoneId;
     }
 
     /**
-     * @param string $equipeEquipeNom
+     * @param int $zoneId
      */
-    public function setEquipeEquipeNom($equipeEquipeNom)
+    public function setZoneId($zoneId)
     {
-        $this->equipeEquipeNom = $equipeEquipeNom;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEquipePole()
-    {
-        return $this->equipePole;
-    }
-
-    /**
-     * @param string $equipePole
-     */
-    public function setEquipePole($equipePole)
-    {
-        $this->equipePole = $equipePole;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEquipeSousEquipe()
-    {
-        return $this->equipeSousEquipe;
-    }
-
-    /**
-     * @param string $equipeSousEquipe
-     */
-    public function setEquipeSousEquipe($equipeSousEquipe)
-    {
-        $this->equipeSousEquipe = $equipeSousEquipe;
+        $this->zoneId = $zoneId;
     }
 
 

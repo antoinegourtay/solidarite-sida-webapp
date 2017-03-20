@@ -10,55 +10,57 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="poste")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PosteRepository")
  */
-class Poste
+class Type
 {
     /**
      * @var int
      *
-     * @ORM\Column(name="poste_id", type="integer")
+     * @ORM\Column(name="type_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $idPoste;
+    private $idType;
 
     /**
      * @var string
      *
      * @ORM\Column(name="poste_intitule", type="string", length=255)
      */
-    private $posteIntitule;
+    private $typeIntitule;
 
     /**
      * @return int
      */
-    public function getIdPoste()
+    public function getIdType()
     {
-        return $this->idPoste;
+        return $this->idType;
     }
 
     /**
-     * @param int $idPoste
+     * @param int $idType
      */
-    public function setIdPoste($idPoste)
+    public function setIdType($idType)
     {
-        $this->idPoste = $idPoste;
+        $this->idType = $idType;
     }
 
     /**
      * @return string
      */
-    public function getPosteIntitule()
+    public function getTypeIntitule()
     {
-        return $this->posteIntitule;
+        return $this->typeIntitule;
     }
 
     /**
-     * @param string $posteIntitule
+     * @param string $typeIntitule
      */
-    public function setPosteIntitule($posteIntitule)
+    public function setTypeIntitule($typeIntitule)
     {
-        $this->posteIntitule = $posteIntitule;
+        $this->typeIntitule = $typeIntitule;
     }
+
+
 
 
 }

@@ -24,9 +24,9 @@ class Affectation
     /**
      * @var int
      *
-     * @ORM\Column(name="id_equipe", type="integer")
+     * @ORM\Column(name="id_sous_equipe", type="integer")
      */
-    private $idEquipe;
+    private $idSousEquipe;
 
     /**
      * @var int
@@ -45,9 +45,9 @@ class Affectation
     /**
      * @var int
      *
-     * @ORM\Column(name="id_poste", type="integer")
+     * @ORM\Column(name="id_type", type="integer")
      */
-    private $idPoste;
+    private $idType;
 
     /**
      * @var int
@@ -82,17 +82,17 @@ class Affectation
     /**
      * @return int
      */
-    public function getIdEquipe()
+    public function getIdSousEquipe()
     {
-        return $this->idEquipe;
+        return $this->idSousEquipe;
     }
 
     /**
-     * @param int $idEquipe
+     * @param int $idSousEquipe
      */
-    public function setIdEquipe($idEquipe)
+    public function setIdSousEquipe($idSousEquipe)
     {
-        $this->idEquipe = $idEquipe;
+        $this->idSousEquipe = $idSousEquipe;
     }
 
     /**
@@ -130,17 +130,17 @@ class Affectation
     /**
      * @return int
      */
-    public function getIdPoste()
+    public function getIdType()
     {
-        return $this->idPoste;
+        return $this->idType;
     }
 
     /**
-     * @param int $idPoste
+     * @param int $idType
      */
-    public function setIdPoste($idPoste)
+    public function setIdType($idType)
     {
-        $this->idPoste = $idPoste;
+        $this->idType = $idType;
     }
 
     /**
@@ -174,7 +174,6 @@ class Affectation
     {
         $this->affectationAdjoint = $affectationAdjoint;
     }
-
 
 
 
