@@ -15,7 +15,8 @@ class PdfController extends Controller
      */
     public function indexAction()
     {
-        $snappy = $this->get('knp_snappy.pdf');
+        $pdf = $this->get('knp_snappy.pdf');
+        $pdf->setOption('page-size', 'A3');
 
         $html = $this->renderView('pdf/index.html.twig', array(
             'title' => 'bonjour'
@@ -24,7 +25,7 @@ class PdfController extends Controller
         $filename = 'Trombinoscope';
 
         return new Response(
-            $snappy->getOutputFromHtml($html),
+            $pdf->getOutputFromHtml($html),
             200,
             array(
                 'Content-Type'          => 'application/pdf',
