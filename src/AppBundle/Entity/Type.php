@@ -24,7 +24,7 @@ class Type
     /**
      * @var string
      *
-     * @ORM\Column(name="poste_intitule", type="string", length=255)
+     * @ORM\Column(name="type_intitule", type="string", length=255)
      */
     private $typeIntitule;
 
