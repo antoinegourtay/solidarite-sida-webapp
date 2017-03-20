@@ -82,5 +82,5 @@ class Pole
     {
         $this->zoneId = $zoneId;
     }
-    
+
 }
