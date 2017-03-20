@@ -15,8 +15,13 @@ class PdfController extends Controller
      */
     public function indexAction()
     {
+        //TODO: Get informations from the volunteers table with Doctrine
+
         $snappy = $this->get('knp_snappy.pdf');
 
+        /**
+         * In the array, we put the data we want to pass to the twig template
+         */
         $html = $this->renderView('pdf/index.html.twig', array(
             'title' => 'bonjour'
         ));
