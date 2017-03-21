@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * SousEquipe
@@ -30,8 +32,9 @@ class SousEquipe
 
     /**
      * @var int
-     *
-     * @ORM\Column(name="pole_id", type="integer")
+     **
+     * @ManyToOne(targetEntity="AppBundle\Entity\Pole")
+     * @JoinColumn(name="pole_id", referencedColumnName="pole_id")
      */
     private $poleId;
 

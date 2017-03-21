@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToOne;
 
 /**
  * Affectation
@@ -24,35 +26,40 @@ class Affectation
     /**
      * @var int
      *
-     * @ORM\Column(name="id_sous_equipe", type="integer")
+     * @OneToOne(targetEntity="AppBundle\Entity\SousEquipe")
+     * @JoinColumn(name="id_sous_equipe", referencedColumnName="sous_equipe_id")
      */
     private $idSousEquipe;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id_date", type="integer")
+     * @OneToOne(targetEntity="AppBundle\Entity\Date")
+     * @JoinColumn(name="id_date", referencedColumnName="date_id")
      */
     private $idDate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id_evenement", type="integer")
+     * @OneToOne(targetEntity="AppBundle\Entity\Evenement")
+     * @JoinColumn(name="id_evenement", referencedColumnName="evenement_id")
      */
     private $idEvenement;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id_type", type="integer")
+     * @OneToOne(targetEntity="AppBundle\Entity\Type")
+     * @JoinColumn(name="id_type", referencedColumnName="type_id")
      */
     private $idType;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id_benevole", type="integer")
+     * @OneToOne(targetEntity="AppBundle\Entity\User")
+     * @JoinColumn(name="id_benevole", referencedColumnName="id_benevole")
      */
     private $idBenevole;
 
@@ -60,6 +67,7 @@ class Affectation
      * @var boolean
      *
      * @ORM\Column(name="affectation_adjoint", type="boolean")
+     *
      */
     private $affectationAdjoint;
 

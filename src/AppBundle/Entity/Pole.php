@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Pole
@@ -18,6 +21,7 @@ class Pole
      * @ORM\Column(name="pole_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     *
      */
     private $idPole;
 
@@ -31,9 +35,10 @@ class Pole
     /**
      * @var int
      *
-     * @ORM\Column(name="zone_id", type="integer")
+     * @ManyToOne(targetEntity="AppBundle\Entity\Equipe")
+     * @JoinColumn(name="equipe_id", referencedColumnName="equipe_id")
      */
-    private $zoneId;
+    private $equipeId;
 
     /**
      * @return int
@@ -70,17 +75,18 @@ class Pole
     /**
      * @return int
      */
-    public function getZoneId()
+    public function getEquipeId()
     {
-        return $this->zoneId;
+        return $this->equipeId;
     }
 
     /**
-     * @param int $zoneId
+     * @param int $equipeId
      */
-    public function setZoneId($zoneId)
+    public function setEquipeId($equipeId)
     {
-        $this->zoneId = $zoneId;
+        $this->equipeId = $equipeId;
     }
+
 
 }

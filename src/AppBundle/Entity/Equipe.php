@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * Equipe
@@ -31,7 +33,8 @@ class Equipe
     /**
      * @var int
      *
-     * @ORM\Column(name="zone_id", type="integer")
+     * @ManyToOne(targetEntity="AppBundle\Entity\Zone")
+     * @JoinColumn(name="zone_id", referencedColumnName="zone_id")
      */
     private $zoneId;
 

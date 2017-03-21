@@ -16,7 +16,6 @@ class User extends BaseUser
     /**
      * @ORM\Id
      * @ORM\Column(name="id_benevole", type="integer")
-     * @GeneratedValue
      */
     protected $idBenevole;
 
