@@ -11,20 +11,22 @@ class PdfController extends Controller
     /**
      * @return Response
      *
-     * @Route("/pdf")
+     * @Route("/pdftrombi")
      */
-    public function indexAction()
+    public function trombiAction()
     {
 
         //TODO: Get informations from the volunteers table with Doctrine
 
         $pdf = $this->get('knp_snappy.pdf');
+
+        /* Here we will put the options we want */
         $pdf->setOption('page-size', 'A3');
 
         /**
          * In the array, we put the data we want to pass to the twig template
          */
-        $html = $this->renderView('pdf/index.html.twig', array(
+        $html = $this->renderView('pdf/trombi.html.twig', array(
             'title' => 'bonjour'
         ));
 
@@ -39,4 +41,36 @@ class PdfController extends Controller
             )
         );
     }
+
+    /**
+     * @return Response
+     *
+     * @Route("/pdfcallsheet")
+     */
+    public function callsheetAction(){
+
+        $pdf = $this->get('knp_snappy.pdf');
+
+        /* Here we will put the options we want */
+        $pdf->setOption('page-size', 'A3');
+
+        /**
+         * In the array, we put the data we want to pass to the twig template
+         */
+        $html = $this->renderView('pdf/trombi.html.twig', array(
+            'title' => 'Feuille d\'appel'
+        ));
+
+        $filename = 'Trombinoscope';
+
+        return new Response(
+            $pdf->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
+            )
+        );
+    }
+
 }
