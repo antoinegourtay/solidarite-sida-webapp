@@ -57,7 +57,7 @@ class PdfController extends Controller
         /**
          * In the array, we put the data we want to pass to the twig template
          */
-        $html = $this->renderView('pdf/trombi.html.twig', array(
+        $html = $this->renderView('pdf/callsheet.html.twig', array(
             'title' => 'Feuille d\'appel'
         ));
 
