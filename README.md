@@ -13,9 +13,9 @@ Who work on it ?
 
 [**Timothée Blanco**][4] - *Marketing Correspondant*
 
-[**Nicolas Castells**][5] - *God Developer*
+[**Nicolas Castells**][5] - *Back-end Developer*
 
-[**Antoine Gourtay**][6] - *Back-end Developer*
+[**Antoine Gourtay**][6] - *Lead Developer*
 
 How to install the project
 --------------------------
