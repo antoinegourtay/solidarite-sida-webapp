@@ -15,7 +15,7 @@ Who work on it ?
 
 [**Nicolas Castells**][5] - *Back-end Developer*
 
-[**Antoine Gourtay**][6] - *Lead Developer*
+[**Antoine Gourtay**][6] - *Back-end Developer*
 
 How to install the project
 --------------------------
