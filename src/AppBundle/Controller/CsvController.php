@@ -22,10 +22,17 @@ class CsvController extends Controller
 
         foreach ($users as $current){
             $user = new User();
-            $user->setUsername($current['firstName']);
+            $user->setFirstname($current['firstName']);
+            $user->setName($current['lastName']);
             $user->setEmail($current['email']);
+            $birthdate = \DateTime::createFromFormat('dmY', $current['birthdate']);
+            $user->setBirthdate($birthdate);
             $user->setPassword('test');
             $user->setDriverLicence(false);
+            $user->setPhoneNumber($current['phoneNumber']);
+            $user->setAdress($current['adress']);
+            $user->setZipcode($current['zipcode']);
+            $user->setCity($current['city']);
 
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();

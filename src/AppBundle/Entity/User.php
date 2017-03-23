@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -34,9 +35,9 @@ class User extends BaseUser
     private $firstname;
 
     /**
-     * @var datetime
+     * @Assert\DateTime()
      *
-     * @ORM\Column(name="birthdate", type="datetime")
+     * @ORM\Column(name="birthdate", type="date")
      */
     private $birthdate;
 
@@ -65,7 +66,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=10)
+     * @ORM\Column(name="adress", type="text")
      */
     private $adress;
 
@@ -87,7 +88,7 @@ class User extends BaseUser
 
     /** Getters & Setters */
     /**
-     * @return DateTime
+     * @return Assert\DateTime
      */
     public function getBirthdate()
     {
@@ -95,7 +96,7 @@ class User extends BaseUser
     }
 
     /**
-     * @param DateTime $birthdate
+     * @param Assert\DateTime $birthdate
      */
     public function setBirthdate($birthdate)
     {
