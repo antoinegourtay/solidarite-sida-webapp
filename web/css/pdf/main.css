@@ -2,10 +2,33 @@ body {
     width: 100%;
 }
 
-table, tr, th, td{
-    border: 1px solid black;
+.title {
+    text-align: center;
 }
 
-table {
-    width: 95%;
+.content {
+    width: 100%;
+    text-align: center;
+}
+
+.card__single {
+    margin : 2%;
+    display: inline-block;
+    width: 13%;
+    text-align: center;
+    border: 1px solid;
+    padding: 1%;
+
+}
+
+.card__single img {
+    width: 75%;
+}
+
+.name {
+    font-weight: bold;
+}
+
+.poste {
+    font-style: italic;
 }

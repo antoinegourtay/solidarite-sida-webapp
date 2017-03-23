@@ -21,7 +21,7 @@ class PdfController extends Controller
 
         $pdf = $this->get('knp_snappy.pdf');
         /* Here we will put the options we want */
-        $pdf->setOption('page-size', 'A3');
+        $pdf->setOption('page-size', 'A4');
 
         /**
          * We retrive the data from the entities we need with doctrine
@@ -60,7 +60,7 @@ class PdfController extends Controller
         $pdf = $this->get('knp_snappy.pdf');
 
         /* Here we will put the options we want */
-        $pdf->setOption('page-size', 'A3');
+        $pdf->setOption('page-size', 'A4');
 
         /**
          * In the array, we put the data we want to pass to the twig template
