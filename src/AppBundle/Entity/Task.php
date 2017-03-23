@@ -18,32 +18,16 @@ class Task
      */
     protected $id;
 
-    /**
-     * @var string
-     * @ORM\Column(name="task",type="string")
-     */
-    public $task;
+    protected $importer;
 
-    protected $attachment;
-
-    public function getAttachment()
+    public function getImporter()
     {
-        return $this->attachment;
+        return $this->importer;
     }
 
-    public function setAttachment($attachment)
+    public function setImporter($importer)
     {
-        $this->attachment = $attachment;
-    }
-
-    public function getTask()
-    {
-        return $this->task;
-    }
-
-    public function setTask($task)
-    {
-        $this->task = $task;
+        $this->importer = $importer;
     }
 
 }

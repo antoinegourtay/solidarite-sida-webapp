@@ -21,9 +21,8 @@ class DefaultController extends Controller
         $task = new Task();
 
         $form = $this->createFormBuilder($task)
-            ->add('task', TextType::class)
-            ->add('attachment', FileType::class)
-            ->add('save', SubmitType::class, array('label' => 'Create Task'))
+            ->add('importer', FileType::class)
+            ->add('save', SubmitType::class)
             ->getForm();
 
         $form->handleRequest($request);
@@ -31,21 +30,14 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $task = $form->getData();
 
+            $file = $task->getImporter();
 
-            // $file stores the uploaded PDF file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $task->getAttachment();
-
-            // Generate a unique name for the file before saving it
             $fileName = 'users'.'.'.'csv';
 
-            // Move the file to the directory where brochures are stored
             $file->move(
                 __DIR__  . "/../../../tests/CsvBundle/Fixtures/",
                 $fileName
             );
-
-            //$form['attachment']->getData()->move(__DIR__  . "/../../../tests/CsvBundle/Fixtures/");
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
@@ -54,7 +46,7 @@ class DefaultController extends Controller
             return $this->redirectToRoute('csv_controller');
         }
 
-        return $this->render('default/new.html.twig', array(
+        return $this->render('new.html.twig', array(
             'form' => $form->createView(),
         ));
     }
