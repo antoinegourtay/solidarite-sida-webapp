@@ -11,10 +11,11 @@ use Symfony\Component\HttpFoundation\Request;
 class CsvController extends Controller
 {
     /**
-     * @Route("/csv", name="csv_importer")
+     * @Route("/csv", name="csv_controller")
      */
     public function indexAction(Request $request)
     {
+
         $csvImporter = $this->get('csvImporter');
 
         $users = $csvImporter->import(__DIR__ . "/../../../tests/CsvBundle/Fixtures/users.csv");
@@ -30,8 +31,7 @@ class CsvController extends Controller
             $this->getDoctrine()->getManager()->flush();
         }
 
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', array(
+        return $this->render("csv.html.twig", array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ));
     }
