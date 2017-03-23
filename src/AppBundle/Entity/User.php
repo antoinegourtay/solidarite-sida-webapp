@@ -2,9 +2,8 @@
 
 namespace AppBundle\Entity;
 
-use DateTime;
 use Doctrine\ORM\Mapping\GeneratedValue;
-use FOS\UserBundle\Model\User as BaseUser;
+use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,6 +14,7 @@ class User extends BaseUser
 {
     /**
      * @ORM\Id
+     * @GeneratedValue
      * @ORM\Column(name="id_benevole", type="integer")
      */
     protected $idBenevole;
@@ -55,6 +55,7 @@ class User extends BaseUser
     private $driverLicence;
 
     /**
+     * @return bool
      * @var string
      *
      * @ORM\Column(name="phone_number", type="string", length=10)
@@ -120,6 +121,11 @@ class User extends BaseUser
     /**
      * @return string
      */
+    public function getIdAiw()
+    {
+      return $this->IdAiw;
+    }
+  
     public function getCity()
     {
         return $this->city;
