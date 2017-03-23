@@ -14,7 +14,7 @@ class PdfController extends Controller
      *
      * @Route("/pdftrombi")
      */
-    public function trombiAction(Request $request)
+    public function trombiAction()
     {
 
         //TODO: Get informations from the volunteers table with Doctrine
