@@ -1,0 +1,19 @@
+body {
+    text-align: center;
+}
+.content {
+    width: 100%;
+}
+
+table {
+    width:95%;
+}
+
+th, td {
+    width: 7%;
+    border: 1px solid black;
+}
+
+.image {
+    width:100%;
+}
