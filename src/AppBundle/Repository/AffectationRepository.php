@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class AffectationRepository extends EntityRepository
 {
+    /**
+     * Function to get the Team affectation joined to all the table in casacade
+     */
+    public function getTeamAffectation()
+    {
+        return $this->getRe->getEntityManager()
+            ->createQueryBuilder()
+            ->select('team')->from('AppBundle:Affectation', 'se')
+            ->innerJoin('se.idSousEquipe', 'ssid')
+            ->where('ssid = :user.');
+        // TODO: Do how to retrive data
+
+
+    }
 }

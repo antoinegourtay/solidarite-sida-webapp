@@ -19,7 +19,7 @@ class DefaultController extends Controller
 
         $users = $csvImporter->import(__DIR__ . "/../../../tests/CsvBundle/Fixtures/users.csv");
 
-        
+
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', array(
