@@ -58,7 +58,9 @@ class DefaultController extends Controller
 
         return $this->render('default/new.html.twig', array(
             'form' => $form->createView(),
-        $csvImporter = new CsvImporter();
+        $csvImporter = new CsvImporter()
+            )
+        );
 
         $users = $csvImporter->import(__DIR__ . "/../../../tests/CsvBundle/Fixtures/users.csv");
 
