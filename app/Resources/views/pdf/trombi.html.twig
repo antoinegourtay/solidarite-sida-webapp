@@ -1,35 +1,44 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="../../../../web/css/pdf/main.css" />
+{% endblock %}
 {% block body %}
 <h1>{{title}}</h1>
 <table class="tableau">
     <tr>
         <th>Photo</th>
+        <th>Nom</th>
         <th>Coordonnées</th>
     </tr>
     <tr>
         <td>Photo</td>
         <td>Antoine Gourtay</td>
+        <td></td>
     </tr>
     <tr>
         <td>Photo</td>
         <td>Nicolas Castells</td>
+        <td></td>
     </tr>
     <tr>
         <td>Photo</td>
         <td>Anne Maurice-Peroumal</td>
+        <td></td>
     </tr>
     <tr>
         <td>Photo</td>
         <td>Jennyfer Millet</td>
+        <td></td>
     </tr>
     <tr>
         <td>Photo</td>
         <td>Aymeric Chappuy</td>
+        <td></td>
     <tr>
         <td>Photo</td>
         <td>Timothée Blanco</td>
-    </tr>
+        <td></td>
     </tr>
 </table>
 {% endblock %}
