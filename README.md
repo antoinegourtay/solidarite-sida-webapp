@@ -11,7 +11,7 @@ Who work on it ?
 
 [**Aymeric Chappuy**][3] - *Designer UX/UI*
 
-[**Timothée Blanco**][4] - *Marketing Correspondant*
+[**Timothée Blanco**][4] - *Front-end Developer*
 
 [**Nicolas Castells**][5] - *Back-end Developer*
 
