@@ -7,3 +7,6 @@ services:
     csvImporter:
         class: CsvBundle\CsvImporter
         arguments:
+
+    app.service.user_data_service:
+      class: AppBundle\Services\UserDataService
