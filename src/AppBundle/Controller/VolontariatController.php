@@ -17,4 +17,20 @@ class VolontariatController extends Controller
         ));
     }
 
+    /**
+     * @Route("volontariat/zones")
+     */
+    public function zoneAction()
+    {
+        return $this->render('AppBundle:Volontariat:zones.html.twig', array(
+
+        ));
+    }
+
+    public function coordinatorAction()
+    {
+        return $this->render('AppBundle:Volontariat:coordinators.html.twig', array(
+
+        ));
+    }
 }

@@ -17,4 +17,14 @@ class TeamChiefController extends Controller
         ));
     }
 
+    /**
+     * @Route("/chef-equipe/create-pole")
+     */
+    public function createPoleAction(){
+
+        return $this->render('AppBundle:TeamChief:createpole.html.twig', array(
+
+        ));
+    }
+
 }
