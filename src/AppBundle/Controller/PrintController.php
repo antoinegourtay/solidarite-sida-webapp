@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class PrintController extends Controller
 {
     /**
+     * This controller is used for generating pdf with specific informations and parameters
      * @Route("/print")
      */
     public function indexAction()
