@@ -9,6 +9,7 @@ class PrintController extends Controller
 {
     /**
      * This controller is used for generating pdf with specific informations and parameters
+     * TODO: Check technologies (AngularJS)
      * @Route("/print")
      */
     public function indexAction()
