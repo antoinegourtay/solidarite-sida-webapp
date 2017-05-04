@@ -15,6 +15,8 @@ class ZonesController extends Controller
      */
     public function indexAction()
     {
+        //We get the current user
+        $currentUser = $this->getUser();
         return $this->render('AppBundle:Zones:index.html.twig', array(
             // ...
         ));

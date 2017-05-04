@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class LoginController extends Controller
 {
     /**
-     * @Route("/login", name="login")
+     * @Route("/", name="home_login")
      */
 
     public function newAction(Request $request)
