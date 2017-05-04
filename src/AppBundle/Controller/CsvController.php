@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Middleware\AuthenticationMiddleware;
 use CsvBundle\CsvImporter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,6 +16,10 @@ class CsvController extends Controller
      */
     public function indexAction(Request $request)
     {
+        // Redirect if not logged in
+        if(!AuthenticationMiddleware::isAuthenticated()) {
+            return $this->redirectToRoute('login');
+        }
 
         $csvImporter = $this->get('csvImporter');
 

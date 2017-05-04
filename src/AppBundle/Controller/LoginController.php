@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Login;
+use AppBundle\Middleware\AuthenticationMiddleware;
 use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,11 +15,24 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class LoginController extends Controller
 {
     /**
-     * @Route("/", name="home_login")
+     * @Route("/disconnect", name="disconnect")
      */
-
-    public function newAction(Request $request)
+    public function disconnectAction(Request $request)
     {
+        session_destroy();
+        return $this->redirectToRoute('login');
+    }
+
+    /**
+     * @Route("/", name="login")
+     */
+    public function loginAction(Request $request)
+    {
+        // Redirect if already logged in
+        if(AuthenticationMiddleware::isAuthenticated()) {
+            return $this->redirectToRoute('csv_controller');
+        }
+
         // create a task and give it some dummy data for this example
         $login = new Login();
         $login->setEmail('E-mail');
@@ -41,7 +55,14 @@ class LoginController extends Controller
             $xmlResponse = (string) $response->getBody();
 
             if ($this->hasLoginSucceeded($xmlResponse)) {
-                return $this->redirectToRoute('csv_controller');
+                $equipeRepository = $this->getDoctrine()->getManager()->getRepository('AppBundle:User');
+                if ($equipeRepository->existsByEmail($email)) {
+                    AuthenticationMiddleware::authenticate($email);
+
+                    return $this->redirectToRoute('csv_controller');
+                }
+
+                return $this->redirectToRoute('login');
             }
 
             return $this->redirectToRoute('login');
