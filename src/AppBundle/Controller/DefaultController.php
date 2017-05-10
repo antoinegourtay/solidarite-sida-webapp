@@ -10,6 +10,7 @@ use Symfony\Component\Form\Forms;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use AppBundle\Middleware\AuthenticationMiddleware;
 
 class DefaultController extends Controller
 {
@@ -18,6 +19,11 @@ class DefaultController extends Controller
      */
     public function newAction(Request $request)
     {
+        // Redirect if not logged in
+        if(!AuthenticationMiddleware::isAuthenticated()) {
+            return $this->redirectToRoute('login');
+        }
+        
         $task = new Task();
 
         $form = $this->createFormBuilder($task)

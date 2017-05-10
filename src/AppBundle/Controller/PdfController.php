@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Middleware\AuthenticationMiddleware;
 
 class PdfController extends Controller
 {
@@ -16,6 +17,10 @@ class PdfController extends Controller
      */
     public function trombiAction()
     {
+        // Redirect if not logged in
+        if(!AuthenticationMiddleware::isAuthenticated()) {
+            return $this->redirectToRoute('login');
+        }
 
         //TODO: Get informations from the volunteers table with Doctrine
 

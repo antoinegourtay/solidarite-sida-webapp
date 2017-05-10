@@ -24,7 +24,7 @@ class LoginController extends Controller
     }
 
     /**
-     * @Route("/", name="home_login")
+     * @Route("/", name="login")
      */
     public function loginAction(Request $request)
     {
