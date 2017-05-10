@@ -3,6 +3,8 @@
 namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Middleware\InformationsRetrieverMiddleware;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * EquipeRepository
@@ -17,4 +19,6 @@ class UserRepository extends EntityRepository
         $user = $this->findBy(['email' => $email]);
         return count($user) > 0;
     }
+
+
 }

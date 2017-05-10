@@ -22,13 +22,4 @@ class AuthenticationMiddleware
         $_SESSION['user.email'] = $email;
     }
 
-    /**
-     * The function gets the current user connected
-     * @return mixed
-     */
-    public static function getCurrentUser()
-    {
-         $email = $_SESSION['user.email'];
-         return $email;
-    }
 }
