@@ -1,84 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/css/style.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="https://use.fontawesome.com/89f329f9fa.js"></script>
+    <meta charset="UTF-8"> {% block stylesheets %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/css/style.css" />
+    <script src="https://use.fontawesome.com/89f329f9fa.js"></script>
     {% endblock %}
 </head>
+
 <body>
-{% block body %}
-<header>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Solisarité Sida Trombinoscope</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a type="button" class="btn btn-default" href="#"> Répartir </a></li>
-                    <li><a type="button" class="btn btn-default " href="#"> Importer </a></li>
-                    <li><a  type="button" class="btn btn-warning" href="#"> Impression </a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img alt="ID" href="images/moi.jpg">Name <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"></a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
+    {% block body %}
+    <header>
+        <header class="header--nav">
+            <div class="left">
+                <h1>Equipe Camping - Accueil 01</h1>
+                <ul class="breadcrumb">
+                    <li class="path_off"><a href="#">Pôles</a></li>
+                    <li class="path_off"><a href="#">Sous-équipes</a></li>
+                    <li class="active path_on">Trombinoscope</li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-    <nav class="navbar">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Trombinoscope</a>
             </div>
+            <div class="right">
+                <div class="sort dropdown">
+                    <p class="grey">Trier par :</p>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Prénom
+                        <span class="caret"></span>
+                    </a>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><p>Trier par : </p> Prenom <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </li>
-                    <b>Trier par :</b>
-                    <li> <a type="button" class="btn btn-default" href="#"><i class="fa fa-phone fa-lg" aria-hidden="true"></i></a></li>
-                    <li> <a type="button" class="btn btn-default" href="#"><i class="fa fa-at fa-lg" aria-hidden="true"></i></a></li>
-                    <li> <a type="button" class="btn btn-default" href="#"><i class="fa fa-home fa-lg" aria-hidden="true"></i></a></li>
-                    <li> <a type="button" class="btn btn-default" href="#"><i class="fa fa-car fa-lg" aria-hidden="true"></i></a></li>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Nom</a></li>
+
+                    </ul>
+                </div>
+
+                <p class="show">Afficher</p>
+                <ul class="icons">
+                    <li>
+                        <a type="button" class="btn btn-default btn-icons" href="#"><i class="fa fa-phone fa-lg icons_show" aria-hidden="true"></i></a> </li>
+                    <li>
+                        <a type="button" class="btn btn-default btn-icons icons_show" href="#"><i class="fa fa-at fa-lg" aria-hidden="true"></i></a> </li>
+                    <li>
+                        <a type="button" class="btn btn-default btn-icons icons_show" href="#"><i class="fa fa-home fa-lg" aria-hidden="true"></i></a> </li>
+                    <li>
+                        <a type="button" class="btn btn-default btn-icons icons_show" href="#"><i class="fa fa-car fa-lg" aria-hidden="true"></i></a> </li>
                 </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
-</header>
-{% endblock %}
+            </div>
+        </header>
 
+        <script src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        {% endblock %}

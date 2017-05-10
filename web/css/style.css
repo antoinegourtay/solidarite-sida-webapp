@@ -1,20 +1,25 @@
-body{
+body {
     background: #FFFFFF;
     margin: 0;
+    font-family: Open Sans;
 }
 
-.header_container{
+h1 {
+    font-family: Open Sans;
+}
+
+.header_container {
     height: 70px;
     border-bottom: solid 1px;
     border-bottom-color: #fafafa;
-    box-shadow:0px 2px 2px #ececec;
+    box-shadow: 0px 2px 2px #ececec;
     background-color: #fafafa;
 }
 
-.header_container ul{
-    list-style:none;
-    position:relative;
-    float:right;
+.header_container ul {
+    list-style: none;
+    position: relative;
+    float: right;
     margin-right: 100px;
     padding-top: 13px;
 }
@@ -30,30 +35,30 @@ body{
     font-weight: 400;
 }
 
-.container{
+.container {
     width: 800px;
     margin: 0 auto;
 }
 
-h2{
+h2 {
     font-family: "Open Sans";
     font-weight: 500;
     font-size: 27px;
     text-align: center;
 }
 
-.centered{
+.centered {
     display: flex;
     justify-content: center;
 }
 
-label{
+label {
     text-align: center;
     font-size: 13px;
     font-weight: 700;
     color: white;
     background-color: #fec22e;
-    padding-top:10px;
+    padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 25px;
     padding-right: 25px;
@@ -65,7 +70,7 @@ label{
     cursor: pointer;
 }
 
-input{
+input {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -74,8 +79,106 @@ input{
     z-index: -1;
 }
 
-button{
+button {
     position: absolute;
     bottom: 80px;
     right: 60px;
+}
+
+.header--nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid #979797;
+    width: 80%;
+    margin: auto;
+}
+
+.header--nav .right {
+    display: flex;
+    align-items: center;
+}
+
+.header--nav .icons {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-left: 1rem;
+}
+
+.header--nav .icons li {
+    margin: 0 .5rem;
+}
+
+
+/* SHOW */
+
+.dropdown-menu {
+    margin: 24px 0 0 !important;
+    text-decoration: none;
+}
+
+a:focus,
+a:hover {
+    text-decoration: none !important;
+}
+
+
+/* PATH */
+
+.path_on {
+    color: #64B5F6 !important;
+}
+
+a {
+    color: #000000 !important;
+}
+
+
+/* SORT */
+
+.header--nav .breadcrumb {
+    background: transparent;
+    margin-bottom: 10px;
+}
+
+.header--nav .sort {
+    margin-right: .75rem;
+}
+
+.header--nav .dropdown {
+    display: flex;
+    position: relative;
+}
+
+.header--nav .dropdown-toggle {
+    margin-left: 4px;
+}
+
+.header--nav .dropdown.open .dropdown-menu {
+    display: block!important;
+}
+
+.header--nav .dropdown-menu {
+    top: 0 !important;
+}
+
+
+/* ICONS */
+
+.grey {
+    color: #4A4A4A;
+}
+
+.btn-icons {
+    border-radius: 5px;
+    border-color: transparent;
+    background: #F2F2F2;
+}
+
+.fa-car,
+.fa-phone,
+.fa-home,
+.fa-at {
+    color: #E0E0E0;
 }
