@@ -14,11 +14,57 @@ use Doctrine\ORM\Query\ResultSetMapping;
  */
 class UserRepository extends EntityRepository
 {
+    /**
+     * nqsndqsd
+     * @param $email
+     * @return bool
+     */
     public function existsByEmail($email)
     {
         $user = $this->findBy(['email' => $email]);
         return count($user) > 0;
     }
 
+    /**
+     * Returns the user ID linked to the email passed in parameter
+     *
+     * @return array
+     */
+    public function getCurrentUserId()
+    {
+        $rsm = new ResultSetMapping();
+        $currentUserMail = InformationsRetrieverMiddleware::getCurrentUser();
 
+        $query = $this->getEntityManager()->createNativeQuery(
+            'SELECT id_benevole FROM fos_user WHERE email_user = ?', $rsm
+        );
+        $query->setParameter(1, $currentUserMail);
+        return $query->getResult();
+
+    }
+
+    /**
+     * The function get current user's name and firstname
+     *
+     * @return array
+     */
+    public function getCurrentUserName()
+    {
+        $rsm = new ResultSetMapping();
+        $currentUserMail = InformationsRetrieverMiddleware::getCurrentUser();
+
+        $query = $this->getEntityManager()->createNativeQuery(
+            'SELECT name FROM fos_user WHERE email_user = ?', $rsm
+        );
+        $query->setParameter(1, $currentUserMail);
+        $result = $query->getResult();
+
+        return $result[0]['name'];
+
+    }
+
+    public function getCurrentUserFirstname()
+    {
+
+    }
 }
