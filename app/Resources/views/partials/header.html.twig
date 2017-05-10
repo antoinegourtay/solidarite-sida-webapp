@@ -2,53 +2,83 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"> {% block stylesheets %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/css/style.css" />
-    <script src="https://use.fontawesome.com/89f329f9fa.js"></script>
+    <meta charset="UTF-8">
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/css/reset.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/css/style.css" />
     {% endblock %}
 </head>
-
 <body>
-    {% block body %}
-    <header>
-        <header class="header--nav">
-            <div class="left">
-                <h1>Equipe Camping - Accueil 01</h1>
-                <ul class="breadcrumb">
-                    <li class="path_off"><a href="#">Pôles</a></li>
-                    <li class="path_off"><a href="#">Sous-équipes</a></li>
-                    <li class="active path_on">Trombinoscope</li>
+{% block body %}
+<header>
+    <nav class="navbar navbar-default navbar1">
+        <div class="">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Solisarité Sida Trombinoscope</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a type="button" class="btn" href="#"> Répartir </a></li>
+                    <li><a type="button" class="btn" href="#"> Importer </a></li>
+                    <li><a  type="button" class="btn btn-impression" href="#"> Impression </a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="ProfilPicture" alt="ID" src="{{ asset('img/profil.jpg') }}">Name <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Deconnexion</a></li>
+                            <li><a href="#">Tutoriel</a></li>
+                            <li><a href="#">Aide</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <nav class="header--nav">
+        <div class="left">
+            <h1>Equipe Camping - Accueil 01</h1>
+            <ul class="breadcrumb">
+                <li class="path_off"><a href="#">Pôles</a></li>
+                <li class="path_off"><a href="#">Sous-équipes</a></li>
+                <li class="active path_on">Trombinoscope</li>
+            </ul>
+        </div>
+        <div class="right">
+            <div class="sort dropdown">
+                <p class="grey">Trier par :</p>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Prénom
+                    <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Nom</a></li>
+
                 </ul>
             </div>
-            <div class="right">
-                <div class="sort dropdown">
-                    <p class="grey">Trier par :</p>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Prénom
-                        <span class="caret"></span>
-                    </a>
 
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Nom</a></li>
+            <p class="show">Afficher</p>
+            <ul class="icons">
+                <li>
+                    <a type="button" class="btn btn-default btn-icons" href="#"><i class="fa fa-phone fa-lg icons_show" aria-hidden="true"></i></a> </li>
+                <li>
+                    <a type="button" class="btn btn-default btn-icons icons_show" href="#"><i class="fa fa-at fa-lg" aria-hidden="true"></i></a> </li>
+                <li>
+                    <a type="button" class="btn btn-default btn-icons icons_show" href="#"><i class="fa fa-home fa-lg" aria-hidden="true"></i></a> </li>
+                <li>
+                    <a type="button" class="btn btn-default btn-icons icons_show" href="#"><i class="fa fa-car fa-lg" aria-hidden="true"></i></a> </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-                    </ul>
-                </div>
+    <script src="https://use.fontawesome.com/89f329f9fa.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-                <p class="show">Afficher</p>
-                <ul class="icons">
-                    <li>
-                        <a type="button" class="btn btn-default btn-icons" href="#"><i class="fa fa-phone fa-lg icons_show" aria-hidden="true"></i></a> </li>
-                    <li>
-                        <a type="button" class="btn btn-default btn-icons icons_show" href="#"><i class="fa fa-at fa-lg" aria-hidden="true"></i></a> </li>
-                    <li>
-                        <a type="button" class="btn btn-default btn-icons icons_show" href="#"><i class="fa fa-home fa-lg" aria-hidden="true"></i></a> </li>
-                    <li>
-                        <a type="button" class="btn btn-default btn-icons icons_show" href="#"><i class="fa fa-car fa-lg" aria-hidden="true"></i></a> </li>
-                </ul>
-            </div>
-        </header>
 
-        <script src=" https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        {% endblock %}
+{% endblock %}
+

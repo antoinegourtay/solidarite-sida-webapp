@@ -4,11 +4,9 @@ body {
     font-family: Open Sans;
 }
 
-h1 {
-    font-family: Open Sans;
-}
+/* HEADER *********************************************************************/
 
-.header_container {
+.header_container{
     height: 70px;
     border-bottom: solid 1px;
     border-bottom-color: #fafafa;
@@ -111,12 +109,9 @@ button {
 }
 
 
-/* SHOW */
 
-.dropdown-menu {
-    margin: 24px 0 0 !important;
-    text-decoration: none;
-}
+
+/* SHOW */
 
 a:focus,
 a:hover {
@@ -146,10 +141,57 @@ a {
     margin-right: .75rem;
 }
 
-.header--nav .dropdown {
-    display: flex;
-    position: relative;
+
+.navbar1{
+    width: 1440px;
+    height: 68px;
+    background-color: #fafafa !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    padding-top: 8px;
 }
+
+.btn-impression{
+    border-radius: 5px;
+    background-color: #ffc400;
+}
+
+.btn-impression:hover{
+    background-color: #ffc400 !important;
+}
+
+.btn{
+    width: 122px;
+    height: 36px;
+    border-radius: 5px;
+    padding-top: 7px !important;
+    margin-top: 7px;
+}
+
+.btn-login{
+    width: 122px;
+    height: 36px;
+    border-radius: 5px;
+    padding-top: 7px;
+    margin-top: 2px;
+}
+
+.ProfilPicture{
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.navbar-right{
+    margin-right: 15px;
+}
+
+.btn-profil{
+    margin-top: 10px;
+}
+
+/* DROPDOWN PROFIL *******************************************************/
+
 
 .header--nav .dropdown-toggle {
     margin-left: 4px;
@@ -157,12 +199,30 @@ a {
 
 .header--nav .dropdown.open .dropdown-menu {
     display: block!important;
+
+.dropdown {
+
+    display: flex;
+    position: relative;
+}
+
+.dropdown-toggle {
+    margin-left: 4px;
+}
+
+.dropdown.open .dropdown-menu {
+    display: block;
+
 }
 
 .header--nav .dropdown-menu {
     top: 0 !important;
 }
 
+.dropdown-menu {
+    margin: 24px 0 0 !important;
+    text-decoration: none;
+}
 
 /* ICONS */
 
@@ -174,6 +234,9 @@ a {
     border-radius: 5px;
     border-color: transparent;
     background: #F2F2F2;
+    width: 50px;
+    padding-top: 7px !important;
+    margin-top: 7px;
 }
 
 .fa-car,
@@ -182,3 +245,4 @@ a {
 .fa-at {
     color: #E0E0E0;
 }
+
