@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Middleware\AuthenticationMiddleware;
 
 class TeamsController extends Controller
 {
@@ -14,8 +15,9 @@ class TeamsController extends Controller
      */
     public function indexAction()
     {
+        $currentUser = AuthenticationMiddleware::getCurrentUser();
         return $this->render('AppBundle:Teams:index.html.twig', array(
-            // ...
+            //...
         ));
     }
 
