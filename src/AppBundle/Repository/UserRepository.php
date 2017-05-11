@@ -33,7 +33,7 @@ class UserRepository extends EntityRepository
      *
      * @return array
      */
-    private function findByEmail()
+    private function _findByEmail()
     {
         $em = $this->getEntityManager();
         $query = $em->createQuery(
@@ -46,31 +46,36 @@ class UserRepository extends EntityRepository
     }
 
     /**
-     * The function get current user's name and firstname
+     * The function get current user's name
      *
-     *
+     * @return mixed
      */
     public function getCurrentUserName()
     {
-        $currentUser = $this->findByEmail();
+        $currentUser = $this->_findByEmail();
         return $currentUser[0]->name;
     }
 
+
     /**
+     * The function gets current user first name
      *
+     * @return mixed
      */
     public function getCurrentUserFirstname()
     {
-        $currentUser = $this->findByEmail();
+        $currentUser = $this->_findByEmail();
         return $currentUser[0]->firstname;
     }
 
     /**
+     * The function gets current user id
      *
+     * @return mixed
      */
     public function getCurrentUserId()
     {
-        $currentUser = $this->findByEmail();
-        return $currentUser[0]->id;
+        $currentUser = $this->_findByEmail();
+        return $currentUser[0]->idBenevole;
     }
 }
