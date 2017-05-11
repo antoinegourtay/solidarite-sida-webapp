@@ -15,8 +15,10 @@ use Doctrine\ORM\Query\ResultSetMapping;
 class UserRepository extends EntityRepository
 {
     /**
-     * nqsndqsd
+     * We check if the email exists
+     *
      * @param $email
+     *
      * @return bool
      */
     public function existsByEmail($email)
@@ -25,45 +27,49 @@ class UserRepository extends EntityRepository
         return count($user) > 0;
     }
 
+
     /**
-     * Returns the user ID linked to the email passed in parameter
+     * This function retrives the values of the current user connected in an array
      *
      * @return array
      */
-    public function getCurrentUserId()
+    private function findByEmail()
     {
-        $rsm = new ResultSetMapping();
-        $currentUserMail = InformationsRetrieverMiddleware::getCurrentUser();
-
-        $query = $this->getEntityManager()->createNativeQuery(
-            'SELECT id_benevole FROM fos_user WHERE email_user = ?', $rsm
-        );
-        $query->setParameter(1, $currentUserMail);
-        return $query->getResult();
-
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT u
+            FROM AppBundle:User u
+            WHERE u.email = :user'
+        )->setParameter('user', InformationsRetrieverMiddleware::getCurrentUser());
+        $user = $query->getResult();
+        return $user;
     }
 
     /**
      * The function get current user's name and firstname
      *
-     * @return array
+     *
      */
     public function getCurrentUserName()
     {
-        $rsm = new ResultSetMapping();
-        $currentUserMail = InformationsRetrieverMiddleware::getCurrentUser();
-
-        $query = $this->getEntityManager()->createNativeQuery(
-            'SELECT name FROM fos_user WHERE email_user = ?', $rsm
-        );
-        $query->setParameter(1, $currentUserMail);
-        $result = $query->getResult();
-
-        return $result[0]['name'];
+        $currentUser = $this->findByEmail();
+        dump($currentUser);
+        die();
 
     }
 
+    /**
+     *
+     */
     public function getCurrentUserFirstname()
+    {
+
+    }
+
+    /**
+     *
+     */
+    public function getCurrentUserId()
     {
 
     }

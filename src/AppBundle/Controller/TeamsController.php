@@ -21,13 +21,14 @@ class TeamsController extends Controller
     {
         $em = $this->getDoctrine()->getRepository('AppBundle:User');
         //We get the current user, using the middleware
-        $currentUserId = $em->getCurrentUserId();
+        //$currentUserId = $em->getCurrentUserId();
         $currentUserName = $em->getCurrentUserName();
+        $currentUserFirstname = $em->getCurrentUserFirstname();
         $currentUser = InformationsRetrieverMiddleware::getCurrentUser();
 
         return $this->render(
             'AppBundle:Teams:index.html.twig', array(
-                'current_user_id' => $currentUserId,
+                'current_user_id' => $currentUserName,
                 'current_user' => $currentUser,
 
                 )
