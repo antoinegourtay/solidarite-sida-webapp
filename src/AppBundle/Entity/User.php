@@ -19,28 +19,28 @@ class User extends BaseUser
      * @GeneratedValue
      * @ORM\Column(name="id_benevole", type="integer")
      */
-    protected $idBenevole;
+    public $idBenevole;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    public $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
      */
-    private $firstname;
+    public $firstname;
 
     /**
      * @Assert\DateTime()
      *
      * @ORM\Column(name="birthdate", type="date")
      */
-    private $birthdate;
+    public $birthdate;
 
     /**
      * @var string
@@ -54,7 +54,7 @@ class User extends BaseUser
      *
      * @ORM\Column(name="driver_licence", type="boolean")
      */
-    private $driverLicence;
+    public $driverLicence;
 
     /**
      * @return bool
@@ -62,28 +62,28 @@ class User extends BaseUser
      *
      * @ORM\Column(name="phone_number", type="string", length=10)
      */
-    private $phoneNumber;
+    public $phoneNumber;
 
     /**
      * @var string
      *
      * @ORM\Column(name="adress", type="text")
      */
-    private $adress;
+    public $adress;
 
     /**
      * @var string
      *
      * @ORM\Column(name="zipcode", type="string", length=5)
      */
-    private $zipcode;
+    public $zipcode;
 
     /**
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
      */
-    private $city;
+    public $city;
 
     /**
      * @return mixed

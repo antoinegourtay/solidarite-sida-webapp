@@ -53,9 +53,7 @@ class UserRepository extends EntityRepository
     public function getCurrentUserName()
     {
         $currentUser = $this->findByEmail();
-        dump($currentUser);
-        die();
-
+        return $currentUser[0]->name;
     }
 
     /**
@@ -63,7 +61,8 @@ class UserRepository extends EntityRepository
      */
     public function getCurrentUserFirstname()
     {
-
+        $currentUser = $this->findByEmail();
+        return $currentUser[0]->firstname;
     }
 
     /**
@@ -71,6 +70,7 @@ class UserRepository extends EntityRepository
      */
     public function getCurrentUserId()
     {
-
+        $currentUser = $this->findByEmail();
+        return $currentUser[0]->id;
     }
 }

@@ -24,12 +24,11 @@ class TeamsController extends Controller
         //$currentUserId = $em->getCurrentUserId();
         $currentUserName = $em->getCurrentUserName();
         $currentUserFirstname = $em->getCurrentUserFirstname();
-        $currentUser = InformationsRetrieverMiddleware::getCurrentUser();
 
         return $this->render(
             'AppBundle:Teams:index.html.twig', array(
-                'current_user_id' => $currentUserName,
-                'current_user' => $currentUser,
+                'current_user_name' => $currentUserName,
+                'current_user_firstname' => $currentUserFirstname,
 
                 )
         );
