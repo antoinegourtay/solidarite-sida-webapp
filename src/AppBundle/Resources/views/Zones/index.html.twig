@@ -1,9 +1,60 @@
 {% extends "::base.html.twig" %}
 
-
 {% block title %}AppBundle:Zones:index{% endblock %}
 
 {% block body %}
     {{ include("partials/header.html.twig") }}
-    <h1>Welcome to the Zones:index page</h1>
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/css/zones/zones.css" />
+    {% endblock %}
+
+    <div class="zone__container container">
+        <div class="team row">
+            <h2 class="teamHeader">Entrées Publiques</h2>
+            <div class="teamLeaders">
+                <div class="team__member col-md-4">
+                    <div class="team__memberPicture col-md-3"><img src="https://unsplash.it/68/86" alt=""></div>
+                    <div class="team__memberInfo col-md-9">
+                        <div class="team__memberInfoName col-md-7">Lulu Hart</div>
+                        <div class="team__memberInfoTag team__memberInfoTag--chef col-md-5">Chef d'équipe</div>
+                    </div>
+                </div>
+                <div class="team__member col-md-4">
+                    <div class="team__memberPicture col-md-3"><img src="https://unsplash.it/68/86" alt=""></div>
+                    <div class="team__memberInfo col-md-9">
+                        <div class="team__memberInfoName col-md-7">Lisa Fields</div>
+                        <div class="team__memberInfoTag team__memberInfoTag--adjoint col-md-5">Adjoint</div>
+                    </div>
+                </div>
+                <div class="team__member col-md-4">
+                    <div class="team__memberPicture col-md-3"><img src="https://unsplash.it/68/86" alt=""></div>
+                    <div class="team__memberInfo col-md-9">
+                        <div class="team__memberInfoName col-md-7">Lee Dennis</div>
+                        <div class="team__memberInfoTag team__memberInfoTag--adjoint col-md-5">Adjoint</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="team row">
+            <h2 class="teamHeader">Invitations</h2>
+            <div class="teamLeaders">
+                <div class="team__member col-md-3">
+                    <div class="team__memberPicture col-md-3"><img src="https://unsplash.it/68/86" alt=""></div>
+                    <div class="team__memberInfo col-md-9">
+                        <div class="team__memberInfoName col-md-7">Lillie Summers</div>
+                        <div class="team__memberInfoTag team__memberInfoTag--chef col-md-5">Chef d'équipe</div>
+                    </div>
+                </div>
+                <div class="team__member col-md-3">
+                    <div class="team__memberPicture col-md-3"><img src="https://unsplash.it/68/86" alt=""></div>
+                    <div class="team__memberInfo col-md-9">
+                        <div class="team__memberInfoName col-md-7">Antonio Chapman</div>
+                        <div class="team__memberInfoTag team__memberInfoTag--chef col-md-5">Chef d'équipe</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+

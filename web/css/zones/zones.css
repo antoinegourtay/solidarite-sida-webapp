@@ -1,0 +1,82 @@
+.container {
+  width: 80%;
+  margin-top: 50px;
+}
+
+.team {
+  border-radius: 5px;
+  background-color: rgba(224,224,224,0.8);
+  box-shadow: 1px 2px 5px 2px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+  font-family: Open Sans;
+  padding-bottom: 20px;
+}
+
+.teamHeader {
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.teamLeaders {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.teamNonLeaders {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.team__member {
+  height: 86px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.15);
+  padding-left: 0;
+  padding-right: 0;
+  width: 28%;
+  margin: 0 2.5%;
+}
+
+.team__memberPicture {
+  padding-left: 0;
+}
+
+.team__memberInfo {
+  margin-top: 10px;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.team__memberInfoName {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0;
+}
+
+.team__memberInfoTag {
+  width: 97px;
+  border-radius: 15px;
+  font-size: 12px;
+  text-align: center;
+  padding: 0;
+  margin-top: 3.5px;
+}
+
+.team__memberInfoTag--chef {
+  background-color: #80ceff;
+  color: #305b81;
+}
+
+.team__memberInfoTag--adjoint {
+  background-color: #aee86f;
+  color: #476428;
+}
+
+.team__memberInfoTag--benevole {
+  background-color: #ffec7c;
+  color: #746000;
+}
