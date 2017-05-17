@@ -86,6 +86,13 @@ class User extends BaseUser
     public $city;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="integer")
+     */
+    public $role;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -264,6 +271,22 @@ class User extends BaseUser
     public function setZipcode($zipcode)
     {
         $this->zipcode = $zipcode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 
 

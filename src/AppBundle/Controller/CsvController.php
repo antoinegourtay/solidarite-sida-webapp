@@ -38,6 +38,7 @@ class CsvController extends Controller
             $user->setAdress($current['adress']);
             $user->setZipcode($current['zipcode']);
             $user->setCity($current['city']);
+            $user->setRole($current['role']);
 
             $this->getDoctrine()->getManager()->persist($user);
             $this->getDoctrine()->getManager()->flush();
