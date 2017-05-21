@@ -78,4 +78,32 @@ class UserRepository extends EntityRepository
         $currentUser = $this->_findByEmail();
         return $currentUser[0]->idBenevole;
     }
+
+    /**
+     *
+     */
+    public function getCurrentUserAffectationId()
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            ''
+        );
+
+    }
+
+    //TODO: Get the current team via Affectation table
+
+//    public function getCurrentUserTeamId()
+//    {
+//        $em = $this->getEntityManager();
+//        $query = $em->createQuery(
+//            'SELECT se
+//            FROM AppBundle:Affectation a
+//            JOIN a.idSousEquipe se
+//            WHERE a.idBenevole = :identifiant'
+//        )->setParameter('identifiant', $this->getCurrentUserId());
+//        $result = $query->getResult();
+//
+//    }
+
 }
