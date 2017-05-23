@@ -3,5 +3,84 @@
 {% block title %}AppBundle:Trombinoscope:index{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Trombinoscope:index page</h1>
+    {{ include("partials/header.html.twig") }}
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" type="text/css" href="{{app.request.basepath}}/css/zones/zones.css" />
+    {% endblock %}
+
+    <div class="trombi__container container">
+        <div class="teamTrombi row">
+            <div class="team__memberTrombi col-xs-2">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Lulu Hart</div>
+                </div>
+            </div>
+            <div class="team__memberTrombi col-xs-2 col-half-offset">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Lisa Fields</div>
+                </div>
+            </div>
+            <div class="team__memberTrombi col-xs-2 col-half-offset">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Lee Dennis</div>
+                </div>
+            </div>
+            <div class="team__memberTrombi col-xs-2 col-half-offset">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Lisa Fields</div>
+                </div>
+            </div>
+            <div class="team__memberTrombi col-xs-2 col-half-offset">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Lee Dennis</div>
+                </div>
+            </div>
+        </div>
+        <div class="teamTrombi row nextRow">
+            <div class="team__memberTrombi col-xs-2">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Lillie Summers</div>
+                </div>
+            </div>
+            <div class="team__memberTrombi col-xs-2 col-half-offset">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Antonio Chapman</div>
+                </div>
+            </div>
+            <div class="team__memberTrombi col-xs-2 col-half-offset">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Lillie Summers</div>
+                </div>
+            </div>
+            <div class="team__memberTrombi col-xs-2 col-half-offset">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Antonio Chapman</div>
+                </div>
+            </div>
+            <div class="team__memberTrombi col-xs-2 col-half-offset">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Antonio Chapman</div>
+                </div>
+            </div>
+        </div>
+         <div class="teamTrombi row nextRow">
+            <div class="team__memberTrombi col-xs-2">
+                <div class="team__memberPictureTrombi"><img src="https://unsplash.it/135/177" alt=""></div>
+                <div class="team__memberInfo">
+                    <div class="team__memberInfoNameTrombi">Audrey Webster</div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

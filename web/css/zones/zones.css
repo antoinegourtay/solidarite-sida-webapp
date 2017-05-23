@@ -1,4 +1,4 @@
-.container {
+.zone__container {
   width: 80%;
   margin-top: 50px;
 }
@@ -79,4 +79,44 @@
 .team__memberInfoTag--benevole {
   background-color: #ffec7c;
   color: #746000;
+}
+
+/* TROMBI */
+
+.trombi__container {
+  width: 66%;
+  margin-top: 50px;
+}
+.team__memberTrombi {
+  height: 245px;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+
+.team__memberPictureTrombi {
+  padding-top: 15px;
+}
+
+.team__memberInfoNameTrombi {
+  text-align: center;
+  font-size: 13.3px;
+  font-weight: bold;
+}
+
+.col-half-offset{
+    margin-left:4.166666667%
+}
+
+.nextRow {
+  margin-top: 30px;
+}
+
+/* LANDING TROMBI */
+
+.team__memberTrombiLanding {
+  height: 245px;
+  width: 16.33%;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  margin-left: 12%;
 }
