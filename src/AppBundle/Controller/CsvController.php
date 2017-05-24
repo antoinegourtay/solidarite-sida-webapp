@@ -16,10 +16,7 @@ class CsvController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // Redirect if not logged in
-        if(!AuthenticationMiddleware::isAuthenticated()) {
-            return $this->redirectToRoute('login');
-        }
+
 
         $csvImporter = $this->get('csvImporter');
 

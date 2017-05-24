@@ -1,19 +1,51 @@
 body {
     text-align: center;
+    font-family: Open Sans;
 }
+
 .content {
     width: 100%;
 }
 
 table {
-    width:95%;
+    width: 95%;
 }
 
-th, td {
-    width: 7%;
-    border: 1px solid black;
+.block {
+    width: 100%;
+    border-bottom: 1px solid black;
 }
 
 .image {
-    width:100%;
+    width: 100%;
+}
+
+.check {
+    border-right: 1px solid #E7E7E7;
+    width: 20px;
+    height: 10px;
+}
+
+#border_bottom {
+    border-bottom: 1px solid #E7E7E7;
+}
+
+th {
+    padding-bottom: 5px;
+}
+
+th {
+    font-weight: 800;
+    font-size: 14px;
+}
+
+td {
+    padding-bottom: 24px;
+    padding-top: 24px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+h1 {
+    font-weight: 400;
 }
