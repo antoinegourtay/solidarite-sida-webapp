@@ -1,6 +1,8 @@
 <?php
 namespace PeopleBundle\Entity;
 
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -17,61 +19,61 @@ class People
     private $id;
 
     /**
-     * @type string
+     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $first_name;
 
     /**
-     * @type string
+     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $last_name;
 
     /**
-     * @type int
-     * @ORM\Column(type="integet", length=20)
+     * @var int
+     * @ORM\Column(type="integer", length=20)
      */
     private $birthdate;
 
     /**
-     * @type string
+     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
-     * @type boolean
+     * @var boolean
      * @ORM\Column(type="boolean")
      */
     private $driver_license;
 
     /**
-     * @type string
+     * @var string
      * @ORM\Column(type="string", length=10)
      */
     private $phone;
 
     /**
-     * @type int
+     * @var int
      * @ORM\Column(type="integer", length=5)
      */
     private $zipcode;
 
     /**
-     * @type string
+     * @var string
      * @ORM\Column(type="string", length=255)
      */
     private $city;
 
     /**
-     * @type int
+     * @var int
      * @ORM\Column(type="integer", length=1)
      */
     private $role;
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -79,7 +81,7 @@ class People
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id)
     {
@@ -87,7 +89,7 @@ class People
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getFirstName()
     {
@@ -95,7 +97,7 @@ class People
     }
 
     /**
-     * @param mixed $first_name
+     * @param string $first_name
      */
     public function setFirstName($first_name)
     {
