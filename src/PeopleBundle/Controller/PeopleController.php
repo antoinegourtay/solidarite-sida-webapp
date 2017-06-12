@@ -20,6 +20,7 @@ class PeopleController extends Controller
 
         try {
             $user = $this->container->get('AuthenticationService')->login($email, $password);
+            $request->getSession()->set('user.email', $user->getEmail());
             return $this->redirectToRoute('dashboard');
         } catch (\InvalidArgumentException $exception) {
             return $this->redirectToRoute('homepage');
