@@ -2,7 +2,6 @@
 namespace PeopleBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -21,18 +20,22 @@ class PeopleController extends Controller
 
         try {
             $user = $this->container->get('AuthenticationService')->login($email, $password);
-            return JsonResponse::create([
-                'error' => false,
-                'user'  => [
-                    'id'    => $user->getId(),
-                    'email' => $user->getEmail(),
-                ],
-            ]);
+            return $this->redirectToRoute('dashboard');
         } catch (\InvalidArgumentException $exception) {
-            return JsonResponse::create([
-                "error"   => true,
-                "message" => $exception->getMessage(),
-            ], 401);
+            return $this->redirectToRoute('homepage');
         }
+    }
+
+    /**
+     * @Route("/", name="homepage")
+     * @Method({ "GET" })
+     */
+    public function homepageAction(Request $request)
+    {
+        if ($this->container->get('AuthenticationService')->isAuthenticated($request)) {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return $this->render('@PeopleBundle/homepage.html.twig');
     }
 }
