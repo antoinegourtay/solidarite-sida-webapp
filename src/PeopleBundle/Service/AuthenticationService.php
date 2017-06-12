@@ -5,6 +5,7 @@ use PeopleBundle\Client\BeneboxClient;
 use \InvalidArgumentException;
 use PeopleBundle\Entity\People;
 use PeopleBundle\Repository\PeopleRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 class AuthenticationService
 {
@@ -44,5 +45,24 @@ class AuthenticationService
         }
 
         return $user;
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function isAuthenticated(Request $request)
+    {
+        $email = $request->getSession()->get('user.email');
+        if (!$email) {
+            return false;
+        }
+
+        $user = $this->peopleRepository->getFromEmail($email);
+        if (!$user) {
+            return false;
+        }
+
+        return true;
     }
 }
