@@ -28,7 +28,7 @@ class BeneboxClient
         $response = $this->client->request('GET', $this->buildUrl($email, $password));
         $xmlResponse = (string) $response->getBody();
         $decodedXml = new \SimpleXMLElement($xmlResponse);
-        
+
         return (string) $decodedXml->result['val'] === 'OK';
     }
 

@@ -2,6 +2,7 @@
 namespace PeopleBundle\Service;
 
 use PeopleBundle\Client\BeneboxClient;
+use \InvalidArgumentException;
 
 class AuthenticationService
 {
@@ -18,11 +19,16 @@ class AuthenticationService
     /**
      * @param string $email
      * @param string $password
+     * @return array
      */
     public function login($email, $password)
     {
-        $success = $this->beneboxClient->login($email, $password);
-        dump($success);
-        exit;
+        $successBeneboxAuthentication = $this->beneboxClient->login($email, $password);
+
+        if (!$successBeneboxAuthentication) {
+            throw new InvalidArgumentException('Password/Email invalid');
+        }
+
+        return [];
     }
 }
