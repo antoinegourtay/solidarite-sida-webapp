@@ -8,9 +8,6 @@
 
 namespace AppBundle\Middleware;
 
-
-use Doctrine\ORM\Query\ResultSetMapping;
-
 /**
  * Class InformationsRetrieverMiddleware
  *
