@@ -1,0 +1,11 @@
+services:
+    BeneboxGuzzleClient:
+        class: GuzzleHttp\Client
+
+    BeneboxClient:
+        class: PeopleBundle\Client\BeneboxClient
+        arguments: [ "@BeneboxGuzzleClient" ]
+
+    AuthenticationService:
+        class: PeopleBundle\Service\AuthenticationService
+        arguments: [ "@BeneboxClient" ]
