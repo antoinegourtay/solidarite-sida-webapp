@@ -15,7 +15,7 @@ class EventController extends Controller
      */
     public function dashboardAction(Request $request)
     {
-        if (!$this->container->get('AuthenticationService')->isAuthenticated($request)) {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
         }
 

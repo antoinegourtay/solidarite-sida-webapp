@@ -1,4 +1,12 @@
 services:
+    app.controller_listener:
+        class: PeopleBundle\Middleware\UserProviderMiddleware
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller }
+
+    CurrentUser:
+        class: PeopleBundle\Repository\CurrentUser
+
     PeopleRepository:
         class: PeopleBundle\Repository\PeopleRepository
         factory: ['@doctrine.orm.default_entity_manager', getRepository]

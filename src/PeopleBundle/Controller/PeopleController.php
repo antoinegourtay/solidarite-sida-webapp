@@ -33,7 +33,7 @@ class PeopleController extends Controller
      */
     public function homepageAction(Request $request)
     {
-        if ($this->container->get('AuthenticationService')->isAuthenticated($request)) {
+        if ($this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('dashboard');
         }
 
