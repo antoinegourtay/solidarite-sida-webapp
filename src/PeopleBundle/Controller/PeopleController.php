@@ -21,7 +21,13 @@ class PeopleController extends Controller
 
         try {
             $user = $this->container->get('AuthenticationService')->login($email, $password);
-            return JsonResponse::create($user);
+            return JsonResponse::create([
+                'error' => false,
+                'user'  => [
+                    'id'    => $user->getId(),
+                    'email' => $user->getEmail(),
+                ],
+            ]);
         } catch (\InvalidArgumentException $exception) {
             return JsonResponse::create([
                 "error"   => true,

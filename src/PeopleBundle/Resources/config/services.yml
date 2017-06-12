@@ -1,4 +1,10 @@
 services:
+    PeopleRepository:
+        class: PeopleBundle\Repository\PeopleRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - PeopleBundle\Entity\People
+
     BeneboxGuzzleClient:
         class: GuzzleHttp\Client
 
@@ -8,4 +14,4 @@ services:
 
     AuthenticationService:
         class: PeopleBundle\Service\AuthenticationService
-        arguments: [ "@BeneboxClient" ]
+        arguments: [ "@BeneboxClient", "@PeopleRepository" ]
