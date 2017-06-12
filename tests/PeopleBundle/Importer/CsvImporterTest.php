@@ -1,8 +1,8 @@
 <?php
 
-namespace CsvBundle\Tests;
+namespace PeopleBundle\Tests\Importer;
 
-use CsvBundle\CsvImporter;
+use PeopleBundle\Importer\CSVImporter;
 
 class CsvImporterTests extends \PHPUnit_Framework_TestCase
 {
@@ -11,17 +11,17 @@ class CsvImporterTests extends \PHPUnit_Framework_TestCase
      */
     public function it_should_transform_csv_to_array()
     {
-        $csv = __DIR__ . "/Fixtures/users.csv";
+        $csv = __DIR__ . "/../Fixtures/users.csv";
 
-        $CsvImporter = new CsvImporter();
+        $CsvImporter = new CSVImporter();
         $users = $CsvImporter->import($csv);
         $userNicolas = $users[0];
 
         $this->assertEquals('Nicolas', $userNicolas['firstName']);
         $this->assertEquals('Castells', $userNicolas['lastName']);
         $this->assertEquals('castellsnicolas1303@gmail.com', $userNicolas['email']);
-        $this->assertEquals('22', $userNicolas['age']);
-        $this->assertEquals('god', $userNicolas['role']);
+        $this->assertEquals('13031995', $userNicolas['birthdate']);
+        $this->assertEquals('0', $userNicolas['role']);
 
     }
 }
