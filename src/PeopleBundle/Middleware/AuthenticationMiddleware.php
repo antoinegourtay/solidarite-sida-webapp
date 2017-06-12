@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Middleware;
+namespace PeopleBundle\Middleware;
 
 class AuthenticationMiddleware
 {

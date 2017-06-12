@@ -1,8 +1,8 @@
 <?php
 
-namespace CsvBundle;
+namespace PeopleBundle\Importer;
 
-class CsvImporter
+class CSVImporter
 {
     /**
      * @param string $csvFile
