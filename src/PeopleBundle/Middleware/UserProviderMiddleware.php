@@ -24,7 +24,9 @@ class UserProviderMiddleware implements EventSubscriberInterface
         }
 
         $user = $controller->get('AuthenticationService')->isAuthenticated($controller->getRequest());
-        $controller->get('CurrentUser')->set($user);
+        if ($user) {
+            $controller->get('CurrentUser')->set($user);
+        }
     }
 
     public static function getSubscribedEvents()
