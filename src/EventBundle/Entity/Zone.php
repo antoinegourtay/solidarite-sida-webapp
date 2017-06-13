@@ -64,14 +64,6 @@ class Zone
     /**
      * @return mixed
      */
-    public function getPeople()
-    {
-        return $this->people;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getChiefs()
     {
         return $this->chiefs;
