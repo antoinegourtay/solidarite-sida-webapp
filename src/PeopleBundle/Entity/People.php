@@ -67,6 +67,25 @@ class People
     private $address;
 
     /**
+     * @var int
+     * @ORM\Column(type="integer", length=11)
+     */
+    private $team_id;
+
+    /**
+     * @var int
+     * @ORM\Column(type="integer", length=11)
+     */
+    private $subteam_id;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $admin;
+
+
+    /**
      * @return int
      */
     public function getId()
@@ -208,5 +227,53 @@ class People
     public function setAddress($address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTeamId()
+    {
+        return $this->team_id;
+    }
+
+    /**
+     * @param int $team_id
+     */
+    public function setTeamId($team_id)
+    {
+        $this->team_id = $team_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSubteamId()
+    {
+        return $this->subteam_id;
+    }
+
+    /**
+     * @param int $subteam_id
+     */
+    public function setSubteamId($subteam_id)
+    {
+        $this->subteam_id = $subteam_id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->admin;
+    }
+
+    /**
+     * @param bool $admin
+     */
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
     }
 }
