@@ -3,13 +3,32 @@ hello {{ current_user.get().getFirstName() }} {{ current_user.get().getLastName(
 <br><br><br>
 
 <h1>ZONES</h1>
-{% for zone in zones %}
-    <div>
+{% for zone in zoneRepository.findAll() %}
+    <div style="border-bottom: solid 2px black">
         <h3>{{ zone.name }}</h3>
-        <ul>
-            {% for chief in zone.getChiefs() %}
-                <li>{{ chief.getPeople().getFirstName() }}</li>
-            {% endfor %}
-        </ul>
+        <div style="margin-left: 20px">
+            <h5>CHIEF</h5>
+            <ul>
+                {% for chief in zone.getChiefs() %}
+                    <li>{{ chief.getPeople().getFirstName() }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div style="margin-left: 20px">
+            <h5>TEAMS</h5>
+            <ul>
+                {% for team in teamRepository.findBy({'zone_id': zone.getId()}) %}
+                    <li>
+                        {{ team.getName() }}
+                        (
+                            {% for chief in team.getChiefs() %}
+                               {{ chief.getPeople().getFirstName() }},
+                            {% endfor %}
+                        )
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endfor %}
