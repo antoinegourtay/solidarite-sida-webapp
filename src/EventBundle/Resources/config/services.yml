@@ -15,3 +15,9 @@ services:
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
         arguments:
         - EventBundle\Entity\Pole
+
+    SubteamRepository:
+        class: EventBundle\Repository\SubteamRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+        - EventBundle\Entity\Subteam

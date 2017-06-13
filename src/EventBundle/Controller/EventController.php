@@ -23,6 +23,7 @@ class EventController extends Controller
             'zoneRepository' => $this->get('ZoneRepository'),
             'teamRepository' => $this->get('TeamRepository'),
             'poleRepository' => $this->get('PoleRepository'),
+            'subteamRepository' => $this->get('SubteamRepository'),
         ]);
     }
 }
