@@ -19,6 +19,9 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('@EventBundle/dashboard.html.twig');
+        $zones = $this->get('ZoneRepository')->findAll();
+        return $this->render('@EventBundle/dashboard.html.twig', [
+            'zones' => $zones,
+        ]);
     }
 }

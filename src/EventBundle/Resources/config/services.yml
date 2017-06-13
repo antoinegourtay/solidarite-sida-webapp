@@ -1,0 +1,6 @@
+services:
+    ZoneRepository:
+        class: EventBundle\Repository\ZoneRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - EventBundle\Entity\Zone

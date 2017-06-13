@@ -31,12 +31,6 @@ class People
     private $last_name;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer", length=20)
-     */
-    private $birthdate;
-
-    /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
@@ -67,10 +61,10 @@ class People
     private $city;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer", length=1)
+     * @var string
+     * @ORM\Column(type="string", length=255)
      */
-    private $role;
+    private $address;
 
     /**
      * @return int
@@ -118,22 +112,6 @@ class People
     public function setLastName($last_name)
     {
         $this->last_name = $last_name;
-    }
-
-    /**
-     * @return int
-     */
-    public function getBirthdate()
-    {
-        return $this->birthdate;
-    }
-
-    /**
-     * @param int $birthdate
-     */
-    public function setBirthdate($birthdate)
-    {
-        $this->birthdate = $birthdate;
     }
 
     /**
@@ -217,18 +195,18 @@ class People
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getRole()
+    public function getAddress()
     {
-        return $this->role;
+        return $this->address;
     }
 
     /**
-     * @param int $role
+     * @param mixed $address
      */
-    public function setRole($role)
+    public function setAddress($address)
     {
-        $this->role = $role;
+        $this->address = $address;
     }
 }

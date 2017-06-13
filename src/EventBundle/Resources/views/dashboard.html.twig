@@ -1,1 +1,15 @@
 hello {{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }}
+
+<br><br><br>
+
+<h1>ZONES</h1>
+{% for zone in zones %}
+    <div>
+        <h3>{{ zone.name }}</h3>
+        <ul>
+            {% for chief in zone.getChiefs() %}
+                <li>{{ chief.getPeople().getFirstName() }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
