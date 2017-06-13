@@ -22,6 +22,7 @@ class EventController extends Controller
         return $this->render('@EventBundle/dashboard.html.twig', [
             'zoneRepository' => $this->get('ZoneRepository'),
             'teamRepository' => $this->get('TeamRepository'),
+            'poleRepository' => $this->get('PoleRepository'),
         ]);
     }
 }
