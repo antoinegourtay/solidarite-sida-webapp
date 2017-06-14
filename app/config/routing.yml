@@ -1,3 +1,7 @@
-app:
-    resource: "@AppBundle/Controller/"
+event:
+    resource: "@EventBundle/Controller/"
+    type:     annotation
+
+people:
+    resource: "@PeopleBundle/Controller/"
     type:     annotation

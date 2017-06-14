@@ -1,0 +1,72 @@
+hello {{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }}
+
+<br><br><br>
+
+<h1>ZONES</h1>
+{% for zone in zoneRepository.findAll() %}
+    <div style="border-bottom: solid 2px black">
+        <h3>{{ zone.name }}</h3>
+        <div style="margin-left: 20px">
+            <h5>CHIEF</h5>
+            <ul>
+                {% for chief in zone.getChiefs() %}
+                    <li>{{ chief.getPeople().getFirstName() }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div style="margin-left: 20px">
+            <h5>TEAMS</h5>
+            <ul>
+                {% for team in teamRepository.findBy({'zone_id': zone.getId()}) %}
+                    <li>
+                        {{ team.getName() }} –
+                        Chief: (
+                            {% for chief in team.getChiefs() %}
+                               {{ chief.getPeople().getFirstName() }},
+                            {% endfor %}
+                        ) - People: (
+                            {% for people in peopleRepository.findBy({'subteam_id': team.getId()}) %}
+                                {{ people.getFirstName() }},
+                            {% endfor %}
+                        )
+                    </li>
+                    <div style="margin-left: 20px">
+                        <h5>POLES</h5>
+                        <ul>
+                            {% for pole in poleRepository.findBy({'team_id': team.getId()}) %}
+                                <li>
+                                    {{ pole.getName() }}
+                                    (
+                                    {% for chief in pole.getChiefs() %}
+                                        {{ chief.getPeople().getFirstName() }},
+                                    {% endfor %}
+                                    )
+                                </li>
+                                <div style="margin-left: 20px">
+                                    <h5>SUBTEAMS</h5>
+                                    <ul>
+                                        {% for subteam in subteamRepository.findBy({'pole_id': pole.getId()}) %}
+                                            <li>
+                                                {{ subteam.getName() }} –
+                                                Chief: (
+                                                    {% for chief in subteam.getChiefs() %}
+                                                        {{ chief.getPeople().getFirstName() }},
+                                                    {% endfor %}
+                                                ) - People: (
+                                                    {% for people in peopleRepository.findBy({'subteam_id': subteam.getId()}) %}
+                                                        {{ people.getFirstName() }},
+                                                    {% endfor %}
+                                                )
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endfor %}

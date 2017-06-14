@@ -1,0 +1,23 @@
+services:
+    ZoneRepository:
+        class: EventBundle\Repository\ZoneRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - EventBundle\Entity\Zone
+    TeamRepository:
+        class: EventBundle\Repository\TeamRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+        - EventBundle\Entity\Team
+
+    PoleRepository:
+        class: EventBundle\Repository\PoleRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+        - EventBundle\Entity\Pole
+
+    SubteamRepository:
+        class: EventBundle\Repository\SubteamRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+        - EventBundle\Entity\Subteam

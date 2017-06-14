@@ -11,3 +11,7 @@ install:
 stop:
 	cd docker && docker-compose stop;
 	php app/console server:stop;
+
+reset-database:
+	php app/console doctrine:schema:update --dump-sql;
+	php app/console doctrine:schema:update --force;
