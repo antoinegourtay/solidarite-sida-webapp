@@ -98,6 +98,11 @@ class People
      */
     private $admin;
 
+    /**
+     * @var int
+     */
+    private $role = 1;
+
 
     /**
      * @return int
@@ -321,5 +326,21 @@ class People
     public function setSubteam($subteam)
     {
         $this->subteam = $subteam;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param int $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 }
