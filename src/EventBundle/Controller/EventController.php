@@ -24,6 +24,7 @@ class EventController extends Controller
             'teamRepository' => $this->get('TeamRepository'),
             'poleRepository' => $this->get('PoleRepository'),
             'subteamRepository' => $this->get('SubteamRepository'),
+            'peopleRepository'  => $this->get('PeopleRepository'),
         ]);
     }
 }

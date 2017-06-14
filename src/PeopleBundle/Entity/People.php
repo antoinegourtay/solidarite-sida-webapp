@@ -3,6 +3,7 @@ namespace PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping as ORM;
+use EventBundle\Entity\Subteam;
 use EventBundle\Entity\Team;
 
 /**
@@ -84,6 +85,12 @@ class People
      * @ORM\Column(type="integer", length=11)
      */
     private $subteam_id;
+
+    /**
+     * @var Subteam
+     * @ORM\OneToOne(targetEntity="EventBundle\Entity\Subteam", fetch="EAGER")
+     */
+    private $subteam;
 
     /**
      * @var bool
@@ -298,5 +305,21 @@ class People
     public function setTeam($team)
     {
         $this->team = $team;
+    }
+
+    /**
+     * @return Subteam
+     */
+    public function getSubteam()
+    {
+        return $this->subteam;
+    }
+
+    /**
+     * @param Subteam $subteam
+     */
+    public function setSubteam($subteam)
+    {
+        $this->subteam = $subteam;
     }
 }

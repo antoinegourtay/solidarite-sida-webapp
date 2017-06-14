@@ -46,9 +46,13 @@ hello {{ current_user.get().getFirstName() }} {{ current_user.get().getLastName(
                                             <li>
                                                 {{ subteam.getName() }}
                                                 (
-                                                {% for chief in subteam.getChiefs() %}
-                                                    {{ chief.getPeople().getFirstName() }},
-                                                {% endfor %}
+                                                    {% for chief in subteam.getChiefs() %}
+                                                        {{ chief.getPeople().getFirstName() }},
+                                                    {% endfor %}
+                                                ) - (
+                                                    {% for people in peopleRepository.findBy({'subteam_id': subteam.getId()}) %}
+                                                        {{ people.getFirstName() }},
+                                                    {% endfor %}
                                                 )
                                             </li>
                                         {% endfor %}
