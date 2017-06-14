@@ -3,6 +3,7 @@ namespace PeopleBundle\Entity;
 
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping as ORM;
+use EventBundle\Entity\Team;
 
 /**
  * @ORM\Entity
@@ -71,6 +72,12 @@ class People
      * @ORM\Column(type="integer", length=11)
      */
     private $team_id;
+
+    /**
+     * @var Team
+     * @ORM\OneToOne(targetEntity="EventBundle\Entity\Team", fetch="EAGER")
+     */
+    private $team;
 
     /**
      * @var int
@@ -275,5 +282,21 @@ class People
     public function setAdmin($admin)
     {
         $this->admin = $admin;
+    }
+
+    /**
+     * @return Team
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * @param Team $team
+     */
+    public function setTeam($team)
+    {
+        $this->team = $team;
     }
 }
