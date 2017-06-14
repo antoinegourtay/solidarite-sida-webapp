@@ -1,5 +1,38 @@
-<form action="/login" method="POST">
-    <input type="email" name="email">
-    <input type="password" name="password">
-    <button>LOGIN</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solidarité Sida - Trombinoscope</title>
+    <link rel="stylesheet" href="/css/reset.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="flex_container">
+        <div class="left_container">
+            <div class="left_center">
+                <h1>Solidarité Sida</h1>
+                <h2>Trombinoscope</h2>
+
+                <form action="/login" method="POST">
+                    <p>Email</p>
+                        <input type="email" name="email" placeholder="toto@toto.fun">
+                    <br>
+                    <p>Mot de passe</p>
+                        <input type="password" name="password" placeholder="**********">
+                    <br>
+                    <input type="submit" value="Se connecter">
+                </form>
+            </div>
+        </div>
+
+        <div class="right_container"></div>
+    </div>
+</div>
+
+
+
+<script src="/js/script.js"></script>
+</body>
+</html>
