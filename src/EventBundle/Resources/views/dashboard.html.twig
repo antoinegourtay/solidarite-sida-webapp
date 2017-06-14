@@ -20,10 +20,14 @@ hello {{ current_user.get().getFirstName() }} {{ current_user.get().getLastName(
             <ul>
                 {% for team in teamRepository.findBy({'zone_id': zone.getId()}) %}
                     <li>
-                        {{ team.getName() }}
-                        (
+                        {{ team.getName() }} –
+                        Chief: (
                             {% for chief in team.getChiefs() %}
                                {{ chief.getPeople().getFirstName() }},
+                            {% endfor %}
+                        ) - People: (
+                            {% for people in peopleRepository.findBy({'subteam_id': team.getId()}) %}
+                                {{ people.getFirstName() }},
                             {% endfor %}
                         )
                     </li>
@@ -44,12 +48,12 @@ hello {{ current_user.get().getFirstName() }} {{ current_user.get().getLastName(
                                     <ul>
                                         {% for subteam in subteamRepository.findBy({'pole_id': pole.getId()}) %}
                                             <li>
-                                                {{ subteam.getName() }}
-                                                (
+                                                {{ subteam.getName() }} –
+                                                Chief: (
                                                     {% for chief in subteam.getChiefs() %}
                                                         {{ chief.getPeople().getFirstName() }},
                                                     {% endfor %}
-                                                ) - (
+                                                ) - People: (
                                                     {% for people in peopleRepository.findBy({'subteam_id': subteam.getId()}) %}
                                                         {{ people.getFirstName() }},
                                                     {% endfor %}
