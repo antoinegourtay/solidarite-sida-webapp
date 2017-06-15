@@ -24,9 +24,9 @@ class CurrentUser
     {
         if ($people->isAdmin() === true) {
             $people->setRole(RoleHelper::VOLONTARIA);
-        } else if ($this->isChief($people->getTeam()->getChiefs(), $people)) {
+        } else if ($this->isChief($people->getTeam(), $people)) {
             $people->setRole(RoleHelper::CHIEF_TEAM);
-        } else if ($this->isChief($people->getSubteam()->getChiefs(), $people)) {
+        } else if ($this->isChief($people->getSubteam(), $people)) {
             $people->setRole(RoleHelper::CHIEF_SUBTEAM);
         }
 
@@ -37,7 +37,11 @@ class CurrentUser
 
     private function isChief($chiefs, $people)
     {
-        foreach ($chiefs as $chief) {
+        if (!$chiefs) {
+            return false;
+        }
+
+        foreach ($chiefs->getChiefs() as $chief) {
             if ($chief->getPeople()->getId() === $people->getId()) {
                 return true;
             }

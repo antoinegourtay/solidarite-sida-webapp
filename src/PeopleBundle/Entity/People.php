@@ -70,7 +70,7 @@ class People
 
     /**
      * @var int
-     * @ORM\Column(type="integer", length=11)
+     * @ORM\Column(type="integer", length=11, nullable=true)
      */
     private $team_id;
 
@@ -82,7 +82,7 @@ class People
 
     /**
      * @var int
-     * @ORM\Column(type="integer", length=11)
+     * @ORM\Column(type="integer", length=11, nullable=true)
      */
     private $subteam_id;
 
@@ -96,7 +96,7 @@ class People
      * @var bool
      * @ORM\Column(type="boolean")
      */
-    private $admin;
+    private $admin = false;
 
     /**
      * @var int
