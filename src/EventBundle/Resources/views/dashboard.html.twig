@@ -1,72 +1,16 @@
-hello {{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }}
+{% extends "@EventBundle/layout/dashboard.html.twig" %}
 
-<br><br><br>
-
-<h1>ZONES</h1>
-{% for zone in zoneRepository.findAll() %}
-    <div style="border-bottom: solid 2px black">
-        <h3>{{ zone.name }}</h3>
-        <div style="margin-left: 20px">
-            <h5>CHIEF</h5>
-            <ul>
-                {% for chief in zone.getChiefs() %}
-                    <li>{{ chief.getPeople().getFirstName() }}</li>
-                {% endfor %}
-            </ul>
+{% block content %}
+    {% if peopleRepository.findBy({'admin': false})|length > 0  %}
+        <br>
+        <center>People imported</center>
+    {% else %}
+        <div class="importation">
+            <h2>Aucun bénévole n'est encore importé</h2>
+            <a href="#" onClick="document.querySelector('#csvFile').click()"><p class="orange_button">IMPORTER</p></a>
+            <form id="csvForm" enctype="multipart/form-data" method="POST" action="/import">
+                <input onChange="document.querySelector('#csvForm').submit()" type="file" id="csvFile" name="csvFile" style="display: none">
+            </form>
         </div>
-
-        <div style="margin-left: 20px">
-            <h5>TEAMS</h5>
-            <ul>
-                {% for team in teamRepository.findBy({'zone_id': zone.getId()}) %}
-                    <li>
-                        {{ team.getName() }} –
-                        Chief: (
-                            {% for chief in team.getChiefs() %}
-                               {{ chief.getPeople().getFirstName() }},
-                            {% endfor %}
-                        ) - People: (
-                            {% for people in peopleRepository.findBy({'subteam_id': team.getId()}) %}
-                                {{ people.getFirstName() }},
-                            {% endfor %}
-                        )
-                    </li>
-                    <div style="margin-left: 20px">
-                        <h5>POLES</h5>
-                        <ul>
-                            {% for pole in poleRepository.findBy({'team_id': team.getId()}) %}
-                                <li>
-                                    {{ pole.getName() }}
-                                    (
-                                    {% for chief in pole.getChiefs() %}
-                                        {{ chief.getPeople().getFirstName() }},
-                                    {% endfor %}
-                                    )
-                                </li>
-                                <div style="margin-left: 20px">
-                                    <h5>SUBTEAMS</h5>
-                                    <ul>
-                                        {% for subteam in subteamRepository.findBy({'pole_id': pole.getId()}) %}
-                                            <li>
-                                                {{ subteam.getName() }} –
-                                                Chief: (
-                                                    {% for chief in subteam.getChiefs() %}
-                                                        {{ chief.getPeople().getFirstName() }},
-                                                    {% endfor %}
-                                                ) - People: (
-                                                    {% for people in peopleRepository.findBy({'subteam_id': subteam.getId()}) %}
-                                                        {{ people.getFirstName() }},
-                                                    {% endfor %}
-                                                )
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-{% endfor %}
+    {% endif %}
+{% endblock %}
