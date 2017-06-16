@@ -19,12 +19,6 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('@EventBundle/dashboard.html.twig', [
-            'zoneRepository' => $this->get('ZoneRepository'),
-            'teamRepository' => $this->get('TeamRepository'),
-            'poleRepository' => $this->get('PoleRepository'),
-            'subteamRepository' => $this->get('SubteamRepository'),
-            'peopleRepository'  => $this->get('PeopleRepository'),
-        ]);
+        return $this->render('@EventBundle/dashboard.html.twig');
     }
 }
