@@ -1,6 +1,8 @@
 <?php
 namespace PeopleBundle\Controller;
 
+use EventBundle\Entity\Team;
+use EventBundle\Entity\Zone;
 use PeopleBundle\Entity\People;
 use PeopleBundle\Importer\CSVImporter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -58,38 +60,50 @@ class PeopleController extends Controller
 
         $csvFile = $request->files->get('csvFile');
         $people = CSVImporter::import($csvFile->getRealPath());
+        $em = $this->getDoctrine()->getEntityManager();
 
         foreach($people as $person) {
-            /** @var People $databaseEntry */
-            $databaseEntry = $this->get('PeopleRepository')->getFromEmail($person['email']);
-
-            if (!$databaseEntry) {
-                // CREATE NEW USER TO DATABASE
-                $newPerson = new People();
-                $newPerson->setEmail($person['email']);
-                $newPerson->setFirstName($person['firstName']);
-                $newPerson->setLastName($person['lastName']);
-                $newPerson->setAddress($person['address']);
-                $newPerson->setZipcode($person['zipcode']);
-                $newPerson->setCity($person['city']);
-                $newPerson->setPhone($person['phone']);
-                $newPerson->setDriverLicense($person['driverLicense']);
+            // Check if the zone already exists
+            $zoneEntry = $this->get('ZoneRepository')->getFromName($person['zone']);
+            if (!$zoneEntry) {
+                $newZone = new Zone();
+                $newZone->setName($person['zone']);
+                $em->persist($newZone);
+                $em->flush();
             } else {
-                // UPDATE ALREADY EXISTING INFOS
-                $newPerson = $databaseEntry;
-                $newPerson->setFirstName($person['firstName']);
-                $newPerson->setLastName($person['lastName']);
-                $newPerson->setAddress($person['address']);
-                $newPerson->setZipcode($person['zipcode']);
-                $newPerson->setCity($person['city']);
-                $newPerson->setPhone($person['phone']);
-                $newPerson->setDriverLicense($person['driverLicense']);
+                $newZone = $zoneEntry;
             }
 
-            // UPDATE/ADD TEAM
+            // Check if the team already exists
+            $teamEntry = $this->get('TeamRepository')->getFromNameAndZone($person['team'], $newZone->getId());
+            if (!$teamEntry) {
+                $newTeam = new Team();
+                $newTeam->setName($person['team']);
+                $newTeam->setZoneId($newZone->getId());
+            } else {
+                $newTeam = $teamEntry;
+            }
+
+            // Check if the user already exists
+            $databaseEntry = $this->get('PeopleRepository')->getFromEmail($person['email']);
+            if (!$databaseEntry) {
+                $newPerson = new People();
+                $newPerson->setEmail($person['email']);
+            } else {
+                $newPerson = $databaseEntry;
+            }
+
+            // Update user informations
+            $newPerson->setFirstName($person['firstName']);
+            $newPerson->setLastName($person['lastName']);
+            $newPerson->setAddress($person['address']);
+            $newPerson->setZipcode($person['zipcode']);
+            $newPerson->setCity($person['city']);
+            $newPerson->setPhone($person['phone']);
+            $newPerson->setDriverLicense($person['driverLicense']);
+            $newPerson->setTeamId($newTeam->getId());
 
             // SAVE CHANGES
-            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($newPerson);
             $em->flush();
         }
