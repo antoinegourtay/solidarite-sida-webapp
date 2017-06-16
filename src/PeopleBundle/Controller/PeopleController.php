@@ -80,7 +80,7 @@ class PeopleController extends Controller
                 $em->persist($newZone);
                 $em->flush();
             } else {
-                $newZone = $zoneEntry;
+                $newZone = $zoneEntry[0];
             }
 
             // Check if the team already exists
@@ -88,9 +88,11 @@ class PeopleController extends Controller
             if (!$teamEntry) {
                 $newTeam = new Team();
                 $newTeam->setName($person['team']);
-                $newTeam->setZoneId($newZone->getId());
+                $newTeam->setZone($newZone);
+                $em->persist($newTeam);
+                $em->flush();
             } else {
-                $newTeam = $teamEntry;
+                $newTeam = $teamEntry[0];
             }
 
             // Check if the user already exists
@@ -110,7 +112,7 @@ class PeopleController extends Controller
             $newPerson->setCity($person['city']);
             $newPerson->setPhone($person['phone']);
             $newPerson->setDriverLicense($person['driverLicense']);
-            $newPerson->setTeamId($newTeam->getId());
+            $newPerson->setTeam($newTeam);
 
             // SAVE CHANGES
             $em->persist($newPerson);

@@ -76,7 +76,7 @@ class People
 
     /**
      * @var Team
-     * @ORM\OneToOne(targetEntity="EventBundle\Entity\Team", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="EventBundle\Entity\Team", fetch="EAGER")
      */
     private $team;
 
@@ -88,7 +88,7 @@ class People
 
     /**
      * @var Subteam
-     * @ORM\OneToOne(targetEntity="EventBundle\Entity\Subteam", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="EventBundle\Entity\Subteam", fetch="EAGER")
      */
     private $subteam;
 

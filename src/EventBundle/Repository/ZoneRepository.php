@@ -13,8 +13,8 @@ class ZoneRepository extends EntityRepository
     public function getFromName($name)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT p FROM EventBundle:Zone z WHERE z.name = :name ")
+        $query = $em->createQuery("SELECT z FROM EventBundle:Zone z WHERE z.name = :name ")
             ->setParameter('name', $name);
-        return $query->getFirstResult();
+        return $query->getResult();
     }
 }

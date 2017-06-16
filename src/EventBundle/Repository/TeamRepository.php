@@ -14,9 +14,9 @@ class TeamRepository extends EntityRepository
     public function getFromNameAndZone($name, $zone)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT p FROM EventBundle:Team t WHERE t.name = :name AND t.zone_id = :zone")
+        $query = $em->createQuery("SELECT t FROM EventBundle:Team t WHERE t.name = :name AND t.zone_id = :zone")
             ->setParameter('name', $name)
             ->setParameter('zone', $zone);
-        return $query->getFirstResult();
+        return $query->getResult();
     }
 }
