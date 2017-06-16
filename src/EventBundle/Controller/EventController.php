@@ -19,6 +19,10 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
+        if (empty($this->get('PeopleRepository')->findBy(['admin' => false]))) {
+            return $this->redirectToRoute('import');
+        }
+
         return $this->render('@EventBundle/dashboard.html.twig');
     }
 }

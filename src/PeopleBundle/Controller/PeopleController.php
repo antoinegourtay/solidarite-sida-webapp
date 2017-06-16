@@ -46,9 +46,18 @@ class PeopleController extends Controller
 
     /**
      * @Route("/import", name="import")
-     * @Method({ "POST" })
+     * @Method({ "GET" })
      */
     public function importAction(Request $request)
+    {
+        return $this->render('@EventBundle/import.html.twig');
+    }
+
+    /**
+     * @Route("/importing", name="importing")
+     * @Method({ "POST" })
+     */
+    public function importingAction(Request $request)
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');

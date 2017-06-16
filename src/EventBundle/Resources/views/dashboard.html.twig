@@ -1,16 +1,6 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %}
 
 {% block content %}
-    {% if peopleRepository.findBy({'admin': false})|length > 0  %}
-        <br>
-        <center>People imported</center>
-    {% else %}
-        <div class="importation">
-            <h2>Aucun bénévole n'est encore importé</h2>
-            <a href="#" onClick="document.querySelector('#csvFile').click()"><p class="orange_button">IMPORTER</p></a>
-            <form id="csvForm" enctype="multipart/form-data" method="POST" action="/import">
-                <input onChange="document.querySelector('#csvForm').submit()" type="file" id="csvFile" name="csvFile" style="display: none">
-            </form>
-        </div>
-    {% endif %}
+    <br>
+    <center>People imported</center>
 {% endblock %}
