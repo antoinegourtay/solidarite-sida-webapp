@@ -19,12 +19,10 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('@EventBundle/dashboard.html.twig', [
-            'zoneRepository' => $this->get('ZoneRepository'),
-            'teamRepository' => $this->get('TeamRepository'),
-            'poleRepository' => $this->get('PoleRepository'),
-            'subteamRepository' => $this->get('SubteamRepository'),
-            'peopleRepository'  => $this->get('PeopleRepository'),
-        ]);
+        if (empty($this->get('PeopleRepository')->findBy(['admin' => false]))) {
+            return $this->redirectToRoute('import');
+        }
+
+        return $this->render('@EventBundle/dashboard.html.twig');
     }
 }

@@ -1,0 +1,11 @@
+{% extends "@EventBundle/layout/dashboard.html.twig" %}
+
+{% block content %}
+    <div class="importation">
+        <h2>Importer des bénévoles</h2>
+        <a href="#" onClick="document.querySelector('#csvFile').click()"><p class="orange_button">IMPORTER</p></a>
+        <form id="csvForm" enctype="multipart/form-data" method="POST" action="/importing">
+            <input onChange="document.querySelector('#csvForm').submit()" type="file" id="csvFile" name="csvFile" style="display: none">
+        </form>
+    </div>
+{% endblock %}

@@ -36,6 +36,11 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         current_user: "@CurrentUser"
+        zoneRepository: "@ZoneRepository"
+        teamRepository: "@TeamRepository"
+        poleRepository: "@PoleRepository"
+        subteamRepository: "@SubteamRepository"
+        peopleRepository: "@PeopleRepository"
     paths:
         '%kernel.root_dir%/../src/PeopleBundle/Resources/views': PeopleBundle
         '%kernel.root_dir%/../src/EventBundle/Resources/views': EventBundle

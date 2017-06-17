@@ -13,8 +13,7 @@ class CsvImporterTests extends \PHPUnit_Framework_TestCase
     {
         $csv = __DIR__ . "/../Fixtures/users.csv";
 
-        $CsvImporter = new CSVImporter();
-        $users = $CsvImporter->import($csv);
+        $users = CSVImporter::import($csv);
         $userNicolas = $users[0];
 
         $this->assertEquals('Nicolas', $userNicolas['firstName']);

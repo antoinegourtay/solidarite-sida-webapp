@@ -1,81 +1,438 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 body{
-    background: #FFFFFF;
-    margin: 0;
+    font-family: "Open Sans";
+}
+
+header{
+    width: 100vw;
+    height: 60px;
+    background-color: #fafafa;
+    box-shadow: 0px 2px 1px #eeeeee;
 }
 
 .header_container{
-    height: 70px;
-    border-bottom: solid 1px;
-    border-bottom-color: #fafafa;
-    box-shadow:0px 2px 2px #ececec;
-    background-color: #fafafa;
+    width: 80vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.header_container ul{
-    list-style:none;
-    position:relative;
-    float:right;
-    margin-right: 100px;
-    padding-top: 13px;
+header a{
+    text-decoration: none;
 }
 
-.header_container li {
-    position: relative;
-    float: left;
-    margin: 0;
-    padding: 0;
-    text-transform: uppercase;
-    margin-left: 50px;
-    font-family: "Open Sans";
-    font-weight: 400;
+header ul{
+    margin-top: 22px;
 }
 
-.container{
-    width: 800px;
+header ul li{
+    display: inline;
+    margin-left: 40px;
+    font-size: 13px;
+}
+
+.orange_button{
+    padding: 10px 20px 10px 20px;
+    background-color: #ffc400;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+/* END OF HEADER */
+
+.controls_container{
+    width: 80vw;
     margin: 0 auto;
 }
 
-h2{
-    font-family: "Open Sans";
-    font-weight: 500;
-    font-size: 27px;
-    text-align: center;
+.controls_container h2{
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
-.centered{
-    display: flex;
-    justify-content: center;
+.controls_container h5{
+    color: #4cc1fc;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
 
-label{
-    text-align: center;
-    font-size: 13px;
-    font-weight: 700;
-    color: white;
-    background-color: #fec22e;
-    padding-top:10px;
-    padding-bottom: 10px;
-    padding-left: 25px;
-    padding-right: 25px;
+.controls_container .controls_bar{
     display: inline-block;
+}
+
+.controls_container .controls_bar.end{
+    float: right;
+}
+
+.controls_container .controls_bar.end ul{
+    display: inline-flex;
+}
+
+.controls_container .controls_bar.end ul li img{
+    margin-top: -8px;
+    margin-left: 10px;
+}
+
+/* END OF HEADER */
+
+.flex_container{
+    display: flex;
+}
+
+.left_container{
+    width: 45vw;
+}
+
+.left_center{
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 80px;
+}
+
+.left_container h1{
+    font-size: 33px;
+    margin-bottom: 30px;
+    width: 400px;
+    text-align: center;
+}
+
+.left_container h2{
+    font-size: 33px;
+    font-weight: 600;
+    margin-bottom: 60px;
+    width: 400px;
+    text-align: center;
+}
+
+.left_container form{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.left_container form p{
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.left_container form input{
+    height: 50px;
+    width: 400px;
     border-radius: 5px;
-    font-family: "Open Sans";
-    font-weight: 500;
-    text-transform: uppercase;
+}
+
+.left_container form input[type=email]{
+    border: solid 1px #9b9b9b;
+    padding-left: 15px;
+}
+
+.left_container form input[type=password]{
+    border: solid 1px #9b9b9b;
+    padding-left: 15px;
+}
+
+.left_container form input[type=submit]{
+    color: #ffffff;
+    background-color: #2196f3;
+    margin-top: 50px;
+}
+
+.right_container{
+    background: url("/images/connexion.png");
+    background-size: cover;
+    width: calc(100vw - 400px);
+    height: 100vh;
+}
+
+.pole_creation{
+    width: 400px;
+    margin: 0 auto;
+}
+
+.pole_creation .creation_text{
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.pole_creation .creation_text h5{
+    font-size: 27px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.pole_creation .creation_text p{
+    font-size: 16px;
+}
+
+.pole_creation .creation_field p{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.pole_creation .creation_field input{
+    height: 50px;
+    width: 400px;
+    border-radius: 5px;
+    border: solid 1px #9b9b9b;
+    padding-left: 15px;
+    margin-top: 10px;
+}
+
+.pole_creation .creation_field button{
+    height: 50px;
+    width: 400px;
+    border-radius: 5px;
+    border: dashed 0.1px #4cc1fc;
+    padding-left: 15px;
+    margin-top: 10px;
+    color: #4cc1fc;
     cursor: pointer;
 }
 
-input{
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+.subteams_creation{
+    width: 500px;
+    margin: 0 auto;
 }
 
-button{
-    position: absolute;
-    bottom: 80px;
-    right: 60px;
+.subteams_creation .creation_text{
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.subteams_creation .creation_text h5{
+    font-size: 27px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.subteams_creation .creation_text p{
+    font-size: 16px;
+}
+
+.subteams_creation .creation_field h5{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.subteams_creation .creation_field p{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.subteams_creation .creation_field input{
+    height: 50px;
+    width: 500px;
+    border-radius: 5px;
+    border: solid 1px #9b9b9b;
+    padding-left: 15px;
+    margin-top: 10px;
+}
+
+.subteams_creation .creation_field button{
+    height: 50px;
+    width: 500px;
+    border-radius: 5px;
+    border: dashed 0.1px #4cc1fc;
+    padding-left: 15px;
+    margin-top: 10px;
+    color: #4cc1fc;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.subteams_creation .creation_field hr{
+    margin-bottom: 20px;
+}
+
+
+.equipe_container{
+    width: 80vw;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+}
+
+.equipe{
+    width: 80vw;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px 2px #fafafa;
+    margin-top: 20px;
+}
+
+.equipe h5{
+    font-size: 18px;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.equipe_person{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.person_card{
+    width: 350px;
+    height: 90px;
+    background-color: #ffffff;
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 2px 4px 0px #eee;
+    margin-bottom: 15px;
+}
+
+.person_photo{
+    background: url(src/06.jpg);
+    height: 90px;
+    width: 70px;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.person_info{
+    margin-left: 15px;
+    margin-top: 15px;
+}
+
+.person_info span{
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.person_info .person_poste{
+    background-color: #FF8181;
+    padding: 7px;
+    color: #82254B;
+    font-size: 11px;
+    width: 95px;
+    border-radius: 15px;
+    padding-left: 12px;
+    margin-top: 10px;
+}
+
+.importation{
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.importation h2{
+    margin-top: 175px;
+    width: 80vw;
+    font-size: 27px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.importation p{
+    text-align: center;
+    width: 110px;
+    margin: 0 auto;
+    font-size: 13px;
+}
+
+.importation a{
+    text-decoration: none;
+}
+
+.pole_container{
+    width: 80vw;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+}
+
+.pole_container p{
+    font-size: 27px;
+    margin-top: 20px;
+}
+
+.pole{
+    width: 80vw;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px 2px #fafafa;
+    margin-top: 20px;
+}
+
+.pole h5{
+    font-size: 18px;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.pole_person{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.recap_importation{
+    width: 600px;
+    height: 250px;
+    margin: 0 auto;
+    background-color: #fafafa;
+    box-shadow: 0px 1px 20px 1px #eee;
+}
+
+.recap_importation h2{
+    margin-top: 100px;
+    padding-top: 20px;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.recap_importation p{
+    color: #4A4A4A;
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 55px;
+    line-height: 17px;
+}
+
+.recap_importation p.orange_button{
+    width: 100px;
+    font-size: 13px;
+    color: #ffffff;
+}
+
+.recap_importation a{
+    text-decoration: none;
+}
+
+.card_container{
+    width: 80vw;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.card{
+    width: 380px;
+    height: 170px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 1px 2px 5px 2px #fafafa;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.card h5{
+    font-size: 18px;
+    padding-top: 15px;
+    padding-left: 15px;
 }

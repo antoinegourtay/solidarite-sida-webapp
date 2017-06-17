@@ -70,25 +70,25 @@ class People
 
     /**
      * @var int
-     * @ORM\Column(type="integer", length=11)
+     * @ORM\Column(type="integer", length=11, nullable=true)
      */
     private $team_id;
 
     /**
      * @var Team
-     * @ORM\OneToOne(targetEntity="EventBundle\Entity\Team", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="EventBundle\Entity\Team", fetch="EAGER")
      */
     private $team;
 
     /**
      * @var int
-     * @ORM\Column(type="integer", length=11)
+     * @ORM\Column(type="integer", length=11, nullable=true)
      */
     private $subteam_id;
 
     /**
      * @var Subteam
-     * @ORM\OneToOne(targetEntity="EventBundle\Entity\Subteam", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="EventBundle\Entity\Subteam", fetch="EAGER")
      */
     private $subteam;
 
@@ -96,7 +96,12 @@ class People
      * @var bool
      * @ORM\Column(type="boolean")
      */
-    private $admin;
+    private $admin = false;
+
+    /**
+     * @var int
+     */
+    private $role = 1;
 
 
     /**
@@ -321,5 +326,21 @@ class People
     public function setSubteam($subteam)
     {
         $this->subteam = $subteam;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param int $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 }

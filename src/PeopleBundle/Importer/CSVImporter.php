@@ -8,7 +8,7 @@ class CSVImporter
      * @param string $csvFile
      * @return array
      */
-    public function import($csvFile)
+    public static function import($csvFile)
     {
         $csv = array_map('str_getcsv', file($csvFile));
 
