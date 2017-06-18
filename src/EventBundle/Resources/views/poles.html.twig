@@ -1,0 +1,35 @@
+{% extends "@EventBundle/layout/dashboard.html.twig" %}
+
+{% block title %}Zones > Equipes > Poles{% endblock %}
+
+{% block content %}
+    <div class="equipe_container">
+        {% if poles is empty %}
+            <div style="text-align: center; width: 100%; margin-top: 20px">
+                Il n'y a aucun Poles <br><br>
+                <a href="/pole/create">Créer les poles</a>
+            </div>
+        {% else %}
+            {% for pole in poles %}
+                <div class="equipe">
+                    <a href="/pole/{{ pole.id }}"><h5>{{ pole.getName() }}</h5></a>
+                    <div class="equipe_person">
+                        {% if pole.getChiefs() is empty %}
+                            <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef de pôle</center>
+                        {% else %}
+                            {% for chief in pole.getChiefs() %}
+                                <div class="person_card">
+                                    <div class="person_photo"></div>
+                                    <div class="person_info">
+                                        <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
+                                        <p class="person_poste">Chef de pôle</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

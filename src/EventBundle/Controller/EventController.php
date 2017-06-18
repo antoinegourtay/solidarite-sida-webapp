@@ -40,7 +40,7 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/zone/{zone}", name="zone")
+     * @Route("/zone/{zone}", name="zone", requirements={"zone": "\d+")
      * @Method({ "GET" })
      */
     public function teamsAction(Request $request, $zone)
@@ -51,6 +51,22 @@ class EventController extends Controller
 
         return $this->render('@EventBundle/teams.html.twig', [
             'zoneId' => $zone,
+        ]);
+    }
+
+    /**
+     * @Route("/team/{team}", name="team", requirements={"team": "\d+")
+     * @Method({ "GET" })
+     */
+    public function polesActions(Request $request, $team)
+    {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('@EventBundle/poles.html.twig', [
+            'teamId' => $team,
+            'poles'  => $this->get('poleRepository')->findBy(['team_id' => $team]),
         ]);
     }
 }
