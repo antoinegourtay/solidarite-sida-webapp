@@ -1,0 +1,34 @@
+{% extends "@EventBundle/layout/dashboard.html.twig" %}
+
+{% block title %}Zones > Equipes > Poles > Sous Equipes{% endblock %}
+
+{% block content %}
+    <div class="equipe_container">
+        {% if subteams is empty %}
+            <div style="text-align: center; width: 100%; margin-top: 20px">
+                Il n'y a aucune Sous Equipe <br><br>
+            </div>
+        {% else %}
+            {% for subteam in subteams %}
+                <div class="equipe">
+                    <a href="/subteam/{{ subteam.id }}"><h5>{{ subteam.getName() }}</h5></a>
+                    <div class="equipe_person">
+                        {% if subteam.getChiefs() is empty %}
+                            <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef de sous équipe</center>
+                        {% else %}
+                            {% for chief in subteam.getChiefs() %}
+                                <div class="person_card">
+                                    <div class="person_photo"></div>
+                                    <div class="person_info">
+                                        <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
+                                        <p class="person_poste">Chef de sous équipe</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

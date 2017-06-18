@@ -75,6 +75,22 @@ class EventController extends Controller
     }
 
     /**
+     * @Route("/pole/{pole}", name="pole", requirements={"pole": "\d+"})
+     * @Method({ "GET" })
+     */
+    public function subteamsActions(Request $request, $pole)
+    {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('@EventBundle/subteams.html.twig', [
+            'poleId'    => $pole,
+            'subteams'  => $this->get('subteamRepository')->findBy(['pole_id' => $pole]),
+        ]);
+    }
+
+    /**
      * @Route("/pole/create/{team}", name="pole_create", requirements={"team": "\d+"})
      * @Method({ "GET" })
      */
