@@ -186,6 +186,23 @@ class EventController extends Controller
     }
 
     /**
+     * @Route("/api/team/{team}/people/available/{subteam}", name="api_team_available_people")
+     * @Method({ "GET" })
+     */
+    public function apiTeamPeopleAction(Request $request, $team, $subteam)
+    {
+        $people = $this->get('PeopleRepository')->getFromTeamIdAndNotSubteamId($team, $subteam);
+        $people = array_reduce($people, function ($previous, $person) use ($subteam) {
+            $previous[] = [
+                'name'    => $person->getFirstName() .' '. $person->getLastName(),
+                'id'      => $person->getId(),
+            ];
+            return $previous;
+        }, []);
+        return new JsonResponse(['people' => $people]);
+    }
+
+    /**
      * @Route("/api/team/{team}", name="api_team")
      * @Method({ "GET" })
      */
