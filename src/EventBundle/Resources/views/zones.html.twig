@@ -6,7 +6,7 @@
 <div class="card_container">
     {% for zone in zoneRepository.findAll() %}
     <div class="card">
-        <h5>{{ zone.getName() }}</h5>
+        <a href="/zone/{{ zone.getId() }}"><h5>{{ zone.getName() }}</h5></a>
         {% if zone.getChiefs() is empty %}
             <center style="margin-top: 10px; font-size: 13px">Il n'y a aucun coordinateur</center>
         {% else %}
