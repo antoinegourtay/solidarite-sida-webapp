@@ -14,15 +14,24 @@
                 <div class="equipe">
                     <a href="/subteam/{{ subteam.id }}"><h5>Sous-Équipe {{ subteam.getName() }}</h5></a>
                     <div class="equipe_person">
-                        {% if subteam.getChiefs() is empty %}
-                            <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef de sous équipe</center>
+                        {% set subteamPeople = peopleRepository.findBy({'subteam_id': subteam.getId()}) %}
+                        {% if subteamPeople is empty %}
+                            <center style="margin: 20px; font-size: 13px">Il n'y a aucun membre dans la sous-équipe</center>
                         {% else %}
-                            {% for chief in subteam.getChiefs() %}
+                            {% for people in subteamPeople %}
                                 <div class="person_card">
                                     <div class="person_photo"></div>
                                     <div class="person_info">
-                                        <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
-                                        <p class="person_poste">Chef de sous équipe</p>
+                                        <span>{{ people.getFirstName() }} {{ people.getLastName() }}</span>
+                                        {% if subteamHasChiefRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
+                                            <p class="person_poste">Chef d'équipe</p>
+                                        {% elseif subteamHasAdjointRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
+                                            <p class="person_poste">Adjoint</p>
+                                        {% endif %}
+                                        <p class="person_email person_info_hidden">Mail: {{ people.getEmail() }}</p>
+                                        <p class="person_phone person_info_hidden">Tel: {{ people.getPhone() }}</p>
+                                        <p class="person_address person_info_hidden">Adresse: {{ people.getAddress() }} {{ people.getZipcode() }} {{ people.getCity() }}</p>
+                                        <p class="person_permis person_info_hidden">Permis B: {% if people.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
                                     </div>
                                 </div>
                             {% endfor %}

@@ -174,4 +174,13 @@ class EventController extends Controller
 
         return $this->redirectToRoute('pole', ['pole' => $poleId]);
     }
+
+    /**
+     * @Route("/subteam/{subteam}", name="subteam_edit")
+     * @Method({ "GET" })
+     */
+    public function editSubteamAction(Request $request, $subteam)
+    {
+        return $this->render('@EventBundle/subteam.edit.html.twig');
+    }
 }
