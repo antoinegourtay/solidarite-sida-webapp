@@ -1,6 +1,26 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %}
 
+{% block title %}Zones{% endblock %}
+
 {% block content %}
-    <br>
-    <center>People imported</center>
+<div class="card_container">
+    {% for zone in zoneRepository.findAll() %}
+    <div class="card">
+        <h5>{{ zone.getName() }}</h5>
+        {% if zone.getChiefs() is empty %}
+            <center style="margin-top: 10px; font-size: 13px">Il n'y a aucun coordinateur</center>
+        {% else %}
+            {% for chief in zone.getChiefs() %}
+            <div class="person_card">
+                <div class="person_photo"></div>
+                <div class="person_info">
+                    <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
+                    <p class="person_poste">Coordinateur</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
