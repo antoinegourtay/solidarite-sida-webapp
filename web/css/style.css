@@ -540,6 +540,7 @@ header ul li{
     border-radius: 10px;
     box-shadow: 1px 2px 4px 0px #eee;
     margin-bottom: 15px;
+    cursor: pointer;
 }
 
 .container_repartition .middle_repartition .person_card_repartition h5{

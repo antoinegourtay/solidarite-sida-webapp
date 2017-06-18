@@ -250,4 +250,25 @@ class EventController extends Controller
         }, []);
         return new JsonResponse(['people' => $people]);
     }
+
+    /**
+     * @Route("/api/subteam/{subteam}/people/{people}", name="api_subteam_people_add")
+     * @Method({ "POST" })
+     */
+    public function apiSubteamAddAction(Request $request, $subteam, $people)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $people = $this->get('PeopleRepository')->findBy(['id' => $people]);
+        $subteam = $this->get('SubteamRepository')->findBy(['id' => $subteam]);
+
+        if (empty($people) || empty($subteam)) {
+            return new JsonResponse(['error' => true]);
+        }
+
+        $people[0]->setSubteam($subteam[0]);
+        $em->persist($people[0]);
+        $em->flush();
+
+        return new JsonResponse(['error' => false]);
+    }
 }

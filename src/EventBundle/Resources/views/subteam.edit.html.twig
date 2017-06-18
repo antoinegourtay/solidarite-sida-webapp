@@ -68,14 +68,29 @@
     // Click on a subteam
     $('.left_repartition').on('click', '#subteams li', function (event) {
         const subteamId = $(this).attr('data-id');
-        $('#subteam_people').html('');
-        $('#available_people').html('');
 
         $('#subteams .active').removeClass('active');
         $(this).addClass('active');
 
+        update_people_subteam(subteamId);
+        update_people_available(subteamId);
+    });
+
+    // Click on available people
+    $('#available_people').on('click', '.person_card_repartition', function (event) {
+        const peopleId = $(this).attr('data-id');
+        const subteamId = $('#subteams .active').attr('data-id');
+
+        $.post('/api/subteam/'+ subteamId +'/people/'+ peopleId, function () {
+            update_people_subteam(subteamId);
+            update_people_available(subteamId);
+        });
+    });
+
+    function update_people_subteam(subteamId) {
         // People from the team
         $.get('/api/subteam/'+ subteamId +'/people', function (result) {
+            $('#subteam_people').html('');
             result.people.forEach(function(people) {
                 $('#subteam_people').append(`
                     <div class="person_card_repartition_selected">
@@ -87,18 +102,21 @@
                 `);
             });
         });
+    }
 
+    function update_people_available(subteamId) {
         // People not on the team
         $.get('/api/team/{{ teamId }}/people/available/'+ subteamId, function (result) {
+            $('#available_people').html('');
             result.people.forEach(function(people) {
                 $('#available_people').append(`
-                    <div class="person_card_repartition">
+                    <div class="person_card_repartition" data-id="${people.id}">
                         <div class="person_photo_repartition"></div>
                         <h5>${people.name}</h5>
                     </div>
                 `);
             });
         });
-    });
+    }
 </script>
 {% endblock %}
