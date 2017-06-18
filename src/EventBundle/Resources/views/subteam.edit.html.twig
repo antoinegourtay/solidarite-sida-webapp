@@ -1,0 +1,104 @@
+{% extends "@EventBundle/layout/dashboard.html.twig" %}
+
+{% block title %}Modifier les sous équipes{% endblock %}
+
+{% block controls %}{% endblock %}
+
+{% block content %}
+<div class="container_repartition">
+    <div class="left_repartition">
+        <h5>Pôle et sous-équipe</h5>
+        <div class="flex">
+            <div class="repartition_pole">
+                <p>Pôle</p>
+                <ul id="poles">
+                </ul>
+            </div>
+            <div class="separate_line"></div>
+            <div class="repartition_subteam">
+                <p>Sous-équipe</p>
+                <ul id="subteams">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="middle_repartition">
+        <div class="middle_repartition_container">
+            <h5>Bénévoles disponibles</h5>
+            <p>Bénévoles</p>
+            <div id="available_people"></div>
+        </div>
+    </div>
+
+    <div class="right_repartition">
+        <div class="right_repartition_container">
+            <h5>Bénévoles sélectionnés</h5>
+            <p>Sélectionnés</p>
+            <div id="subteam_people"></div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="application/javascript">
+    $.get('/api/team/{{ teamId }}', function (result) {
+        result.poles.forEach(function(pole) {
+            $('#poles').append('<li data-id="'+ pole.id +'">'+ pole.name +'</li>');
+        });
+    });
+
+    // Click on a pole
+    $('.left_repartition').on('click', '#poles li', function (event) {
+        const poleId = $(this).attr('data-id');
+        $('#subteams').html('');
+
+        $('#poles .active').removeClass('active');
+        $(this).addClass('active');
+
+        $.get('/api/pole/'+ poleId, function (result) {
+            result.subteams.forEach(function(subteam) {
+                $('#subteams').append('<li data-id="'+ subteam.id +'">'+ subteam.name +'</li>');
+            });
+        });
+    });
+
+    // Click on a subteam
+    $('.left_repartition').on('click', '#subteams li', function (event) {
+        const subteamId = $(this).attr('data-id');
+        $('#subteam_people').html('');
+        $('#available_people').html('');
+
+        $('#subteams .active').removeClass('active');
+        $(this).addClass('active');
+
+        // People from the team
+        $.get('/api/subteam/'+ subteamId +'/people', function (result) {
+            result.people.forEach(function(people) {
+                $('#subteam_people').append(`
+                    <div class="person_card_repartition_selected">
+                        <div class="person_photo_repartition_selected"></div>
+                        <h5>${people.name}</h5>
+                        <button class="repartition_adjoint"></button>
+                        <button class="repartition_croix"></button>
+                    </div>
+                `);
+            });
+        });
+
+        // People not on the team
+        $.get('/api/team/{{ teamId }}/people/available/'+ subteamId, function (result) {
+            result.people.forEach(function(people) {
+                $('#available_people').append(`
+                    <div class="person_card_repartition">
+                        <div class="person_photo_repartition"></div>
+                        <h5>${people.name}</h5>
+                    </div>
+                `);
+            });
+        });
+    });
+</script>
+{% endblock %}

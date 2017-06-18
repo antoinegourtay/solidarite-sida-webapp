@@ -439,6 +439,183 @@ header ul li{
     padding-left: 15px;
 }
 
+
+.container_repartition{
+    width: 80vw;
+    display: flex;
+    margin: 0 auto;
+}
+
+.container_repartition .left_repartition{
+    width: 33%;
+    border-right: solid 1px;
+    height: 600px;
+}
+
+.container_repartition .left_repartition h5{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.left_repartition .flex{
+    display: flex;
+}
+
+.left_repartition .repartition_pole{
+    width: 50%;
+    margin-top: 30px;
+}
+
+
+.left_repartition ul {
+    margin-top: 15px;
+}
+
+.left_repartition ul li{
+    font-size: 19px;
+    height: 30px;
+    cursor: pointer;
+    color: rgba(0,0,0,0.7);
+}
+
+.left_repartition ul li:hover,
+.left_repartition ul li.active {
+    color: #4cc1fc;
+}
+
+.left_repartition .separate_line{
+    width: 1px;
+    height: 545px;
+    background-color: #e0e0e0;
+    margin-top: 15px;
+}
+
+.left_repartition .repartition_subteam{
+    width: 50%;
+    margin-top: 30px;
+    padding-left: 15px;
+}
+
+
+.container_repartition .middle_repartition .middle_repartition_container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.container_repartition .middle_repartition{
+    width: 33%;
+    border-right: solid 1px;
+    height: 600px;
+    overflow-x: scroll;
+}
+
+.container_repartition .middle_repartition h5{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.container_repartition .middle_repartition p{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.container_repartition .middle_repartition input{
+    height: 30px;
+    width: 100%;
+    border-radius: 5px;
+    border: solid 1px #9b9b9b;
+    padding-left: 15px;
+}
+
+.container_repartition .middle_repartition .person_card_repartition{
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    display: flex;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 2px 4px 0px #eee;
+    margin-bottom: 15px;
+}
+
+.container_repartition .middle_repartition .person_card_repartition h5{
+    margin-left: 10px;
+    margin-top: 25px;
+}
+
+.person_photo_repartition{
+    background: url(src/06.jpg);
+    height: 70px;
+    width: 70px;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.container_repartition .right_repartition{
+    width: 34%;
+}
+
+.container_repartition .right_repartition .right_repartition_container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.container_repartition .right_repartition h5{
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.container_repartition .right_repartition p{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.person_photo_repartition_selected{
+    background: url(src/06.jpg);
+    height: 40px;
+    width: 40px;
+    background-size: cover;
+    border-radius: 10px;
+}
+
+.right_repartition .right_repartition_container .person_card_repartition_selected{
+    display: flex;
+    margin-top: 10px;
+}
+
+.right_repartition .right_repartition_container .person_card_repartition_selected h5{
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    width: 64%;
+    text-align: left;
+}
+
+.right_repartition .right_repartition_container .person_card_repartition_selected .repartition_adjoint{
+    background: url(src/repartition_adjoint.png);
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    margin-top: 13px;
+    margin-left: 20px;
+}
+
+.right_repartition .right_repartition_container .person_card_repartition_selected .repartition_croix{
+    background: url(src/repartition_croix.png);
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    margin-top: 13px;
+    margin-left: 10px;
+}
+
 .person_info_hidden {
     font-size: 13px;
     margin-left: 2px;

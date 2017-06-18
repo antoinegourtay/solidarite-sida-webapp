@@ -27,7 +27,7 @@ class PeopleRepository extends EntityRepository
     public function getFromTeamIdAndNotSubteamId($teamId, $subteamId)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT p FROM PeopleBundle:People p WHERE p.subteam_id != :subteam AND p.team_id = :team ")
+        $query = $em->createQuery("SELECT p FROM PeopleBundle:People p WHERE (p.subteam_id IS NULL OR p.subteam_id != :subteam) AND p.team_id = :team ")
             ->setParameter('team', $teamId)
             ->setParameter('subteam', $subteamId);
         return $query->getResult();
