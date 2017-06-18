@@ -1,0 +1,46 @@
+{% extends "@EventBundle/layout/dashboard.html.twig" %}
+
+{% block title %}Zones > Equipes > Créer un pole{% endblock %}
+
+{% block content %}
+<div class="pole_creation">
+    <div class="creation_text">
+        <h5>Créer tes pôles</h5>
+        <p>Tu peux créer ici autant de pôle que tu le souhaites.</p>
+    </div>
+    <div class="creation_field">
+        <div id="fields">
+            <p>Nom du pôle</p>
+            <input type="text" placeholder="Animation">
+        </div>
+
+        <button id="add_pole">+ Ajouter un pôle</button>
+        <button id="create_pole" style="border: solid 1px #4cc1fc; background: #4cc1fc; color: white">Valider la création des poles</button>
+        <div style="display: none">
+            <form method="POST" id="validate_pole" action="/pole/create/validate">
+                <input type="hidden" name="poles" id="poles">
+                <input type="hidden" name="team" value="{{ team }}">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="application/javascript">
+    $('#add_pole').on('click', function (event) {
+        event.preventDefault();
+        $('#fields').append('<br><br><p>Nom du pôle</p><input type="text" placeholder="Animation">');
+    });
+
+    $('#create_pole').on('click', function (event) {
+        event.preventDefault();
+        const poles = [];
+        $('#fields input').each(function (i, input) {
+            poles.push($(input).val());
+        });
+        $('#poles').val(JSON.stringify(poles));
+        $('#validate_pole').submit();
+    });
+</script>
+{% endblock %}

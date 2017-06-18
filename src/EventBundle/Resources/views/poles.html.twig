@@ -7,7 +7,7 @@
         {% if poles is empty %}
             <div style="text-align: center; width: 100%; margin-top: 20px">
                 Il n'y a aucun Poles <br><br>
-                <a href="/pole/create">Créer les poles</a>
+                <a href="/pole/create/{{ teamId }}">Créer les poles</a>
             </div>
         {% else %}
             {% for pole in poles %}

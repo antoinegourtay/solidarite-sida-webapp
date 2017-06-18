@@ -1,6 +1,7 @@
 <?php
 namespace EventBundle\Controller;
 
+use EventBundle\Entity\Pole;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -71,5 +72,42 @@ class EventController extends Controller
             'teamId' => $team,
             'poles'  => $this->get('poleRepository')->findBy(['team_id' => $team]),
         ]);
+    }
+
+    /**
+     * @Route("/pole/create/{team}", name="pole_create", requirements={"team": "\d+"})
+     * @Method({ "GET" })
+     */
+    public function createPoleAction($team)
+    {
+        return $this->render('@EventBundle/pole.create.html.twig', [
+            'team' => $team,
+        ]);
+    }
+
+    /**
+     * @Route("/pole/create/validate", name="pole_create_validate")
+     * @Method({ "POST" })
+     */
+    public function createPoleValidateAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $teamId = $request->request->get('team');
+        $poleNames = json_decode($request->request->get('poles'));
+        $team = $this->get('teamRepository')->findBy(['id' => $teamId]);
+
+        if (empty($team)) {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        foreach ($poleNames as $poleName) {
+            $pole = new Pole();
+            $pole->setName($poleName);
+            $pole->setTeam($team[0]);
+            $em->persist($pole);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('team', ['team' => $teamId]);
     }
 }
