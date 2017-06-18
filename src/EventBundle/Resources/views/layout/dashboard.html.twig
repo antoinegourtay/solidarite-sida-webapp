@@ -20,7 +20,7 @@
     <div class="controls_container">
         <h2>{{ constant('PeopleBundle\\Helper\\RoleHelper::ROLES')[current_user.get().getRole()] }}</h2>
         <div class="controls_bar">
-            <h5>Zones</h5>
+            <h5>{% block title %}{% endblock %}</h5>
         </div>
         <div class="controls_bar end">
             <ul>

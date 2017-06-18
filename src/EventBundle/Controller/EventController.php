@@ -23,6 +23,6 @@ class EventController extends Controller
             return $this->redirectToRoute('import');
         }
 
-        return $this->render('@EventBundle/dashboard.html.twig');
+        return $this->render('@EventBundle/zones.html.twig');
     }
 }
