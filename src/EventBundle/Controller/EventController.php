@@ -23,7 +23,19 @@ class EventController extends Controller
             return $this->redirectToRoute('import');
         }
 
-        // TODO: Redirect to the right url according to the role of the current user
+        return $this->redirectToRoute('zones');
+    }
+
+    /**
+     * @Route("/zones", name="zones")
+     * @Method({ "GET" })
+     */
+    public function zonesAction(Request $request)
+    {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         return $this->render('@EventBundle/zones.html.twig');
     }
 
@@ -31,7 +43,7 @@ class EventController extends Controller
      * @Route("/zone/{zone}", name="zone")
      * @Method({ "GET" })
      */
-    public function zoneAction(Request $request, $zone)
+    public function teamsAction(Request $request, $zone)
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
