@@ -4,25 +4,31 @@
 
 {% block content %}
 <div class="equipe_container">
-    {% for team in teamRepository.findBy({'zone_id': zoneId}) %}
-    <div class="equipe">
-        <a href="/team/{{ team.id }}"><h5>{{ team.getName() }}</h5></a>
-        <div class="equipe_person">
-            {% if team.getChiefs() is empty %}
-                <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef d'équipe</center>
-            {% else %}
-                {% for chief in team.getChiefs() %}
-                <div class="person_card">
-                    <div class="person_photo"></div>
-                    <div class="person_info">
-                        <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
-                        <p class="person_poste">Chef d'équipe</p>
-                    </div>
-                </div>
-                {% endfor %}
-            {% endif %}
+    {% if teams is empty %}
+        <div style="text-align: center; width: 100%; margin-top: 20px">
+            Il n'y a aucune Equipe <br><br>
         </div>
-    </div>
-    {% endfor %}
+    {% else %}
+        {% for team in teams %}
+        <div class="equipe">
+            <a href="/team/{{ team.id }}"><h5>{{ team.getName() }}</h5></a>
+            <div class="equipe_person">
+                {% if team.getChiefs() is empty %}
+                    <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef d'équipe</center>
+                {% else %}
+                    {% for chief in team.getChiefs() %}
+                    <div class="person_card">
+                        <div class="person_photo"></div>
+                        <div class="person_info">
+                            <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
+                            <p class="person_poste">Chef d'équipe</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}

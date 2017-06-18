@@ -4,23 +4,29 @@
 
 {% block content %}
 <div class="card_container">
-    {% for zone in zoneRepository.findAll() %}
-    <div class="card">
-        <a href="/zone/{{ zone.getId() }}"><h5>{{ zone.getName() }}</h5></a>
-        {% if zone.getChiefs() is empty %}
-            <center style="margin-top: 10px; font-size: 13px">Il n'y a aucun coordinateur</center>
-        {% else %}
-            {% for chief in zone.getChiefs() %}
-            <div class="person_card">
-                <div class="person_photo"></div>
-                <div class="person_info">
-                    <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
-                    <p class="person_poste">Coordinateur</p>
+    {% if zones is empty %}
+        <div style="text-align: center; width: 100%; margin-top: 20px">
+            Il n'y a aucunes Zones <br><br>
+        </div>
+    {% else %}
+        {% for zone in zones %}
+        <div class="card">
+            <a href="/zone/{{ zone.getId() }}"><h5>{{ zone.getName() }}</h5></a>
+            {% if zone.getChiefs() is empty %}
+                <center style="margin-top: 10px; font-size: 13px">Il n'y a aucun coordinateur</center>
+            {% else %}
+                {% for chief in zone.getChiefs() %}
+                <div class="person_card">
+                    <div class="person_photo"></div>
+                    <div class="person_info">
+                        <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
+                        <p class="person_poste">Coordinateur</p>
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}

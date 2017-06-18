@@ -36,11 +36,13 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('@EventBundle/zones.html.twig');
+        return $this->render('@EventBundle/zones.html.twig', [
+            'zones' => $this->get('zoneRepository')->findAll(),
+        ]);
     }
 
     /**
-     * @Route("/zone/{zone}", name="zone", requirements={"zone": "\d+")
+     * @Route("/zone/{zone}", name="zone", requirements={"zone": "\d+"})
      * @Method({ "GET" })
      */
     public function teamsAction(Request $request, $zone)
@@ -51,11 +53,12 @@ class EventController extends Controller
 
         return $this->render('@EventBundle/teams.html.twig', [
             'zoneId' => $zone,
+            'teams'  => $this->get('teamRepository')->findBy(['zone_id' => $zone]),
         ]);
     }
 
     /**
-     * @Route("/team/{team}", name="team", requirements={"team": "\d+")
+     * @Route("/team/{team}", name="team", requirements={"team": "\d+"})
      * @Method({ "GET" })
      */
     public function polesActions(Request $request, $team)
