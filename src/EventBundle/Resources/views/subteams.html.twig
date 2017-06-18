@@ -12,7 +12,7 @@
         {% else %}
             {% for subteam in subteams %}
                 <div class="equipe">
-                    <a href="/subteam/{{ subteam.id }}"><h5>Sous-Équipe {{ subteam.getName() }}</h5></a>
+                    <h5>Sous-Équipe {{ subteam.getName() }}</h5>
                     <div class="equipe_person">
                         {% set subteamPeople = peopleRepository.findBy({'subteam_id': subteam.getId()}) %}
                         {% if subteamPeople is empty %}
