@@ -177,12 +177,14 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/zone/edit/{team}", name="zone_edit")
+     * @Route("/team/edit/{team}", name="zone_edit")
      * @Method({ "GET" })
      */
     public function editSubteamAction(Request $request, $team)
     {
-        return $this->render('@EventBundle/subteam.edit.html.twig');
+        return $this->render('@EventBundle/subteam.edit.html.twig', [
+            'teamId' => $team
+        ]);
     }
 
     /**
@@ -192,7 +194,7 @@ class EventController extends Controller
     public function apiTeamPeopleAction(Request $request, $team, $subteam)
     {
         $people = $this->get('PeopleRepository')->getFromTeamIdAndNotSubteamId($team, $subteam);
-        $people = array_reduce($people, function ($previous, $person) use ($subteam) {
+        $people = array_reduce($people, function ($previous, $person) {
             $previous[] = [
                 'name'    => $person->getFirstName() .' '. $person->getLastName(),
                 'id'      => $person->getId(),
