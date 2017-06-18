@@ -204,16 +204,16 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/api/team/{team}/people/available/{subteam}", name="api_team_available_people")
+     * @Route("/api/team/{team}/people/available", name="api_team_available_people")
      * @Method({ "GET" })
      */
-    public function apiTeamPeopleAction(Request $request, $team, $subteam)
+    public function apiTeamPeopleAction(Request $request, $team)
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
         }
 
-        $people = $this->get('PeopleRepository')->getFromTeamIdAndNotSubteamId($team, $subteam);
+        $people = $this->get('PeopleRepository')->getFromTeamIdAndNotSubteam($team);
         $people = array_reduce($people, function ($previous, $person) {
             $previous[] = [
                 'name'    => $person->getFirstName() .' '. $person->getLastName(),
@@ -302,6 +302,31 @@ class EventController extends Controller
         }
 
         $people[0]->setSubteam($subteam[0]);
+        $em->persist($people[0]);
+        $em->flush();
+
+        return new JsonResponse(['error' => false]);
+    }
+
+    /**
+     * @Route("/api/subteam/{subteam}/people/{people}", name="api_subteam_people_delete")
+     * @Method({ "DELETE" })
+     */
+    public function apiSubteamDeleteAction(Request $request, $subteam, $people)
+    {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $people = $this->get('PeopleRepository')->findBy(['id' => $people]);
+        $subteam = $this->get('SubteamRepository')->findBy(['id' => $subteam]);
+
+        if (empty($people) || empty($subteam)) {
+            return new JsonResponse(['error' => true]);
+        }
+
+        $people[0]->setSubteam(null);
         $em->persist($people[0]);
         $em->flush();
 

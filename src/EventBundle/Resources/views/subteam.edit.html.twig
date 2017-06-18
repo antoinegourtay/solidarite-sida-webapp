@@ -87,17 +87,31 @@
         });
     });
 
+    // Click delete people from subteam
+    $('#subteam_people').on('click', '.delete', function (event) {
+        const peopleId = $(this).parent().attr('data-id');
+        const subteamId = $('#subteams .active').attr('data-id');
+
+        $.ajax({
+            url: '/api/subteam/'+ subteamId +'/people/'+ peopleId,
+            method: 'DELETE',
+        }).done(function () {
+            update_people_subteam(subteamId);
+            update_people_available(subteamId);
+        });
+    });
+
     function update_people_subteam(subteamId) {
         // People from the team
         $.get('/api/subteam/'+ subteamId +'/people', function (result) {
             $('#subteam_people').html('');
             result.people.forEach(function(people) {
                 $('#subteam_people').append(`
-                    <div class="person_card_repartition_selected">
+                    <div class="person_card_repartition_selected" data-id="${people.id}">
                         <div class="person_photo_repartition_selected"></div>
                         <h5>${people.name}</h5>
                         <button class="repartition_adjoint"></button>
-                        <button class="repartition_croix"></button>
+                        <button class="repartition_croix delete"></button>
                     </div>
                 `);
             });
@@ -106,7 +120,7 @@
 
     function update_people_available(subteamId) {
         // People not on the team
-        $.get('/api/team/{{ teamId }}/people/available/'+ subteamId, function (result) {
+        $.get('/api/team/{{ teamId }}/people/available', function (result) {
             $('#available_people').html('');
             result.people.forEach(function(people) {
                 $('#available_people').append(`
