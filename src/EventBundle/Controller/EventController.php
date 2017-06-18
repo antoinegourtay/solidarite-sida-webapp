@@ -186,10 +186,10 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/api/poles/{team}", name="api_poles")
+     * @Route("/api/team/{team}", name="api_team")
      * @Method({ "GET" })
      */
-    public function apiPolesAction(Request $request, $team)
+    public function apiTeamAction(Request $request, $team)
     {
         $poles = $this->get('PoleRepository')->findBy(['team_id' => $team]);
         $poles = array_reduce($poles, function ($previous, $pole) {
@@ -197,5 +197,19 @@ class EventController extends Controller
             return $previous;
         }, []);
         return new JsonResponse(['poles' => $poles]);
+    }
+
+    /**
+     * @Route("/api/pole/{pole}", name="api_pole")
+     * @Method({ "GET" })
+     */
+    public function apiPoleAction(Request $request, $pole)
+    {
+        $subteams = $this->get('SubteamRepository')->findBy(['pole_id' => $pole]);
+        $subteams = array_reduce($subteams, function ($previous, $subteam) {
+            $previous[] = ['name' => $subteam->getName(), 'id' => $subteam->getId()];
+            return $previous;
+        }, []);
+        return new JsonResponse(['subteams' => $subteams]);
     }
 }
