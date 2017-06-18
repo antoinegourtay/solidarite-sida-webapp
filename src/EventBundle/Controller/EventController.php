@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class EventController extends Controller
@@ -176,11 +177,25 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/subteam/{subteam}", name="subteam_edit")
+     * @Route("/zone/edit/{team}", name="zone_edit")
      * @Method({ "GET" })
      */
-    public function editSubteamAction(Request $request, $subteam)
+    public function editSubteamAction(Request $request, $team)
     {
         return $this->render('@EventBundle/subteam.edit.html.twig');
+    }
+
+    /**
+     * @Route("/api/poles/{team}", name="api_poles")
+     * @Method({ "GET" })
+     */
+    public function apiPolesAction(Request $request, $team)
+    {
+        $poles = $this->get('PoleRepository')->findBy(['team_id' => $team]);
+        $poles = array_reduce($poles, function ($previous, $pole) {
+            $previous[] = ['name' => $pole->getName(), 'id' => $pole->getId()];
+            return $previous;
+        }, []);
+        return new JsonResponse(['poles' => $poles]);
     }
 }
