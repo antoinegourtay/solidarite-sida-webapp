@@ -1,6 +1,6 @@
 run:
 	cd docker && docker-compose up -d;
-	php app/console server:start;
+	php app/console server:run;
 
 install:
 	composer install;
