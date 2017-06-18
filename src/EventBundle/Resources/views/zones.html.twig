@@ -11,7 +11,7 @@
     {% else %}
         {% for zone in zones %}
         <div class="card">
-            <a href="/zone/{{ zone.getId() }}"><h5>{{ zone.getName() }}</h5></a>
+            <a href="/zone/{{ zone.getId() }}"><h5>Zone {{ zone.getName() }}</h5></a>
             {% if zone.getChiefs() is empty %}
                 <center style="margin-top: 10px; font-size: 13px">Il n'y a aucun coordinateur</center>
             {% else %}

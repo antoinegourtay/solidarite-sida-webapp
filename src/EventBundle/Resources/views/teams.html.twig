@@ -11,7 +11,7 @@
     {% else %}
         {% for team in teams %}
         <div class="equipe">
-            <a href="/team/{{ team.id }}"><h5>{{ team.getName() }}</h5></a>
+            <a href="/team/{{ team.id }}"><h5>Équipe {{ team.getName() }}</h5></a>
             <div class="equipe_person">
                 {% if team.getChiefs() is empty %}
                     <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef d'équipe</center>
