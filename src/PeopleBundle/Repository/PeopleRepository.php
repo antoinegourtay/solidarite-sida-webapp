@@ -22,14 +22,12 @@ class PeopleRepository extends EntityRepository
 
     /**
      * @param int $teamId
-     * @param int $subteamId
      */
-    public function getFromTeamIdAndNotSubteamId($teamId, $subteamId)
+    public function getFromTeamIdAndNotSubteam($teamId)
     {
         $em = $this->getEntityManager();
-        $query = $em->createQuery("SELECT p FROM PeopleBundle:People p WHERE (p.subteam_id IS NULL OR p.subteam_id != :subteam) AND p.team_id = :team ")
-            ->setParameter('team', $teamId)
-            ->setParameter('subteam', $subteamId);
+        $query = $em->createQuery("SELECT p FROM PeopleBundle:People p WHERE p.subteam_id IS NULL AND p.team_id = :team ")
+            ->setParameter('team', $teamId);
         return $query->getResult();
     }
 }
