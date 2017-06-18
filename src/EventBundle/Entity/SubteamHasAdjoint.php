@@ -78,10 +78,26 @@ class SubteamHasAdjoint
     }
 
     /**
+     * @param mixed $people
+     */
+    public function setPeople($people)
+    {
+        $this->people = $people;
+    }
+
+    /**
      * @return mixed
      */
     public function getSubteam()
     {
         return $this->subteam;
+    }
+
+    /**
+     * @param mixed $subteam
+     */
+    public function setSubteam($subteam)
+    {
+        $this->subteam = $subteam;
     }
 }

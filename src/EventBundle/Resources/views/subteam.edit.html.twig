@@ -101,16 +101,33 @@
         });
     });
 
+    // Click adjoint people from subteam
+    $('#subteam_people').on('click', '.adjoint', function (event) {
+        const peopleId = $(this).parent().attr('data-id');
+        const subteamId = $('#subteams .active').attr('data-id');
+
+        $(this).toggleClass('active');
+
+        $.ajax({
+            url: '/api/subteam/'+ subteamId +'/people/'+ peopleId,
+            method: 'PATCH',
+        }).done(function () {
+            update_people_subteam(subteamId);
+            update_people_available(subteamId);
+        });
+    });
+
     function update_people_subteam(subteamId) {
         // People from the team
         $.get('/api/subteam/'+ subteamId +'/people', function (result) {
             $('#subteam_people').html('');
             result.people.forEach(function(people) {
+                const adjointClass = people.adjoint ? 'active' : '';
                 $('#subteam_people').append(`
                     <div class="person_card_repartition_selected" data-id="${people.id}">
                         <div class="person_photo_repartition_selected"></div>
                         <h5>${people.name}</h5>
-                        <button class="repartition_adjoint"></button>
+                        <button class="repartition_adjoint adjoint ${adjointClass}"></button>
                         <button class="repartition_croix delete"></button>
                     </div>
                 `);

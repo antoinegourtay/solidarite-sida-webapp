@@ -608,6 +608,11 @@ header ul li{
     margin-left: 20px;
 }
 
+.right_repartition .right_repartition_container .person_card_repartition_selected .repartition_adjoint.active {
+    background: url(../images/repartition_adjoint_active.png);
+    background-size: cover;
+}
+
 .right_repartition .right_repartition_container .person_card_repartition_selected .repartition_croix{
     background: url(../images/repartition_croix.png);
     background-size: cover;

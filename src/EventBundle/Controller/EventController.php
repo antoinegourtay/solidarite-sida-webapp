@@ -3,6 +3,7 @@ namespace EventBundle\Controller;
 
 use EventBundle\Entity\Pole;
 use EventBundle\Entity\Subteam;
+use EventBundle\Entity\SubteamHasAdjoint;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -309,24 +310,67 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/api/subteam/{subteam}/people/{people}", name="api_subteam_people_delete")
-     * @Method({ "DELETE" })
+     * @Route("/api/subteam/{subteamId}/people/{peopleId}", name="api_subteam_people_adjoint")
+     * @Method({ "PATCH" })
      */
-    public function apiSubteamDeleteAction(Request $request, $subteam, $people)
+    public function apiSubteamAdjointAction(Request $request, $subteamId, $peopleId)
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
         }
 
         $em = $this->getDoctrine()->getEntityManager();
-        $people = $this->get('PeopleRepository')->findBy(['id' => $people]);
-        $subteam = $this->get('SubteamRepository')->findBy(['id' => $subteam]);
+        $people = $this->get('PeopleRepository')->findBy(['id' => $peopleId]);
+        $subteam = $this->get('SubteamRepository')->findBy(['id' => $subteamId]);
+        $isAdjoint = $this->get('SubteamHasAdjointRepository')->findBy(['subteam_id' => $subteamId, 'people_id' => $peopleId]);
+
+        if (empty($people) || empty($subteam)) {
+            return new JsonResponse(['error' => true]);
+        }
+
+        if (!empty($isAdjoint)) {
+            $query = $em->createQuery("DELETE EventBundle:SubteamHasAdjoint sha WHERE sha.subteam_id = :subteam AND sha.people_id = :people ")
+                ->setParameter('subteam', $subteamId)
+                ->setParameter('people', $peopleId);
+            $query->execute();
+        } else {
+            $newAdjoint = new SubteamHasAdjoint();
+            $newAdjoint->setPeopleId($peopleId);
+            $newAdjoint->setPeople($people[0]);
+            $newAdjoint->setSubteamId($subteamId);
+            $newAdjoint->setSubteam($subteam[0]);
+
+            $em->persist($newAdjoint);
+            $em->flush();
+        }
+
+        return new JsonResponse(['error' => false]);
+    }
+
+    /**
+     * @Route("/api/subteam/{subteamId}/people/{peopleId}", name="api_subteam_people_delete")
+     * @Method({ "DELETE" })
+     */
+    public function apiSubteamDeleteAction(Request $request, $subteamId, $peopleId)
+    {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $people = $this->get('PeopleRepository')->findBy(['id' => $peopleId]);
+        $subteam = $this->get('SubteamRepository')->findBy(['id' => $subteamId]);
 
         if (empty($people) || empty($subteam)) {
             return new JsonResponse(['error' => true]);
         }
 
         $people[0]->setSubteam(null);
+        $query = $em->createQuery("DELETE EventBundle:SubteamHasAdjoint sha WHERE sha.subteam_id = :subteam AND sha.people_id = :people ")
+            ->setParameter('subteam', $subteamId)
+            ->setParameter('people', $peopleId);
+        $query->execute();
+
         $em->persist($people[0]);
         $em->flush();
 

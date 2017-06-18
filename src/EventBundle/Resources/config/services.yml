@@ -29,7 +29,7 @@ services:
             - EventBundle\Entity\SubteamHasChief
 
     SubteamHasAdjointRepository:
-        class: EventBundle\Repository\SubteamHasChiefRepository
+        class: EventBundle\Repository\SubteamHasAdjointRepository
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
         arguments:
             - EventBundle\Entity\SubteamHasAdjoint
