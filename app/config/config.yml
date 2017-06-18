@@ -41,6 +41,8 @@ twig:
         poleRepository: "@PoleRepository"
         subteamRepository: "@SubteamRepository"
         peopleRepository: "@PeopleRepository"
+        subteamHasChiefRepository: "@SubteamHasChiefRepository"
+        subteamHasAdjointRepository: "@SubteamHasAdjointRepository"
     paths:
         '%kernel.root_dir%/../src/PeopleBundle/Resources/views': PeopleBundle
         '%kernel.root_dir%/../src/EventBundle/Resources/views': EventBundle

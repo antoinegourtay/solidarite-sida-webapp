@@ -21,3 +21,15 @@ services:
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
         arguments:
         - EventBundle\Entity\Subteam
+
+    SubteamHasChiefRepository:
+        class: EventBundle\Repository\SubteamHasChiefRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - EventBundle\Entity\SubteamHasChief
+
+    SubteamHasAdjointRepository:
+        class: EventBundle\Repository\SubteamHasChiefRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - EventBundle\Entity\SubteamHasAdjoint
