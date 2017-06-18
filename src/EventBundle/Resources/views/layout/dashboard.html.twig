@@ -23,6 +23,7 @@
             <h5>{% block title %}{% endblock %}</h5>
         </div>
         <div class="controls_bar end">
+            {% block controls %}
             <ul>
                 <li>Afficher :</li>
                 <li id="display_phone"><img src="/images/tel.png" width="30"></li>
@@ -30,6 +31,7 @@
                 <li id="display_address"><img src="/images/adresse.png" width="30"></li>
                 <li id="display_permis"><img src="/images/permis.png" width="30"></li>
             </ul>
+            {% endblock %}
         </div>
         <hr>
     </div>
