@@ -2,6 +2,7 @@
 namespace EventBundle\Controller;
 
 use EventBundle\Entity\Pole;
+use EventBundle\Entity\Subteam;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -130,5 +131,47 @@ class EventController extends Controller
         }
 
         return $this->redirectToRoute('team', ['team' => $teamId]);
+    }
+
+    /**
+     * @Route("/subteam/create/{pole}", name="subteam_create", requirements={"pole": "\d+"})
+     * @Method({ "GET" })
+     */
+    public function createSubteamAction($pole)
+    {
+        return $this->render('@EventBundle/subteam.create.html.twig', [
+            'pole' => $pole,
+        ]);
+    }
+
+    /**
+     * @Route("/subteam/create/validate", name="subteam_create_validate")
+     * @Method({ "POST" })
+     */
+    public function createSubteamValidateAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $poleId = $request->request->get('pole');
+        $subteamNames = json_decode($request->request->get('subteams'));
+        $subteamNames = array_filter($subteamNames, function ($current) { return !empty($current); });
+        $pole = $this->get('poleRepository')->findBy(['id' => $poleId]);
+
+        if (empty($subteamNames)) {
+            return $this->redirectToRoute('subteam_create', ['pole' => $poleId]);
+        }
+
+        if (empty($pole)) {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        foreach ($subteamNames as $subteamName) {
+            $subteam = new Subteam();
+            $subteam->setName($subteamName);
+            $subteam->setPole($pole[0]);
+            $em->persist($subteam);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('pole', ['pole' => $poleId]);
     }
 }

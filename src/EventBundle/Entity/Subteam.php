@@ -117,6 +117,14 @@ class Subteam
     /**
      * @param Pole $pole
      */
+    public function setPole($pole)
+    {
+        $this->pole = $pole;
+    }
+
+    /**
+     * @param Pole $pole
+     */
     public function setTeam($pole)
     {
         $this->pole = $pole;

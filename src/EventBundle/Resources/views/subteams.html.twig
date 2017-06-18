@@ -7,6 +7,7 @@
         {% if subteams is empty %}
             <div style="text-align: center; width: 100%; margin-top: 20px">
                 Il n'y a aucune Sous Equipe <br><br>
+                <a href="/subteam/create/{{ poleId }}">Créer les sous équipes</a>
             </div>
         {% else %}
             {% for subteam in subteams %}
