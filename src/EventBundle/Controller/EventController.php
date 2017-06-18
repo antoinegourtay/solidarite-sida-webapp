@@ -110,7 +110,12 @@ class EventController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $teamId = $request->request->get('team');
         $poleNames = json_decode($request->request->get('poles'));
+        $poleNames = array_filter($poleNames, function ($current) { return !empty($current); });
         $team = $this->get('teamRepository')->findBy(['id' => $teamId]);
+
+        if (empty($poleNames)) {
+            return $this->redirectToRoute('pole_create', ['team' => $teamId]);
+        }
 
         if (empty($team)) {
             return $this->redirectToRoute('dashboard');
