@@ -6,6 +6,7 @@ services:
 
     CurrentUser:
         class: PeopleBundle\Repository\CurrentUser
+        arguments: [ "@ZoneHasChiefRepository", "@PoleHasChiefRepository" ]
 
     PeopleRepository:
         class: PeopleBundle\Repository\PeopleRepository

@@ -4,6 +4,7 @@ namespace EventBundle\Controller;
 use EventBundle\Entity\Pole;
 use EventBundle\Entity\Subteam;
 use EventBundle\Entity\SubteamHasAdjoint;
+use PeopleBundle\Helper\RoleHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,7 +28,36 @@ class EventController extends Controller
             return $this->redirectToRoute('import');
         }
 
-        return $this->redirectToRoute('zones');
+        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::VOLONTARIA) {
+            return $this->redirectToRoute('zones');
+        }
+
+        /*if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::COORDINATOR) {
+            return $this->redirectToRoute('zones');
+        }
+
+        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_TEAM) {
+            return $this->redirectToRoute('zones');
+        }
+
+        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_POLE) {
+            return $this->redirectToRoute('zones');
+        }
+
+        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM) {
+            return $this->redirectToRoute('zones');
+        }*/
+
+        return $this->redirectToRoute('error');
+    }
+
+    /**
+     * @Route("/error", name="error")
+     * @Method({ "GET" })
+     */
+    public function error()
+    {
+        return $this->render('@EventBundle/error.html.twig');
     }
 
     /**
@@ -38,6 +68,10 @@ class EventController extends Controller
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
+        }
+
+        if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA) {
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('@EventBundle/zones.html.twig', [
@@ -53,6 +87,14 @@ class EventController extends Controller
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
+        }
+
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::COORDINATOR
+
+        ) {
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('@EventBundle/teams.html.twig', [
@@ -71,6 +113,15 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::COORDINATOR &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         return $this->render('@EventBundle/poles.html.twig', [
             'teamId' => $team,
             'poles'  => $this->get('poleRepository')->findBy(['team_id' => $team]),
@@ -87,6 +138,16 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::COORDINATOR &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         return $this->render('@EventBundle/subteams.html.twig', [
             'poleId'    => $pole,
             'subteams'  => $this->get('subteamRepository')->findBy(['pole_id' => $pole]),
@@ -99,6 +160,19 @@ class EventController extends Controller
      */
     public function createPoleAction($team)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::COORDINATOR &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         return $this->render('@EventBundle/pole.create.html.twig', [
             'team' => $team,
         ]);
@@ -149,6 +223,16 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::COORDINATOR &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         return $this->render('@EventBundle/subteam.create.html.twig', [
             'pole' => $pole,
         ]);
@@ -195,6 +279,16 @@ class EventController extends Controller
      */
     public function editSubteamAction(Request $request, $team)
     {
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
         }
@@ -294,6 +388,16 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         $em = $this->getDoctrine()->getEntityManager();
         $people = $this->get('PeopleRepository')->findBy(['id' => $people]);
         $subteam = $this->get('SubteamRepository')->findBy(['id' => $subteam]);
@@ -317,6 +421,16 @@ class EventController extends Controller
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
+        }
+
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
         }
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -355,6 +469,16 @@ class EventController extends Controller
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
+        }
+
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
         }
 
         $em = $this->getDoctrine()->getEntityManager();

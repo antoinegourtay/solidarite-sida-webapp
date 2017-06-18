@@ -9,6 +9,15 @@ class CurrentUser
     /** @var People */
     private $user = null;
 
+    private $zoneHasChiefRepository;
+    private $poleHasChiefRepository;
+
+    public function __construct($zoneHasChiefRepository, $poleHasChiefRepository)
+    {
+        $this->zoneHasChiefRepository = $zoneHasChiefRepository;
+        $this->poleHasChiefRepository = $poleHasChiefRepository;
+    }
+
     /**
      * @return People
      */
@@ -24,13 +33,15 @@ class CurrentUser
     {
         if ($people->isAdmin() === true) {
             $people->setRole(RoleHelper::VOLONTARIA);
+        } else if ( !empty($this->zoneHasChiefRepository->findBy(['people_id' => $people->getId()])) ) {
+            $people->setRole(RoleHelper::COORDINATOR);
         } else if ($this->isChief($people->getTeam(), $people)) {
             $people->setRole(RoleHelper::CHIEF_TEAM);
+        } else if ( !empty($this->poleHasChiefRepository->findBy(['people_id' => $people->getId()])) ) {
+            $people->setRole(RoleHelper::CHIEF_POLE);
         } else if ($this->isChief($people->getSubteam(), $people)) {
             $people->setRole(RoleHelper::CHIEF_SUBTEAM);
         }
-
-        // TODO: add check for coordinator and chief of pole (getting from database)
 
         $this->user = $people;
     }

@@ -4,6 +4,13 @@ services:
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
         arguments:
             - EventBundle\Entity\Zone
+
+    ZoneHasChiefRepository:
+        class: EventBundle\Repository\ZoneRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - EventBundle\Entity\ZoneHasChief
+
     TeamRepository:
         class: EventBundle\Repository\TeamRepository
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
@@ -15,6 +22,12 @@ services:
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
         arguments:
         - EventBundle\Entity\Pole
+
+    PoleHasChiefRepository:
+        class: EventBundle\Repository\PoleRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - EventBundle\Entity\PoleHasChief
 
     SubteamRepository:
         class: EventBundle\Repository\SubteamRepository
