@@ -212,4 +212,23 @@ class EventController extends Controller
         }, []);
         return new JsonResponse(['subteams' => $subteams]);
     }
+
+    /**
+     * @Route("/api/subteam/{subteam}/people", name="api_subteam_people")
+     * @Method({ "GET" })
+     */
+    public function apiSubteamAction(Request $request, $subteam)
+    {
+        $people = $this->get('PeopleRepository')->findBy(['subteam_id' => $subteam]);
+        $people = array_reduce($people, function ($previous, $person) use ($subteam) {
+            $previous[] = [
+                'name'    => $person->getFirstName() .' '. $person->getLastName(),
+                'id'      => $person->getId(),
+                'chief'   => !empty($this->get('SubteamHasChiefRepository')->findBy(['people_id' => $person->getId(), 'subteam_id' => $subteam])),
+                'adjoint' => !empty($this->get('SubteamHasAdjointRepository')->findBy(['people_id' => $person->getId(), 'subteam_id' => $subteam])),
+            ];
+            return $previous;
+        }, []);
+        return new JsonResponse(['people' => $people]);
+    }
 }
