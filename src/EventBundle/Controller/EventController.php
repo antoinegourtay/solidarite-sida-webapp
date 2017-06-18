@@ -109,6 +109,10 @@ class EventController extends Controller
      */
     public function createPoleValidateAction(Request $request)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $em = $this->getDoctrine()->getEntityManager();
         $teamId = $request->request->get('team');
         $poleNames = json_decode($request->request->get('poles'));
@@ -140,6 +144,10 @@ class EventController extends Controller
      */
     public function createSubteamAction($pole)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         return $this->render('@EventBundle/subteam.create.html.twig', [
             'pole' => $pole,
         ]);
@@ -151,6 +159,10 @@ class EventController extends Controller
      */
     public function createSubteamValidateAction(Request $request)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $em = $this->getDoctrine()->getEntityManager();
         $poleId = $request->request->get('pole');
         $subteamNames = json_decode($request->request->get('subteams'));
@@ -182,6 +194,10 @@ class EventController extends Controller
      */
     public function editSubteamAction(Request $request, $team)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         return $this->render('@EventBundle/subteam.edit.html.twig', [
             'teamId' => $team
         ]);
@@ -193,6 +209,10 @@ class EventController extends Controller
      */
     public function apiTeamPeopleAction(Request $request, $team, $subteam)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $people = $this->get('PeopleRepository')->getFromTeamIdAndNotSubteamId($team, $subteam);
         $people = array_reduce($people, function ($previous, $person) {
             $previous[] = [
@@ -210,6 +230,10 @@ class EventController extends Controller
      */
     public function apiTeamAction(Request $request, $team)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $poles = $this->get('PoleRepository')->findBy(['team_id' => $team]);
         $poles = array_reduce($poles, function ($previous, $pole) {
             $previous[] = ['name' => $pole->getName(), 'id' => $pole->getId()];
@@ -224,6 +248,10 @@ class EventController extends Controller
      */
     public function apiPoleAction(Request $request, $pole)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $subteams = $this->get('SubteamRepository')->findBy(['pole_id' => $pole]);
         $subteams = array_reduce($subteams, function ($previous, $subteam) {
             $previous[] = ['name' => $subteam->getName(), 'id' => $subteam->getId()];
@@ -238,6 +266,10 @@ class EventController extends Controller
      */
     public function apiSubteamAction(Request $request, $subteam)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $people = $this->get('PeopleRepository')->findBy(['subteam_id' => $subteam]);
         $people = array_reduce($people, function ($previous, $person) use ($subteam) {
             $previous[] = [
@@ -257,6 +289,10 @@ class EventController extends Controller
      */
     public function apiSubteamAddAction(Request $request, $subteam, $people)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $em = $this->getDoctrine()->getEntityManager();
         $people = $this->get('PeopleRepository')->findBy(['id' => $people]);
         $subteam = $this->get('SubteamRepository')->findBy(['id' => $subteam]);
