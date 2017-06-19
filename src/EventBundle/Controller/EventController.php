@@ -339,6 +339,35 @@ class EventController extends Controller
      */
     public function editSubteamAction(Request $request, $team)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return $this->render('@EventBundle/subteam.edit.html.twig', [
+            'teamId'        => $team,
+            'displayPoles'  => true,
+        ]);
+    }
+
+    /**
+     * @Route("/pole/edit/{pole}", name="pole_edit")
+     * @Method({ "GET" })
+     */
+    public function editPoleSubteamAction(Request $request, $pole)
+    {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         if (
             $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
             $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
@@ -349,19 +378,10 @@ class EventController extends Controller
             return $this->redirectToRoute('dashboard');
         }
 
-        if ($this->get('Currentuser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM) {
-            $displayPoles = false;
-        } else {
-            $displayPoles = true;
-        }
-
-        if (!$this->get('CurrentUser')->isAuthenticated()) {
-            return $this->redirectToRoute('homepage');
-        }
-
+        $pole = $this->get('PoleRepository')->findBy(['id' => $pole]);
         return $this->render('@EventBundle/subteam.edit.html.twig', [
-            'teamId'        => $team,
-            'displayPoles'  => $displayPoles,
+            'teamId'        => $pole[0]->getTeamId(),
+            'displayPoles'  => false,
         ]);
     }
 

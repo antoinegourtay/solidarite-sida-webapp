@@ -1,6 +1,9 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %}
 
-{% block title %}Zones > Equipes > Poles > Sous Equipes{% endblock %}
+{% block title %}
+    Zones > Equipes > Poles > Sous Equipes
+    <a href="/pole/edit/{{ poleId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Editer</a>
+{% endblock %}
 
 {% block content %}
     <div class="equipe_container">
