@@ -15,7 +15,13 @@ services:
         class: EventBundle\Repository\TeamRepository
         factory: ['@doctrine.orm.default_entity_manager', getRepository]
         arguments:
-        - EventBundle\Entity\Team
+            - EventBundle\Entity\Team
+
+    TeamHasChiefRepository:
+        class: EventBundle\Repository\TeamRepository
+        factory: ['@doctrine.orm.default_entity_manager', getRepository]
+        arguments:
+            - EventBundle\Entity\TeamHasChief
 
     PoleRepository:
         class: EventBundle\Repository\PoleRepository
