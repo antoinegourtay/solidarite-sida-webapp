@@ -32,20 +32,26 @@ class EventController extends Controller
             return $this->redirectToRoute('zones');
         }
 
-        /*if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::COORDINATOR) {
+        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::COORDINATOR) {
             return $this->redirectToRoute('zones');
         }
 
         if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_TEAM) {
-            return $this->redirectToRoute('zones');
+            $teamChief = $this->get('TeamHasChiefRepository')->findBy(['people_id' => $this->get('Currentuser')->get()->getId()]);
+            $team = $this->get('TeamRepository')->findById($teamChief[0]->getTeamId());
+            return $this->redirectToRoute('zone', ['zone' => $team[0]->getZoneId()]);
         }
 
         if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_POLE) {
-            return $this->redirectToRoute('zones');
-        }*/
+            $poleChief = $this->get('PoleHasChiefRepository')->findBy(['people_id' => $this->get('Currentuser')->get()->getId()]);
+            $pole = $this->get('PoleRepository')->findById($poleChief[0]->getPoleId());
+            return $this->redirectToRoute('team', ['team' => $pole[0]->getTeamId()]);
+        }
 
         if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM) {
-            return $this->redirectToRoute('zones');
+            $subteamChief = $this->get('SubteamHasChiefRepository')->findBy(['people_id' => $this->get('Currentuser')->get()->getId()]);
+            $subteam = $this->get('SubteamRepository')->findById($subteamChief[0]->getSubteamId());
+            return $this->redirectToRoute('pole', ['pole' => $subteam[0]->getPoleId()]);
         }
 
         return $this->redirectToRoute('error');
