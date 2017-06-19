@@ -130,4 +130,27 @@ class PeopleController extends Controller
 
         return $this->redirectToRoute('dashboard');
     }
+
+    /**
+     * @Route("/print", name="print")
+     * @Method({ "GET" })
+     */
+    public function printAction()
+    {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return $this->render('@EventBundle/print.html.twig');
+    }
 }
