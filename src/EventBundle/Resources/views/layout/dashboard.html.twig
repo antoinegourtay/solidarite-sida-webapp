@@ -10,7 +10,7 @@
     <header>
         <div class="header_container">
             <ul>
-                <a href="/import"><li>IMPORTER</li></a>
+                {% if current_user.get().isAdmin() %}<a href="/import"><li>IMPORTER</li></a>{% endif %}
                 <a href="/print"><li class="orange_button">IMPRESSION</li></a>
                 <a href="/dashboard"><li>{{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }}</li></a>
             </ul>
