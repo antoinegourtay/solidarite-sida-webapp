@@ -11,14 +11,17 @@
         <div class="flex">
             <div class="repartition_pole">
                 <p>Pôle</p>
-                <ul id="poles">
-                </ul>
+                {% if displayPoles %}
+                    <ul id="poles"></ul>
+                {% else %}
+                    <br>
+                    <small style="font-size: 13px">Pas accès</small>
+                {% endif %}
             </div>
             <div class="separate_line"></div>
             <div class="repartition_subteam">
                 <p>Sous-équipe</p>
-                <ul id="subteams">
-                </ul>
+                <ul id="subteams"></ul>
             </div>
         </div>
     </div>
@@ -44,11 +47,19 @@
 
 {% block javascript %}
 <script type="application/javascript">
+    {% if displayPoles %}
     $.get('/api/team/{{ teamId }}', function (result) {
         result.poles.forEach(function(pole) {
             $('#poles').append('<li data-id="'+ pole.id +'">'+ pole.name +'</li>');
         });
     });
+    {% else %}
+    $.get('/api/pole/1', function (result) {
+        result.subteams.forEach(function(subteam) {
+            $('#subteams').append('<li data-id="'+ subteam.id +'">'+ subteam.name +'</li>');
+        });
+    });
+    {% endif %}
 
     // Click on a pole
     $('.left_repartition').on('click', '#poles li', function (event) {

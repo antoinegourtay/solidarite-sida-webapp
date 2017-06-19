@@ -349,12 +349,19 @@ class EventController extends Controller
             return $this->redirectToRoute('dashboard');
         }
 
+        if ($this->get('Currentuser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM) {
+            $displayPoles = false;
+        } else {
+            $displayPoles = true;
+        }
+
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
         }
 
         return $this->render('@EventBundle/subteam.edit.html.twig', [
-            'teamId' => $team
+            'teamId'        => $team,
+            'displayPoles'  => $displayPoles,
         ]);
     }
 
@@ -407,7 +414,18 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        $subteams = $this->get('SubteamRepository')->findBy(['pole_id' => $pole]);
+        // Only display subteams where the current user is the chief if he is subteam chief
+        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM) {
+            $ids = $this->get('SubteamHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
+            $ids = array_reduce($ids, function ($previous, $subteam) {
+                $previous[] = $subteam->getSubteamId();
+                return $previous;
+            }, []);
+            $subteams = $this->get('subteamRepository')->findBy(['id' => $ids]);
+        } else {
+            $subteams = $this->get('SubteamRepository')->findBy(['pole_id' => $pole]);
+        }
+
         $subteams = array_reduce($subteams, function ($previous, $subteam) {
             $previous[] = ['name' => $subteam->getName(), 'id' => $subteam->getId()];
             return $previous;
