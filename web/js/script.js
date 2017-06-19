@@ -22,7 +22,7 @@ $('#display_phone').on('click', function () {
 
 $('#display_address').on('click', function () {
     if ($(this).hasClass('active')) {
-        $(this).children('img').attr('src', '/images/addresse.png');
+        $(this).children('img').attr('src', '/images/adresse.png');
     } else {
         $(this).children('img').attr('src', '/images/address_active.png');
     }
