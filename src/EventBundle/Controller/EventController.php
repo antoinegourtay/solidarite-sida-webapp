@@ -24,11 +24,11 @@ class EventController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        if (empty($this->get('PeopleRepository')->findBy(['admin' => false]))) {
-            return $this->redirectToRoute('import');
-        }
-
         if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::VOLONTARIA) {
+            if (empty($this->get('PeopleRepository')->findBy(['admin' => false]))) {
+                return $this->redirectToRoute('import');
+            }
+
             return $this->redirectToRoute('zones');
         }
 

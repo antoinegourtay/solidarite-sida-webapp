@@ -4,6 +4,7 @@ namespace PeopleBundle\Controller;
 use EventBundle\Entity\Team;
 use EventBundle\Entity\Zone;
 use PeopleBundle\Entity\People;
+use PeopleBundle\Helper\RoleHelper;
 use PeopleBundle\Importer\CSVImporter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,6 +51,14 @@ class PeopleController extends Controller
      */
     public function importAction(Request $request)
     {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA) {
+            return $this->redirectToRoute('dashboard');
+        }
+
         return $this->render('@EventBundle/import.html.twig');
     }
 
