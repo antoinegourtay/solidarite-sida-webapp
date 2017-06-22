@@ -151,6 +151,23 @@ class PeopleController extends Controller
             return $this->redirectToRoute('dashboard');
         }
 
+        if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA){
+            // Here we get all the zones coordinators
+
+        } else if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::COORDINATOR){
+            // Here we get all the teams chiefs in a same zone
+
+        } else if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM){
+            // Here we get all the
+
+        } else if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE){
+            // Here we get all the benevole in the team
+
+        } else if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM){
+            // Here we get all the people of the subteam
+
+        }
+
         return $this->render('@EventBundle/print.html.twig');
     }
 }
