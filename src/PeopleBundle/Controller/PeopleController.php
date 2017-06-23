@@ -153,21 +153,57 @@ class PeopleController extends Controller
 
         if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA){
             // Here we get all the zones coordinators
+            // Only display zones where the current user is the chief if he is zone chief
+            if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::COORDINATOR) {
+                $ids = $this->get('ZoneHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
+                $ids = array_reduce($ids, function ($previous, $zone) {
+                    $previous[] = $zone->getZoneId();
+                    return $previous;
+                }, []);
+                $zones = $this->get('ZoneRepository')->findBy(['id' => $ids]);
+            } else {
+                $zones = $this->get('zoneRepository')->findAll();
+            }
+            return $this->render('@EventBundle/print.html.twig', [
+                'zones' => $zones,
+
+            ]);
 
         } else if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::COORDINATOR){
             // Here we get all the teams chiefs in a same zone
+            if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::COORDINATOR) {
+                $ids = $this->get('ZoneHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
+                $ids = array_reduce($ids, function ($previous, $zone) {
+                    $previous[] = $zone->getZoneId();
+                    return $previous;
+                }, []);
+                $zones = $this->get('ZoneRepository')->findBy(['id' => $ids]);
+            } else {
+                $zones = $this->get('zoneRepository')->findAll();
+            }
+            return $this->render('@EventBundle/print.html.twig', [
+                'zones' => $zones,
 
+            ]);
         } else if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM){
-            // Here we get all the
+            // Here we get all the volunteers in the team ordered by teams
+
+            return $this->render('@EventBundle/print.html.twig', [
+
+            ]);
 
         } else if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE){
-            // Here we get all the benevole in the team
+            // Here we get all the volunteers in the team classed by pole
+            return $this->render('@EventBundle/print.html.twig', [
+
+            ]);
 
         } else if ($this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM){
-            // Here we get all the people of the subteam
+            // Here we get all the volunteers in the team ordered by subteam
+            return $this->render('@EventBundle/print.html.twig', [
+
+            ]);
 
         }
-
-        return $this->render('@EventBundle/print.html.twig');
     }
 }
