@@ -4,7 +4,7 @@
         <h5>Pôle et sous-équipe</h5>
         <div class="flex">
             <div class="repartition_pole">
-                <p>Pôle</p>
+                <p class="team_edit">Pôle</p>
                 {% if displayPoles %}
                 <ul id="poles"></ul>
                 {% else %}
@@ -13,7 +13,7 @@
             </div>
             <div class="separate_line"></div>
             <div class="repartition_subteam">
-                <p>Sous-équipe</p>
+                <p class="team_edit">Sous-équipe</p>
                 <ul id="subteams"></ul>
             </div>
         </div>
@@ -22,7 +22,8 @@
     <div class="middle_repartition">
         <div class="middle_repartition_container">
             <h5>Bénévoles disponibles</h5>
-            <p>Bénévoles</p>
+            <p class="team_edit bene_edit">Bénévoles ()</p>
+            <input class="search" placeholder="Rechecher">
             <div id="available_people"></div>
         </div>
     </div>
@@ -30,7 +31,7 @@
     <div class="right_repartition">
         <div class="right_repartition_container">
             <h5>Bénévoles sélectionnés</h5>
-            <p>Sélectionnés</p>
+            <p class="team_edit bene_edit">Sélectionnés ()</p>
             <div id="subteam_people"></div>
         </div>
     </div>

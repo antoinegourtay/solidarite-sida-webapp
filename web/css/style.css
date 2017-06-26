@@ -668,3 +668,22 @@ h5.click:hover {
 
 
 /* SUBTEAM EDIT */
+
+.team_edit {
+    font-size: 13.33px;
+}
+
+p.team_edit.bene_edit {
+    margin-top: 31px;
+}
+
+.search {
+    border: 1px solid #E0E0E0;
+    font-size: 8px;
+    color: #4A4A4A;
+    margin-top: 15px;
+    padding-top: 6px;
+    padding-left: 15px;
+    padding-bottom: 6px;
+    border-radius: 5px;
+}
