@@ -16,6 +16,6 @@ class RoleHelper
         self::CHIEF_POLE    => 'Chef de pole',
         self::CHIEF_TEAM    => 'Chef d\'équipe',
         self::COORDINATOR   => 'Coordinateur',
-        self::VOLONTARIA    => 'Volontaria',
+        self::VOLONTARIA    => 'Volontariat',
     ];
 }
