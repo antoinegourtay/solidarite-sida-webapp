@@ -10,7 +10,7 @@
     </div>
     {% else %} {% for pole in poles %}
     <div class="equipe">
-        <a class="title_card" href="/pole/{{ pole.id }}"><h5>{{ pole.getName() }}</h5></a>
+        <a class="title_card" href="/pole/{{ pole.id }}"><h5 class="click">{{ pole.getName() }}</h5></a>
         <div class="equipe_person">
             {% if pole.getChiefs() is empty %}
             <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef de pôle</center>

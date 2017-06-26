@@ -657,7 +657,7 @@ header ul li {
     display: none;
 }
 
-h5:hover {
+h5.click:hover {
     color: #4cc1fc;
     cursor: auto;
 }
@@ -665,3 +665,6 @@ h5:hover {
 .title_card {
     text-decoration: none;
 }
+
+
+/* SUBTEAM EDIT */
