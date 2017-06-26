@@ -1,10 +1,4 @@
-{% extends "@EventBundle/layout/dashboard.html.twig" %}
-
-{% block title %}Zones > Equipes > Créer un pole{% endblock %}
-
-{% block controls %}{% endblock %}
-
-{% block content %}
+{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %}Zones > Équipes > Créer un pôle{% endblock %} {% block controls %}{% endblock %} {% block content %}
 <div class="pole_creation">
     <div class="creation_text">
         <h5>Créer tes pôles</h5>
@@ -17,7 +11,7 @@
         </div>
 
         <button id="add_pole">+ Ajouter un pôle</button>
-        <button id="create_pole" style="border: solid 1px #4cc1fc; background: #4cc1fc; color: white">Valider la création des poles</button>
+        <button id="create_pole" style="border: solid 1px #4cc1fc; background: #4cc1fc; color: white">Valider</button>
         <div style="display: none">
             <form method="POST" id="validate_pole" action="/pole/create/validate">
                 <input type="hidden" name="poles" id="poles">
@@ -26,9 +20,7 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block javascript %}
+{% endblock %} {% block javascript %}
 <script type="application/javascript">
     $('#add_pole').on('click', function (event) {
         event.preventDefault();

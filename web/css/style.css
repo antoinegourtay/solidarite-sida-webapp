@@ -1,38 +1,37 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
-body{
+body {
     font-family: "Open Sans";
 }
 
-header{
+header {
     width: 100vw;
     height: 60px;
     background-color: #fafafa;
     box-shadow: 0px 2px 1px #eeeeee;
 }
 
-.header_container{
+.header_container {
     width: 80vw;
     margin: 0 auto;
     display: flex;
     justify-content: flex-end;
 }
 
-header a{
+header a {
     text-decoration: none;
 }
 
-header ul{
+header ul {
     margin-top: 22px;
 }
 
-header ul li{
+header ul li {
     display: inline;
     margin-left: 40px;
     font-size: 13px;
 }
 
-.orange_button{
+.orange_button {
     padding: 10px 20px 10px 20px;
     background-color: #ffc400;
     border-radius: 5px;
@@ -50,15 +49,12 @@ header ul li{
     position: absolute;
     background-color: #FAFAFA;
     min-width: auto;
-    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     margin-top: 0px;
     margin-left: 290px;
     border-radius: 5px;
-
 }
-
-
 
 .dropdown-content-a {
     float: none;
@@ -73,67 +69,69 @@ header ul li{
     display: block;
 }
 
+
 /* END OF HEADER */
 
-.controls_container{
+.controls_container {
     width: 80vw;
     margin: 0 auto;
 }
 
-.controls_container h2{
+.controls_container h2 {
     font-size: 24px;
     margin-top: 30px;
     margin-bottom: 20px;
 }
 
-.controls_container h5{
+.controls_container h5 {
     color: #4cc1fc;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 10px;
 }
 
-.controls_container .controls_bar{
+.controls_container .controls_bar {
     display: inline-block;
 }
 
-.controls_container .controls_bar.end{
+.controls_container .controls_bar.end {
     float: right;
 }
 
-.controls_container .controls_bar.end ul{
+.controls_container .controls_bar.end ul {
     display: inline-flex;
 }
 
-.controls_container .controls_bar.end ul li img{
+.controls_container .controls_bar.end ul li img {
     margin-top: -8px;
     margin-left: 10px;
 }
 
+
 /* END OF HEADER */
 
-.flex_container{
+.flex_container {
     display: flex;
 }
 
-.left_container{
+.left_container {
     width: 45vw;
 }
 
-.left_center{
+.left_center {
     width: 400px;
     margin: 0 auto;
     margin-top: 80px;
 }
 
-.left_container h1{
+.left_container h1 {
     font-size: 33px;
     margin-bottom: 30px;
     width: 400px;
     text-align: center;
 }
 
-.left_container h2{
+.left_container h2 {
     font-size: 33px;
     font-weight: 600;
     margin-bottom: 60px;
@@ -141,71 +139,71 @@ header ul li{
     text-align: center;
 }
 
-.left_container form{
+.left_container form {
     font-size: 16px;
     font-weight: 600;
 }
 
-.left_container form p{
+.left_container form p {
     margin-top: 30px;
     margin-bottom: 10px;
 }
 
-.left_container form input{
+.left_container form input {
     height: 50px;
     width: 400px;
     border-radius: 5px;
 }
 
-.left_container form input[type=email]{
+.left_container form input[type=email] {
     border: solid 1px #9b9b9b;
     padding-left: 15px;
 }
 
-.left_container form input[type=password]{
+.left_container form input[type=password] {
     border: solid 1px #9b9b9b;
     padding-left: 15px;
 }
 
-.left_container form input[type=submit]{
+.left_container form input[type=submit] {
     color: #ffffff;
     background-color: #2196f3;
     margin-top: 50px;
 }
 
-.right_container{
+.right_container {
     background: url("/images/connexion.png");
     background-size: cover;
     width: calc(100vw - 400px);
     height: 100vh;
 }
 
-.pole_creation{
+.pole_creation {
     width: 400px;
     margin: 0 auto;
 }
 
-.pole_creation .creation_text{
+.pole_creation .creation_text {
     margin-top: 30px;
     margin-bottom: 40px;
 }
 
-.pole_creation .creation_text h5{
+.pole_creation .creation_text h5 {
     font-size: 27px;
     font-weight: 600;
     margin-bottom: 15px;
 }
 
-.pole_creation .creation_text p{
+.pole_creation .creation_text p {
     font-size: 16px;
 }
 
-.pole_creation .creation_field p{
+.pole_creation .creation_field p {
     font-size: 16px;
     font-weight: 600;
 }
 
-.pole_creation .creation_field input{
+.pole_creation .creation_field input {
     height: 50px;
     width: 400px;
     border-radius: 5px;
@@ -214,7 +212,7 @@ header ul li{
     margin-top: 10px;
 }
 
-.pole_creation .creation_field button{
+.pole_creation .creation_field button {
     height: 50px;
     width: 400px;
     border-radius: 5px;
@@ -225,38 +223,38 @@ header ul li{
     cursor: pointer;
 }
 
-.subteams_creation{
+.subteams_creation {
     width: 500px;
     margin: 0 auto;
 }
 
-.subteams_creation .creation_text{
+.subteams_creation .creation_text {
     margin-top: 30px;
     margin-bottom: 40px;
 }
 
-.subteams_creation .creation_text h5{
+.subteams_creation .creation_text h5 {
     font-size: 27px;
     font-weight: 600;
     margin-bottom: 15px;
 }
 
-.subteams_creation .creation_text p{
+.subteams_creation .creation_text p {
     font-size: 16px;
 }
 
-.subteams_creation .creation_field h5{
+.subteams_creation .creation_field h5 {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 15px;
 }
 
-.subteams_creation .creation_field p{
+.subteams_creation .creation_field p {
     font-size: 16px;
     font-weight: 600;
 }
 
-.subteams_creation .creation_field input{
+.subteams_creation .creation_field input {
     height: 50px;
     width: 500px;
     border-radius: 5px;
@@ -265,7 +263,7 @@ header ul li{
     margin-top: 10px;
 }
 
-.subteams_creation .creation_field button{
+.subteams_creation .creation_field button {
     height: 50px;
     width: 500px;
     border-radius: 5px;
@@ -277,12 +275,11 @@ header ul li{
     margin-bottom: 20px;
 }
 
-.subteams_creation .creation_field hr{
+.subteams_creation .creation_field hr {
     margin-bottom: 20px;
 }
 
-
-.equipe_container{
+.equipe_container {
     width: 80vw;
     margin: 0 auto;
     display: flex;
@@ -291,7 +288,7 @@ header ul li{
     align-content: flex-start;
 }
 
-.equipe{
+.equipe {
     width: 80vw;
     background-color: #f2f2f2;
     border-radius: 10px;
@@ -299,19 +296,19 @@ header ul li{
     margin-top: 20px;
 }
 
-.equipe h5{
+.equipe h5 {
     font-size: 18px;
     padding-top: 15px;
     padding-left: 15px;
 }
 
-.equipe_person{
+.equipe_person {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
 }
 
-.person_card{
+.person_card {
     width: 350px;
     min-height: 90px;
     padding-bottom: 10px;
@@ -326,7 +323,7 @@ header ul li{
     box-sizing: border-box;
 }
 
-.person_photo{
+.person_photo {
     background: url(../images/06.jpg);
     height: 90px;
     width: 70px;
@@ -334,18 +331,18 @@ header ul li{
     border-radius: 10px;
 }
 
-.person_info{
+.person_info {
     margin-left: 15px;
     margin-top: 15px;
 }
 
-.person_info span{
+.person_info span {
     font-size: 18px;
     font-weight: 600;
     margin-top: 10px;
 }
 
-.person_info .person_poste{
+.person_info .person_poste {
     background-color: #FF8181;
     padding: 7px;
     color: #82254B;
@@ -356,12 +353,12 @@ header ul li{
     margin-top: 10px;
 }
 
-.importation{
+.importation {
     width: 80vw;
     margin: 0 auto;
 }
 
-.importation h2{
+.importation h2 {
     margin-top: 175px;
     width: 80vw;
     font-size: 27px;
@@ -369,18 +366,18 @@ header ul li{
     margin-bottom: 20px;
 }
 
-.importation p{
+.importation p {
     text-align: center;
     width: 110px;
     margin: 0 auto;
     font-size: 13px;
 }
 
-.importation a{
+.importation a {
     text-decoration: none;
 }
 
-.pole_container{
+.pole_container {
     width: 80vw;
     margin: 0 auto;
     display: flex;
@@ -389,12 +386,12 @@ header ul li{
     align-content: flex-start;
 }
 
-.pole_container p{
+.pole_container p {
     font-size: 27px;
     margin-top: 20px;
 }
 
-.pole{
+.pole {
     width: 80vw;
     background-color: #f2f2f2;
     border-radius: 10px;
@@ -402,19 +399,19 @@ header ul li{
     margin-top: 20px;
 }
 
-.pole h5{
+.pole h5 {
     font-size: 18px;
     padding-top: 15px;
     padding-left: 15px;
 }
 
-.pole_person{
+.pole_person {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
 }
 
-.recap_importation{
+.recap_importation {
     width: 600px;
     height: 250px;
     margin: 0 auto;
@@ -422,7 +419,7 @@ header ul li{
     box-shadow: 0px 1px 20px 1px #eee;
 }
 
-.recap_importation h2{
+.recap_importation h2 {
     margin-top: 100px;
     padding-top: 20px;
     font-size: 24px;
@@ -430,7 +427,7 @@ header ul li{
     margin-bottom: 60px;
 }
 
-.recap_importation p{
+.recap_importation p {
     color: #4A4A4A;
     width: 400px;
     margin: 0 auto;
@@ -439,17 +436,17 @@ header ul li{
     line-height: 17px;
 }
 
-.recap_importation p.orange_button{
+.recap_importation p.orange_button {
     width: 100px;
     font-size: 13px;
     color: #ffffff;
 }
 
-.recap_importation a{
+.recap_importation a {
     text-decoration: none;
 }
 
-.card_container{
+.card_container {
     width: 80vw;
     margin: 0 auto;
     display: flex;
@@ -457,7 +454,7 @@ header ul li{
     align-content: flex-start;
 }
 
-.card{
+.card {
     width: 380px;
     height: 170px;
     background-color: #f2f2f2;
@@ -467,51 +464,49 @@ header ul li{
     margin-right: 10px;
 }
 
-.card h5{
+.card h5 {
     font-size: 18px;
     padding-top: 15px;
     padding-left: 15px;
 }
 
-
-.container_repartition{
+.container_repartition {
     width: 80vw;
     display: flex;
     margin: 0 auto;
 }
 
-.container_repartition .left_repartition{
+.container_repartition .left_repartition {
     width: 33%;
     border-right: solid 1px;
     height: 600px;
 }
 
-.container_repartition .left_repartition h5{
+.container_repartition .left_repartition h5 {
     font-size: 16px;
     font-weight: 600;
     text-align: center;
     margin-top: 20px;
 }
 
-.left_repartition .flex{
+.left_repartition .flex {
     display: flex;
 }
 
-.left_repartition .repartition_pole{
+.left_repartition .repartition_pole {
     width: 50%;
     margin-top: 30px;
 }
-
 
 .left_repartition ul {
     margin-top: 15px;
 }
 
-.left_repartition ul li{
+.left_repartition ul li {
     font-size: 19px;
     height: 30px;
     cursor: pointer;
-    color: rgba(0,0,0,0.7);
+    color: rgba(0, 0, 0, 0.7);
 }
 
 .left_repartition ul li:hover,
@@ -519,45 +514,44 @@ header ul li{
     color: #4cc1fc;
 }
 
-.left_repartition .separate_line{
+.left_repartition .separate_line {
     width: 1px;
     height: 545px;
     background-color: #e0e0e0;
     margin-top: 15px;
 }
 
-.left_repartition .repartition_subteam{
+.left_repartition .repartition_subteam {
     width: 50%;
     margin-top: 30px;
     padding-left: 15px;
 }
 
-
-.container_repartition .middle_repartition .middle_repartition_container{
+.container_repartition .middle_repartition .middle_repartition_container {
     width: 90%;
     margin: 0 auto;
 }
 
-.container_repartition .middle_repartition{
+.container_repartition .middle_repartition {
     width: 33%;
     border-right: solid 1px;
     height: 600px;
     overflow-x: scroll;
 }
 
-.container_repartition .middle_repartition h5{
+.container_repartition .middle_repartition h5 {
     font-size: 16px;
     font-weight: 600;
     text-align: center;
     margin-top: 20px;
 }
 
-.container_repartition .middle_repartition p{
+.container_repartition .middle_repartition p {
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
-.container_repartition .middle_repartition input{
+.container_repartition .middle_repartition input {
     height: 30px;
     width: 100%;
     border-radius: 5px;
@@ -565,7 +559,7 @@ header ul li{
     padding-left: 15px;
 }
 
-.container_repartition .middle_repartition .person_card_repartition{
+.container_repartition .middle_repartition .person_card_repartition {
     width: 100%;
     height: 70px;
     background-color: #ffffff;
@@ -577,12 +571,12 @@ header ul li{
     cursor: pointer;
 }
 
-.container_repartition .middle_repartition .person_card_repartition h5{
+.container_repartition .middle_repartition .person_card_repartition h5 {
     margin-left: 10px;
     margin-top: 25px;
 }
 
-.person_photo_repartition{
+.person_photo_repartition {
     background: url(../images/06.jpg);
     height: 70px;
     width: 70px;
@@ -590,28 +584,28 @@ header ul li{
     border-radius: 10px;
 }
 
-.container_repartition .right_repartition{
+.container_repartition .right_repartition {
     width: 34%;
 }
 
-.container_repartition .right_repartition .right_repartition_container{
+.container_repartition .right_repartition .right_repartition_container {
     width: 90%;
     margin: 0 auto;
 }
 
-.container_repartition .right_repartition h5{
+.container_repartition .right_repartition h5 {
     font-size: 16px;
     font-weight: 600;
     text-align: center;
     margin-top: 20px;
 }
 
-.container_repartition .right_repartition p{
+.container_repartition .right_repartition p {
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
-.person_photo_repartition_selected{
+.person_photo_repartition_selected {
     background: url(../images/06.jpg);
     height: 40px;
     width: 40px;
@@ -619,12 +613,12 @@ header ul li{
     border-radius: 10px;
 }
 
-.right_repartition .right_repartition_container .person_card_repartition_selected{
+.right_repartition .right_repartition_container .person_card_repartition_selected {
     display: flex;
     margin-top: 10px;
 }
 
-.right_repartition .right_repartition_container .person_card_repartition_selected h5{
+.right_repartition .right_repartition_container .person_card_repartition_selected h5 {
     margin-top: 10px;
     margin-left: 10px;
     font-size: 18px;
@@ -633,7 +627,7 @@ header ul li{
     text-align: left;
 }
 
-.right_repartition .right_repartition_container .person_card_repartition_selected .repartition_adjoint{
+.right_repartition .right_repartition_container .person_card_repartition_selected .repartition_adjoint {
     background: url(../images/repartition_adjoint.png);
     background-size: cover;
     width: 15px;
@@ -647,7 +641,7 @@ header ul li{
     background-size: cover;
 }
 
-.right_repartition .right_repartition_container .person_card_repartition_selected .repartition_croix{
+.right_repartition .right_repartition_container .person_card_repartition_selected .repartition_croix {
     background: url(../images/repartition_croix.png);
     background-size: cover;
     width: 15px;
@@ -661,4 +655,13 @@ header ul li{
     margin-left: 2px;
     margin-top: 8px;
     display: none;
+}
+
+h5:hover {
+    color: #4cc1fc;
+    cursor: auto;
+}
+
+.title_card {
+    text-decoration: none;
 }

@@ -1,48 +1,40 @@
-{% extends "@EventBundle/layout/dashboard.html.twig" %}
-
-{% block title %}Zones > Equipes > Créer une sous équipe{% endblock %}
-
-{% block controls %}{% endblock %}
-
-{% block content %}
-    <div class="pole_creation">
-        <div class="creation_text">
-            <h5>Créer tes sous équipes</h5>
-            <p>Tu peux créer ici autant de sous équipes que tu le souhaites.</p>
+{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %}Zones > Équipes > Créer une sous-équipe{% endblock %} {% block controls %}{% endblock %} {% block content %}
+<div class="pole_creation">
+    <div class="creation_text">
+        <h5>Créer tes sous-équipes</h5>
+        <p>Tu peux créer ici autant de sous-équipes que tu le souhaites.</p>
+    </div>
+    <div class="creation_field">
+        <div id="fields">
+            <p>Nom de la sous-équipe</p>
+            <input type="text" placeholder="Animation">
         </div>
-        <div class="creation_field">
-            <div id="fields">
-                <p>Nom de la sous équipe</p>
-                <input type="text" placeholder="Animation">
-            </div>
 
-            <button id="add_subteam">+ Ajouter une sous équipe</button>
-            <button id="create_subteam" style="border: solid 1px #4cc1fc; background: #4cc1fc; color: white">Valider la création des sous équipes</button>
-            <div style="display: none">
-                <form method="POST" id="validate_subteam" action="/subteam/create/validate">
-                    <input type="hidden" name="subteams" id="subteams">
-                    <input type="hidden" name="pole" value="{{ pole }}">
-                </form>
-            </div>
+        <button id="add_subteam">+ Ajouter une sous-équipe</button>
+        <button id="create_subteam" style="border: solid 1px #4cc1fc; background: #4cc1fc; color: white">Valider</button>
+        <div style="display: none">
+            <form method="POST" id="validate_subteam" action="/subteam/create/validate">
+                <input type="hidden" name="subteams" id="subteams">
+                <input type="hidden" name="pole" value="{{ pole }}">
+            </form>
         </div>
     </div>
-{% endblock %}
+</div>
+{% endblock %} {% block javascript %}
+<script type="application/javascript">
+    $('#add_subteam').on('click', function (event) {
+        event.preventDefault();
+        $('#fields').append('<br><br><p>Nom de la sous équipe</p><input type="text" placeholder="Animation">');
+    });
 
-{% block javascript %}
-    <script type="application/javascript">
-        $('#add_subteam').on('click', function (event) {
-            event.preventDefault();
-            $('#fields').append('<br><br><p>Nom de la sous équipe</p><input type="text" placeholder="Animation">');
+    $('#create_subteam').on('click', function (event) {
+        event.preventDefault();
+        const subteams = [];
+        $('#fields input').each(function (i, input) {
+            subteams.push($(input).val());
         });
-
-        $('#create_subteam').on('click', function (event) {
-            event.preventDefault();
-            const subteams = [];
-            $('#fields input').each(function (i, input) {
-                subteams.push($(input).val());
-            });
-            $('#subteams').val(JSON.stringify(subteams));
-            $('#validate_subteam').submit();
-        });
-    </script>
+        $('#subteams').val(JSON.stringify(subteams));
+        $('#validate_subteam').submit();
+    });
+</script>
 {% endblock %}

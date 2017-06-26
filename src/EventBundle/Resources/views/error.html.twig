@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Solidarité Sida - Trombinoscope</title>
     <link rel="stylesheet" href="/css/reset.min.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-<header>
-    <div class="header_container">
-        <ul>
-            <a href="/dashboard"><li>{{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }}</li></a>
-        </ul>
+    <header>
+        <div class="header_container">
+            <ul>
+                <a href="/dashboard">
+                    <li>{{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }}</li>
+                </a>
+            </ul>
+        </div>
+    </header>
+
+    <div class="controls_container">
+        <h2>{{ constant('PeopleBundle\\Helper\\RoleHelper::ROLES')[current_user.get().getRole()] }}</h2>
+        <div class="controls_bar">
+            <h5>Oops tu n'as pas accès à cette page</h5>
+        </div>
+        <hr>
     </div>
-</header>
-
-<div class="controls_container">
-    <h2>{{ constant('PeopleBundle\\Helper\\RoleHelper::ROLES')[current_user.get().getRole()] }}</h2>
-    <div class="controls_bar">
-        <h5>Oops tu n'as pas accès a cette page</h5>
-    </div>
-    <hr>
-</div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
+
 </html>

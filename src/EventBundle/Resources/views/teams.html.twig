@@ -1,40 +1,32 @@
-{% extends "@EventBundle/layout/dashboard.html.twig" %}
-
-{% block title %}
-    Zones > Equipes
-{% endblock %}
-
-{% block content %}
+{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Équipes {% endblock %} {% block content %}
 <div class="equipe_container">
     {% if teams is empty %}
-        <div style="text-align: center; width: 100%; margin-top: 20px">
-            Il n'y a aucune Equipe <br><br>
-        </div>
-    {% else %}
-        {% for team in teams %}
-        <div class="equipe">
-            <a href="/team/{{ team.id }}"><h5>Équipe {{ team.getName() }}</h5></a>
-            <div class="equipe_person">
-                {% if team.getChiefs() is empty %}
-                    <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef d'équipe</center>
-                {% else %}
-                    {% for chief in team.getChiefs() %}
-                    <div class="person_card">
-                        <div class="person_photo"></div>
-                        <div class="person_info">
-                            <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
-                            <p class="person_poste">Chef d'équipe</p>
-                            <p class="person_email person_info_hidden">Mail: {{ chief.getPeople().getEmail() }}</p>
-                            <p class="person_phone person_info_hidden">Tel: {{ chief.getPeople().getPhone() }}</p>
-                            <p class="person_address person_info_hidden">Adresse: {{ chief.getPeople().getAddress() }} {{ chief.getPeople().getZipcode() }} {{ chief.getPeople().getCity() }}</p>
-                            <p class="person_permis person_info_hidden">Permis B: {% if chief.getPeople().hasDriverLicense() %}oui{% else %}non{% endif %}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
-                {% endif %}
+    <div style="text-align: center; width: 100%; margin-top: 20px">
+        Il n'y a aucune Equipe
+        <br>
+        <br>
+    </div>
+    {% else %} {% for team in teams %}
+    <div class="equipe">
+        <a class="title_card" href="/team/{{ team.id }}"><h5>{{ team.getName() }}</h5></a>
+        <div class="equipe_person">
+            {% if team.getChiefs() is empty %}
+            <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef d'équipe</center>
+            {% else %} {% for chief in team.getChiefs() %}
+            <div class="person_card">
+                <div class="person_photo"></div>
+                <div class="person_info">
+                    <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
+                    <p class="person_poste">Chef d'équipe</p>
+                    <p class="person_email person_info_hidden">Mail: {{ chief.getPeople().getEmail() }}</p>
+                    <p class="person_phone person_info_hidden">Tél: {{ chief.getPeople().getPhone() }}</p>
+                    <p class="person_address person_info_hidden">Adresse: {{ chief.getPeople().getAddress() }} {{ chief.getPeople().getZipcode() }} {{ chief.getPeople().getCity() }}</p>
+                    <p class="person_permis person_info_hidden">Permis B: {% if chief.getPeople().hasDriverLicense() %}oui{% else %}non{% endif %}</p>
+                </div>
             </div>
+            {% endfor %} {% endif %}
         </div>
-        {% endfor %}
-    {% endif %}
+    </div>
+    {% endfor %} {% endif %}
 </div>
 {% endblock %}

@@ -1,36 +1,29 @@
-{% extends "@EventBundle/layout/dashboard.html.twig" %}
-
-{% block title %}Zones{% endblock %}
-
-{% block content %}
+{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %}Zones{% endblock %} {% block content %}
 <div class="card_container">
     {% if zones is empty %}
-        <div style="text-align: center; width: 100%; margin-top: 20px">
-            Il n'y a aucunes Zones <br><br>
+    <div style="text-align: center; width: 100%; margin-top: 20px">
+        Il n'y a aucunes Zones
+        <br>
+        <br>
+    </div>
+    {% else %} {% for zone in zones %}
+    <div class="card">
+        <a class="title_card" href="/zone/{{ zone.getId() }}"><h5>{{ zone.getName() }}</h5></a> {% if zone.getChiefs() is empty %}
+        <center style="margin-top: 10px; font-size: 13px">Il n'y a aucun coordinateur</center>
+        {% else %} {% for chief in zone.getChiefs() %}
+        <div class="person_card">
+            <div class="person_photo"></div>
+            <div class="person_info">
+                <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
+                <p class="person_poste">Coordinateur</p>
+                <p class="person_email person_info_hidden">Mail: {{ chief.getPeople().getEmail() }}</p>
+                <p class="person_phone person_info_hidden">Tél: {{ chief.getPeople().getPhone() }}</p>
+                <p class="person_address person_info_hidden">Adresse: {{ chief.getPeople().getAddress() }} {{ chief.getPeople().getZipcode() }} {{ chief.getPeople().getCity() }}</p>
+                <p class="person_permis person_info_hidden">Permis B: {% if chief.getPeople().hasDriverLicense() %}oui{% else %}non{% endif %}</p>
+            </div>
         </div>
-    {% else %}
-        {% for zone in zones %}
-        <div class="card">
-            <a href="/zone/{{ zone.getId() }}"><h5>Zone {{ zone.getName() }}</h5></a>
-            {% if zone.getChiefs() is empty %}
-                <center style="margin-top: 10px; font-size: 13px">Il n'y a aucun coordinateur</center>
-            {% else %}
-                {% for chief in zone.getChiefs() %}
-                <div class="person_card">
-                    <div class="person_photo"></div>
-                    <div class="person_info">
-                        <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
-                        <p class="person_poste">Coordinateur</p>
-                        <p class="person_email person_info_hidden">Mail: {{ chief.getPeople().getEmail() }}</p>
-                        <p class="person_phone person_info_hidden">Tel: {{ chief.getPeople().getPhone() }}</p>
-                        <p class="person_address person_info_hidden">Adresse: {{ chief.getPeople().getAddress() }} {{ chief.getPeople().getZipcode() }} {{ chief.getPeople().getCity() }}</p>
-                        <p class="person_permis person_info_hidden">Permis B: {% if chief.getPeople().hasDriverLicense() %}oui{% else %}non{% endif %}</p>
-                    </div>
-                </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-        {% endfor %}
-    {% endif %}
+        {% endfor %} {% endif %}
+    </div>
+    {% endfor %} {% endif %}
 </div>
 {% endblock %}
