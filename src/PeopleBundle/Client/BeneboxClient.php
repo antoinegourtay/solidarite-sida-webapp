@@ -2,6 +2,7 @@
 namespace PeopleBundle\Client;
 
 use GuzzleHttp\Client;
+use Symfony\Component\Routing\Annotation\Route;
 
 class BeneboxClient
 {
@@ -41,4 +42,5 @@ class BeneboxClient
     {
         return str_replace('{PASSWORD}', $password, str_replace('{EMAIL}', $email, self::URL));
     }
+
 }

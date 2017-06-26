@@ -245,4 +245,14 @@ class PeopleController extends Controller
 
         }
     }
+
+    /**
+     * @Route("logout", name="logout")
+     * @return mixed
+     */
+    public function logout(){
+        $this->get('security.context')->setToken(null);
+        $this->get('request')->getSession()->invalidate();
+        return $this->redirectToRoute('homepage');
+    }
 }
