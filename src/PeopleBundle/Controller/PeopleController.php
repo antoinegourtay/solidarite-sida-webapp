@@ -135,6 +135,7 @@ class PeopleController extends Controller
      * @Route("/print", name="print")
      * @Method({ "GET" })
      */
+    //TODO: Handle errors with actions
     public function printAction()
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
