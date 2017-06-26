@@ -215,6 +215,44 @@ class EventController extends Controller
     }
 
     /**
+     * @Route("/trombinoscope/{pole}", name="pole_trombinoscope",requirements={"pole": "\d+"})
+     * @Method({ "GET" })
+     */
+    public function trombinoscopeAction(Request $request, $pole){
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::COORDINATOR &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        // Only display subteams where the current user is the chief if he is subteam chief
+        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM) {
+            $ids = $this->get('SubteamHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
+            $ids = array_reduce($ids, function ($previous, $subteam) {
+                $previous[] = $subteam->getSubteamId();
+                return $previous;
+            }, []);
+            $subteams = $this->get('subteamRepository')->findBy(['id' => $ids]);
+        } else {
+            $subteams = $this->get('subteamRepository')->findBy(['pole_id' => $pole]);
+        }
+
+        return $this->render('@EventBundle/trombinoscope.html.twig', [
+            'poleId'    => $pole,
+            'subteams'  => $subteams,
+        ]);
+    }
+
+    /**
      * @Route("/pole/create/{team}", name="pole_create", requirements={"team": "\d+"})
      * @Method({ "GET" })
      */
