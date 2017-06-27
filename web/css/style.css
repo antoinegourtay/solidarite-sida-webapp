@@ -13,9 +13,19 @@ header {
 .header_container {
     width: 80vw;
     margin: 0 auto;
-    display: flex;
-    justify-content: flex-end;
 }
+
+.header_container a{
+    float: left;
+    margin-top: 25px;
+    font-size: 13px;
+}
+
+.header_container ul a{
+    float: initial;
+    margin-top: 22px;
+}
+
 
 header a {
     text-decoration: none;
@@ -23,6 +33,7 @@ header a {
 
 header ul {
     margin-top: 22px;
+    float: right;
 }
 
 header ul li {
@@ -69,7 +80,8 @@ header ul li {
     display: block;
 }
 
-
+.return_button {
+}
 /* END OF HEADER */
 
 .controls_container {
@@ -650,6 +662,32 @@ header ul li {
     margin-left: 10px;
 }
 
+footer {
+    width: 100vw;
+    height: 60px;
+    background-color: #fafafa;
+    box-shadow: 0px 2px 1px #eeeeee;
+}
+.footer_nav {
+    width: 80vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer_nav a {
+    margin-top: 15px;
+    text-decoration: none;
+    font-size: 13px;
+    width: 100px;
+    padding: 10px 20px 10px 20px;
+    background-color: #0090F7;
+    border-radius: 5px;
+    color: #ffffff;
+
+}
+
+
 .person_info_hidden {
     font-size: 13px;
     margin-left: 2px;
@@ -687,3 +725,4 @@ p.team_edit.bene_edit {
     padding-bottom: 6px;
     border-radius: 5px;
 }
+
