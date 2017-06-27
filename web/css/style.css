@@ -366,10 +366,8 @@ header ul li {
     align-content: flex-start;
 }
 
-.person_card {
+.person_card{
     width: 350px;
-    min-height: 90px;
-    padding-bottom: 10px;
     background-color: #ffffff;
     display: flex;
     margin-left: 10px;
@@ -378,26 +376,29 @@ header ul li {
     border-radius: 10px;
     box-shadow: 1px 2px 4px 0px #eee;
     margin-bottom: 15px;
-    box-sizing: border-box;
 }
 
-.person_photo {
-    background: url(../images/06.jpg);
-    height: 112%;
-    width: 70px;
-    background-size: cover;
+.person_card img{
+    height: 100%;
+    width: 90px;
+    object-fit: cover;
     border-radius: 10px;
 }
 
 .person_info {
     margin-left: 15px;
     margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .person_info span {
     font-size: 18px;
     font-weight: 600;
     margin-top: 10px;
+}
+
+.person_info p{
+    width:240px;
 }
 
 .person_info .person_poste {

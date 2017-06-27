@@ -19,7 +19,7 @@
                     <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef de pôle</center>
                 {% else %} {% for chief in pole.getChiefs() %}
                     <div class="person_card">
-                        <div class="person_photo"></div>
+                        <img src="../images/07.jpg">
                         <div class="person_info">
                             <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
                             <p class="person_poste">Chef de pôle</p>

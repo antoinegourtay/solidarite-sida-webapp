@@ -41,4 +41,3 @@ $('#display_permis').on('click', function () {
     $(this).toggleClass('active');
     $('.person_permis').toggle();
 });
-
