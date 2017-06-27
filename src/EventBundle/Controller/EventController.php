@@ -248,7 +248,7 @@ class EventController extends Controller
 
         return $this->render('@EventBundle/trombinoscope.html.twig', [
             'poleId'    => $pole,
-            'subteam'  => $subteams,
+            'subteams'  => $subteams,
         ]);
     }
 
@@ -438,6 +438,10 @@ class EventController extends Controller
             $previous[] = [
                 'name'    => $person->getFirstName() .' '. $person->getLastName(),
                 'id'      => $person->getId(),
+                'email'   => $person->getEmail(),
+                'driver_license' => $person->hasDriverLicense(),
+                'phone'   => $person->getPhone(),
+                'adress'  => $person->getAddress() . ' ' . $person->getZipcode() . ' ' . $person->getCity(),
             ];
             return $previous;
         }, []);

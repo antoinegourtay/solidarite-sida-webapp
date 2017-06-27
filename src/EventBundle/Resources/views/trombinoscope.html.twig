@@ -1,11 +1,12 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Équipes > Pôles > Sous-Équipes - Trombinoscope {% endblock %} {% block content %}
-    {% if subteam is empty %}
+    {% if subteams is empty %}
     <div style="text-align: center; width: 100%; margin-top: 20px">
         Il n'y a personne dans la sous-équipe
         <br>
         <br>
     </div>
     {% else %}
+        {% for subteam in subteams %}
         <div class="equipe_container">
 
         <div class="equipe">
@@ -30,11 +31,10 @@
                     <p class="person_permis person_info_hidden">Permis B: {% if people.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
                 </div>
             </div>
-            {% endfor %}
-            {% endif %}
+            {% endfor %} {% endif %}
         </div>
     </div>
 </div>
-    {% endif %}
+{% endfor %} {% endif %}
 </div>
 {% endblock %}
