@@ -1,41 +1,40 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Equipes > Poles > Sous Equipes
-<a href="/subteam/create/{{ poleId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Ajouter des sous-équipes</a>
-<a href="/team/edit/{{ poleId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Répartir les bénévoles</a>
+    <a href="/subteam/create/{{ poleId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Ajouter des sous-équipes</a>
+    <a href="/team/edit/{{ poleId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Répartir les bénévoles</a>
+    <div class="equipe_container">
     {% if subteams is empty %}
-    <div style="text-align: center; width: 100%; margin-top: 20px">
-        Il n'y a aucune sous-équipe
-        <br>
-        <br>
-        <a href="/subteam/create/{{ poleId }}">Créer les sous-équipes</a>
-    </div>
-    {% else %} {% for subteam in subteams %}
-        <div class="equipe_container">
-
-        <div class="equipe">
-        <a href="/trombinoscope/{{ subteam.id }}"><h5>Sous-Équipe {{ subteam.getName() }}</h5></a>
-        <div class="equipe_person">
-            {% set subteamPeople = peopleRepository.findBy({'subteam_id': subteam.getId()}) %} {% if subteamPeople is empty %}
-            <center style="margin: 20px; font-size: 13px">Il n'y a aucun membre dans la sous-équipe</center>
-            {% else %} {% for people in subteamPeople %}
-            <div class="person_card">
-                <div class="person_photo"></div>
-                <div class="person_info">
-                    <span>{{ people.getFirstName() }} {{ people.getLastName() }}</span> {% if subteamHasChiefRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
-                    <p class="person_poste">Chef d'équipe</p>
-                    {% elseif subteamHasAdjointRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
-                    <p class="person_poste">Adjoint</p>
-                    {% endif %}
-                    <p class="person_email person_info_hidden">Mail: {{ people.getEmail() }}</p>
-                    <p class="person_phone person_info_hidden">Tél: {{ people.getPhone() }}</p>
-                    <p class="person_address person_info_hidden">Adresse: {{ people.getAddress() }} {{ people.getZipcode() }} {{ people.getCity() }}</p>
-                    <p class="person_permis person_info_hidden">Permis B: {% if people.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
-                </div>
-            </div>
-            {% endfor %} {% endif %}
+        <div style="text-align: center; width: 100%; margin-top: 20px">
+            Il n'y a aucune sous-équipe
+            <br>
+            <br>
+            <a href="/subteam/create/{{ poleId }}">Créer les sous-équipes</a>
         </div>
-    </div>
-</div>
+    {% else %} {% for subteam in subteams %}
+        <div class="equipe">
+            <a href="/trombinoscope/{{ subteam.id }}"><h5 class="click">{{ subteam.getName() }}</h5></a>
+            <div class="equipe_person">
+                {% set subteamPeople = peopleRepository.findBy({'subteam_id': subteam.getId()}) %} {% if subteamPeople is empty %}
+                    <center style="margin: 20px; font-size: 13px">Il n'y a aucun membre dans la sous-équipe</center>
+                {% else %} {% for people in subteamPeople %}
+                    <div class="person_card">
+                        <div class="person_photo"></div>
+                        <div class="person_info">
+                            <span>{{ people.getFirstName() }} {{ people.getLastName() }}</span> {% if subteamHasChiefRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
+                                <p class="person_poste">Chef d'équipe</p>
+                            {% elseif subteamHasAdjointRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
+                                <p class="person_poste">Adjoint</p>
+                            {% endif %}
+                            <p class="person_email person_info_hidden">Mail: {{ people.getEmail() }}</p>
+                            <p class="person_phone person_info_hidden">Tél: {{ people.getPhone() }}</p>
+                            <p class="person_address person_info_hidden">Adresse: {{ people.getAddress() }} {{ people.getZipcode() }} {{ people.getCity() }}</p>
+                            <p class="person_permis person_info_hidden">Permis B: {% if people.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
+                        </div>
+                    </div>
+                {% endfor %} {% endif %}
+            </div>
+        </div>
+        </div>
 
-{% endfor %} {% endif %}
-</div>
+    {% endfor %} {% endif %}
+    </div>
 {% endblock %}
