@@ -203,9 +203,9 @@ class EventController extends Controller
                 $previous[] = $subteam->getSubteamId();
                 return $previous;
             }, []);
-            $subteams = $this->get('subteamRepository')->findBy(['id' => $ids]);
+            $subteams = $this->get('SubteamRepository')->findBy(['id' => $ids]);
         } else {
-            $subteams = $this->get('subteamRepository')->findBy(['pole_id' => $pole]);
+            $subteams = $this->get('SubteamRepository')->findBy(['pole_id' => $pole]);
         }
 
         return $this->render('@EventBundle/subteams.html.twig', [
@@ -215,10 +215,10 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/trombinoscope/{pole}", name="pole_trombinoscope",requirements={"pole": "\d+"})
+     * @Route("/trombinoscope/{subteam}", name="subteam_trombinoscope",requirements={"subteam": "\d+"})
      * @Method({ "GET" })
      */
-    public function trombinoscopeAction(Request $request, $pole){
+    public function trombinoscopeAction(Request $request, $subteam){
         if (!$this->get('CurrentUser')->isAuthenticated()) {
             return $this->redirectToRoute('homepage');
         }
@@ -241,14 +241,14 @@ class EventController extends Controller
                 $previous[] = $subteam->getSubteamId();
                 return $previous;
             }, []);
-            $subteams = $this->get('subteamRepository')->findBy(['id' => $ids]);
+            $people = $this->get('SubteamRepository')->findBy(['id' => $ids]);
         } else {
-            $subteams = $this->get('subteamRepository')->findBy(['pole_id' => $pole]);
+            $people = $this->get('SubteamRepository')->findBy(['id' => $subteam]);
         }
 
         return $this->render('@EventBundle/trombinoscope.html.twig', [
-            'poleId'    => $pole,
-            'subteams'  => $subteams,
+            'subteamId'    => $subteam,
+            'people'  => $people,
         ]);
     }
 
