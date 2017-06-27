@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solidarité Sida - Trombinoscope</title>
+    <link rel="stylesheet" href="/css/reset.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+    <div class="header_container">
+        <ul>
+            {% if current_user.get().isAdmin() %}<a href="/import"><li>IMPORTER</li></a>{% endif %}
+            <a href="/print"><li class="orange_button">IMPRESSION</li></a>
+            <a href="/dashboard"><li>{{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }}</li></a>
+        </ul>
+    </div>
+</header>
+
+{% block content %}{% endblock %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+{% block javascript %}{% endblock %}
+</body>
+</html>
