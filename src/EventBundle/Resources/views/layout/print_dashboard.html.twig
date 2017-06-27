@@ -9,12 +9,14 @@
 <body>
 <header>
     <div class="header_container">
+        <a href="javascript:history.back()">Retour</a>
+
         <ul>
-            {% if current_user.get().isAdmin() %}<a href="/import"><li>IMPORTER</li></a>{% endif %}
-            <a href="/print"><li class="orange_button">IMPRESSION</li></a>
             <a href="/dashboard">
-                <li class="menu-dropdown"> {{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }}
-                    <div class="dropdown-content">
+                <li class="print-dropdown">
+                    <div class="print-dropdown-name">{{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }} &darr; </div>
+                    <img src="../images/06.jpg" alt="">
+                    <div class="print-dropdown-content">
                         <a class="dropdown-content-a" href="/logout">Déconnexion</a>
                         <a class="dropdown-content-a" href="https://www.youtube.com/watch?v=0lej8BJ18hw&feature=youtu.be">Tutoriel</a>
                     </div>
