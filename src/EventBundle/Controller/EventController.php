@@ -248,7 +248,7 @@ class EventController extends Controller
 
         return $this->render('@EventBundle/trombinoscope.html.twig', [
             'poleId'    => $pole,
-            'subteams'  => $subteams,
+            'subteam'  => $subteams,
         ]);
     }
 

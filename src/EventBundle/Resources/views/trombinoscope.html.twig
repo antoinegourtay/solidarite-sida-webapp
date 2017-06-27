@@ -1,11 +1,11 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Équipes > Pôles > Sous-Équipes - Trombinoscope {% endblock %} {% block content %}
-    {% if subteams is empty %}
+    {% if subteam is empty %}
     <div style="text-align: center; width: 100%; margin-top: 20px">
         Il n'y a personne dans la sous-équipe
         <br>
         <br>
     </div>
-    {% else %} {% for subteam in subteams %}
+    {% else %}
         <div class="equipe_container">
 
         <div class="equipe">
@@ -13,12 +13,14 @@
         <div class="equipe_person">
             {% set subteamPeople = peopleRepository.findBy({'subteam_id': subteam.getId()}) %} {% if subteamPeople is empty %}
             <center style="margin: 20px; font-size: 13px">Il n'y a aucun membre dans la sous-équipe</center>
-            {% else %} {% for people in subteamPeople %}
-            <div class="person_card">
-                <img src="../images/07.jpg">
-                <div class="person_info">
-                    <span>{{ people.getFirstName() }} {{ people.getLastName() }}</span> {% if subteamHasChiefRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
-                    <p class="person_poste">Chef d'équipe</p>
+            {% else %}
+                {% for people in subteamPeople %}
+                    <div class="person_card">
+                        <img src="../images/07.jpg">
+                        <div class="person_info">
+                            <span>{{ people.getFirstName() }} {{ people.getLastName() }}</span>
+                            {% if subteamHasChiefRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
+                                <p class="person_poste">Chef d'équipe</p>
                     {% elseif subteamHasAdjointRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
                     <p class="person_poste">Adjoint</p>
                     {% endif %}
@@ -28,10 +30,11 @@
                     <p class="person_permis person_info_hidden">Permis B: {% if people.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
                 </div>
             </div>
-            {% endfor %} {% endif %}
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>
-{% endfor %} {% endif %}
+    {% endif %}
 </div>
 {% endblock %}
