@@ -1,135 +1,126 @@
-{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %}Modifier les sous-équipes{% endblock %} {% block controls %}{% endblock %} {% block content %}
-<div class="container_repartition">
-    <div class="left_repartition">
-        <h5>Pôle et sous-équipe</h5>
-        <div class="flex">
-            <div class="repartition_pole">
-                <p class="team_edit">Pôle</p>
-                {% if displayPoles %}
-                <ul id="poles"></ul>
-                {% else %}
-                <br>
-                <small style="font-size: 13px">Pas accès</small> {% endif %}
+{% extends "@EventBundle/layout/dashboard.html.twig" %}
+
+{% block title %}Modifier les sous équipes{% endblock %}
+
+{% block controls %}{% endblock %}
+
+{% block content %}
+    <div class="container_repartition">
+        <div class="left_repartition">
+            <h5>Pôle et sous-équipe</h5>
+            <div class="flex">
+                <div class="repartition_pole">
+                    <p>Pôle</p>
+                    {% if displayPoles %}
+                        <ul id="poles"></ul>
+                    {% else %}
+                        <br>
+                        <small style="font-size: 13px">Pas accès</small>
+                    {% endif %}
+                </div>
+                <div class="separate_line"></div>
+                <div class="repartition_subteam">
+                    <p>Sous-équipe</p>
+                    <ul id="subteams"></ul>
+                </div>
             </div>
-            <div class="separate_line"></div>
-            <div class="repartition_subteam">
-                <p class="team_edit">Sous-équipe</p>
-                <ul id="subteams"></ul>
+        </div>
+
+        <div class="middle_repartition">
+            <div class="middle_repartition_container">
+                <h5>Bénévoles disponibles</h5>
+                <p>Bénévoles</p>
+                <div id="available_people"></div>
             </div>
         </div>
-    </div>
 
-    <div class="middle_repartition">
-        <div class="middle_repartition_container">
-            <h5>Bénévoles disponibles</h5>
-            <p class="team_edit bene_edit">Bénévoles ()</p>
-            <input class="search" placeholder="Rechecher">
-            <div id="available_people"></div>
+        <div class="right_repartition">
+            <div class="right_repartition_container">
+                <h5>Bénévoles sélectionnés</h5>
+                <p>Sélectionnés</p>
+                <div id="subteam_people"></div>
+            </div>
         </div>
+
     </div>
+{% endblock %}
 
-    <div class="right_repartition">
-        <div class="right_repartition_container">
-            <h5>Bénévoles sélectionnés</h5>
-            <p class="team_edit bene_edit">Sélectionnés ()</p>
-            <div id="subteam_people"></div>
-        </div>
-    </div>
-
-</div>
-{% endblock %} {% block javascript %}
-<script type="application/javascript">
-    { %
-        if displayPoles %
-    }
-    $.get('/api/team/{{ teamId }}', function (result) {
-        result.poles.forEach(function (pole) {
-            $('#poles').append('<li data-id="' + pole.id + '">' + pole.name + '</li>');
-        });
-    }); { %
-        else %
-    }
-    $.get('/api/pole/1', function (result) {
-        result.subteams.forEach(function (subteam) {
-            $('#subteams').append('<li data-id="' + subteam.id + '">' + subteam.name + '</li>');
-        });
-    }); { % endif %
-    }
-
-    // Click on a pole
-    $('.left_repartition').on('click', '#poles li', function (event) {
-        const poleId = $(this).attr('data-id');
-        $('#subteams').html('');
-
-        $('#poles .active').removeClass('active');
-        $(this).addClass('active');
-
-        $.get('/api/pole/' + poleId, function (result) {
-            result.subteams.forEach(function (subteam) {
-                $('#subteams').append('<li data-id="' + subteam.id + '">' + subteam.name + '</li>');
+{% block javascript %}
+    <script type="application/javascript">
+        {% if displayPoles %}
+        $.get('/api/team/{{ teamId }}', function (result) {
+            result.poles.forEach(function(pole) {
+                $('#poles').append('<li data-id="'+ pole.id +'">'+ pole.name +'</li>');
             });
         });
-    });
-
-    // Click on a subteam
-    $('.left_repartition').on('click', '#subteams li', function (event) {
-        const subteamId = $(this).attr('data-id');
-
-        $('#subteams .active').removeClass('active');
-        $(this).addClass('active');
-
-        update_people_subteam(subteamId);
-        update_people_available(subteamId);
-    });
-
-    // Click on available people
-    $('#available_people').on('click', '.person_card_repartition', function (event) {
-        const peopleId = $(this).attr('data-id');
-        const subteamId = $('#subteams .active').attr('data-id');
-
-        $.post('/api/subteam/' + subteamId + '/people/' + peopleId, function () {
+        {% else %}
+        $.get('/api/pole/1', function (result) {
+            result.subteams.forEach(function(subteam) {
+                $('#subteams').append('<li data-id="'+ subteam.id +'">'+ subteam.name +'</li>');
+            });
+        });
+        {% endif %}
+        // Click on a pole
+        $('.left_repartition').on('click', '#poles li', function (event) {
+            const poleId = $(this).attr('data-id');
+            $('#subteams').html('');
+            $('#poles .active').removeClass('active');
+            $(this).addClass('active');
+            $.get('/api/pole/'+ poleId, function (result) {
+                result.subteams.forEach(function(subteam) {
+                    $('#subteams').append('<li data-id="'+ subteam.id +'">'+ subteam.name +'</li>');
+                });
+            });
+        });
+        // Click on a subteam
+        $('.left_repartition').on('click', '#subteams li', function (event) {
+            const subteamId = $(this).attr('data-id');
+            $('#subteams .active').removeClass('active');
+            $(this).addClass('active');
             update_people_subteam(subteamId);
             update_people_available(subteamId);
         });
-    });
-
-    // Click delete people from subteam
-    $('#subteam_people').on('click', '.delete', function (event) {
-        const peopleId = $(this).parent().attr('data-id');
-        const subteamId = $('#subteams .active').attr('data-id');
-
-        $.ajax({
-            url: '/api/subteam/' + subteamId + '/people/' + peopleId,
-            method: 'DELETE',
-        }).done(function () {
-            update_people_subteam(subteamId);
-            update_people_available(subteamId);
+        // Click on available people
+        $('#available_people').on('click', '.person_card_repartition', function (event) {
+            const peopleId = $(this).attr('data-id');
+            const subteamId = $('#subteams .active').attr('data-id');
+            $.post('/api/subteam/'+ subteamId +'/people/'+ peopleId, function () {
+                update_people_subteam(subteamId);
+                update_people_available(subteamId);
+            });
         });
-    });
-
-    // Click adjoint people from subteam
-    $('#subteam_people').on('click', '.adjoint', function (event) {
-        const peopleId = $(this).parent().attr('data-id');
-        const subteamId = $('#subteams .active').attr('data-id');
-
-        $(this).toggleClass('active');
-
-        $.ajax({
-            url: '/api/subteam/' + subteamId + '/people/' + peopleId,
-            method: 'PATCH',
-        }).done(function () {
-            update_people_subteam(subteamId);
-            update_people_available(subteamId);
+        // Click delete people from subteam
+        $('#subteam_people').on('click', '.delete', function (event) {
+            const peopleId = $(this).parent().attr('data-id');
+            const subteamId = $('#subteams .active').attr('data-id');
+            $.ajax({
+                url: '/api/subteam/'+ subteamId +'/people/'+ peopleId,
+                method: 'DELETE',
+            }).done(function () {
+                update_people_subteam(subteamId);
+                update_people_available(subteamId);
+            });
         });
-    });
-
-    function update_people_subteam(subteamId) {
-        // People from the team
-        $.get('/api/subteam/' + subteamId + '/people', function (result) {
-            $('#subteam_people').html('');
-            result.people.forEach(function (people) {
-                const adjointClass = people.adjoint ? 'active' : '';
-                $('#subteam_people').append(`
+        // Click adjoint people from subteam
+        $('#subteam_people').on('click', '.adjoint', function (event) {
+            const peopleId = $(this).parent().attr('data-id');
+            const subteamId = $('#subteams .active').attr('data-id');
+            $(this).toggleClass('active');
+            $.ajax({
+                url: '/api/subteam/'+ subteamId +'/people/'+ peopleId,
+                method: 'PATCH',
+            }).done(function () {
+                update_people_subteam(subteamId);
+                update_people_available(subteamId);
+            });
+        });
+        function update_people_subteam(subteamId) {
+            // People from the team
+            $.get('/api/subteam/'+ subteamId +'/people', function (result) {
+                $('#subteam_people').html('');
+                result.people.forEach(function(people) {
+                    const adjointClass = people.adjoint ? 'active' : '';
+                    $('#subteam_people').append(`
                     <div class="person_card_repartition_selected" data-id="${people.id}">
                         <div class="person_photo_repartition_selected"></div>
                         <h5>${people.name}</h5>
@@ -137,23 +128,22 @@
                         <button class="repartition_croix delete"></button>
                     </div>
                 `);
+                });
             });
-        });
-    }
-
-    function update_people_available(subteamId) {
-        // People not on the team
-        $.get('/api/team/{{ teamId }}/people/available', function (result) {
-            $('#available_people').html('');
-            result.people.forEach(function (people) {
-                $('#available_people').append(`
+        }
+        function update_people_available(subteamId) {
+            // People not on the team
+            $.get('/api/team/{{ teamId }}/people/available', function (result) {
+                $('#available_people').html('');
+                result.people.forEach(function(people) {
+                    $('#available_people').append(`
                     <div class="person_card_repartition" data-id="${people.id}">
                         <div class="person_photo_repartition"></div>
                         <h5>${people.name}</h5>
                     </div>
                 `);
+                });
             });
-        });
-    }
-</script>
+        }
+    </script>
 {% endblock %}
