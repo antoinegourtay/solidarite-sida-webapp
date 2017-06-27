@@ -42,13 +42,17 @@
             </ul>
             {% endblock %}
         </div>
-        <li class="sort-by-dropdown">Trier par : <span class="sort-by-dropdown-span">Prénom &darr </span>;
+        {% if app.request.get('_route') != 'zone_edit' %}
+        <li class="sort-by-dropdown">Trier par : <span class="sort-by-dropdown-span">Prénom &darr; </span>;
             <div class="sort-by-dropdown-content">
                 <a class="sort-by-dropdown-a" href="">Prénom</a>
                 <a class="sort-by-dropdown-a" href="">Nom</a>
             </div>
         </li>
         <hr>
+        {% else %}
+        <hr>
+        {% endif %}
     </div>
 
 

@@ -558,14 +558,15 @@ header ul li {
 }
 
 .left_repartition ul {
-    margin-top: 15px;
+    margin-top: 90%;
 }
 
 .left_repartition ul li {
     font-size: 19px;
-    height: 30px;
+    height: auto;
     cursor: pointer;
     color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 5%;
 }
 
 .left_repartition ul li:hover,
@@ -584,6 +585,10 @@ header ul li {
     width: 50%;
     margin-top: 30px;
     padding-left: 15px;
+}
+
+.repartition_subteam ul {
+    margin-top: 98%;
 }
 
 .container_repartition .middle_repartition .middle_repartition_container {

@@ -16,7 +16,7 @@
             <a  class="title_card" href="/pole/{{ pole.id }}"><h5 class="click">{{ pole.getName() }}</h5></a>
             <div class="equipe_person">
                 {% if pole.getChiefs() is empty %}
-                    <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef de pôle</center>
+                    <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef d'équipe</center>
                 {% else %} {% for chief in pole.getChiefs() %}
                     <div class="person_card">
                         <img src="../images/07.jpg">
