@@ -1,5 +1,4 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Équipes > Pôles > Sous-Équipes - Trombinoscope {% endblock %} {% block content %}
-<div class="equipe_container">
     {% if subteams is empty %}
     <div style="text-align: center; width: 100%; margin-top: 20px">
         Il n'y a personne dans la sous-équipe
@@ -7,7 +6,9 @@
         <br>
     </div>
     {% else %} {% for subteam in subteams %}
-    <div class="equipe">
+        <div class="equipe_container">
+
+        <div class="equipe">
         <h5>Sous-Équipe {{ subteam.getName() }}</h5>
         <div class="equipe_person">
             {% set subteamPeople = peopleRepository.findBy({'subteam_id': subteam.getId()}) %} {% if subteamPeople is empty %}

@@ -2,7 +2,6 @@
 
     <a href="/pole/create/{{ teamId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Ajouter des pôles</a>
     <a href="/team/edit/{{ teamId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Répartir les bénévoles</a> {% endblock %} {% block content %}
-    <div class="equipe_container">
     {% if poles is empty %}
         <div style="text-align: center; width: 100%; margin-top: 20px">
             Il n'y a aucun pôle
@@ -11,8 +10,10 @@
             <a href="/pole/create/{{ teamId }}">Créer les pôles</a>
         </div>
     {% else %} {% for pole in poles %}
+        <div class="equipe_container">
+
         <div class="equipe">
-            <a href="/pole/{{ pole.id }}"><h5 class="click">{{ pole.getName() }}</h5></a>
+            <a  class="title_card" href="/pole/{{ pole.id }}"><h5 class="click">{{ pole.getName() }}</h5></a>
             <div class="equipe_person">
                 {% if pole.getChiefs() is empty %}
                     <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef de pôle</center>

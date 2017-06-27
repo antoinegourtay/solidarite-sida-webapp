@@ -1,5 +1,4 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Équipes {% endblock %} {% block content %}
-<div class="equipe_container">
     {% if teams is empty %}
     <div style="text-align: center; width: 100%; margin-top: 20px">
         Il n'y a aucune équipe
@@ -7,7 +6,9 @@
         <br>
     </div>
     {% else %} {% for team in teams %}
-    <div class="equipe">
+        <div class="equipe_container">
+
+        <div class="equipe">
         <a class="title_card" href="/team/{{ team.id }}"><h5 class="click">{{ team.getName() }}</h5></a>
         <div class="equipe_person">
             {% if team.getChiefs() is empty %}
