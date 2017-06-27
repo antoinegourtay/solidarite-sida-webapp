@@ -9,7 +9,6 @@
         <div class="equipe_container">
 
         <div class="equipe">
-        <h5>{{ subteamId }}</h5>
         <div class="equipe_person">
             {% set subteamPeople = peopleRepository.findBy({'subteam_id': subteamId}) %} {% if subteamPeople is empty %}
             <center style="margin: 20px; font-size: 13px">Il n'y a aucun membre dans la sous-équipe</center>
