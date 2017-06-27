@@ -11,7 +11,7 @@
     </div>
     {% else %} {% for subteam in subteams %}
     <div class="equipe">
-        <a href="/trombinoscope/{{ subteam.id }}"><h5>Sous-Équipe {{ subteam.getName() }}</h5></a>
+        <a href="/trombinoscope/{{ subteam.id }}"><h5 class="click">{{ subteam.getName() }}</h5></a>
         <div class="equipe_person">
             {% set subteamPeople = peopleRepository.findBy({'subteam_id': subteam.getId()}) %} {% if subteamPeople is empty %}
             <center style="margin: 20px; font-size: 13px">Il n'y a aucun membre dans la sous-équipe</center>
