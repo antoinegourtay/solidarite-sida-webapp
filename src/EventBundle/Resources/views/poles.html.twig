@@ -1,18 +1,18 @@
-{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Equipes > Poles
+{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Équipes > Pôles
 
-    <a href="/pole/create/{{ teamId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Ajouter des pôles</a>
+<a href="/pole/create/{{ teamId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Ajouter des pôles</a>
 <a href="/team/edit/{{ teamId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Répartir les bénévoles</a> {% endblock %} {% block content %}
 <div class="equipe_container">
     {% if poles is empty %}
     <div style="text-align: center; width: 100%; margin-top: 20px">
-        Il n'y a aucun Poles
+        Il n'y a aucun pôle
         <br>
         <br>
-        <a href="/pole/create/{{ teamId }}">Créer les poles</a>
+        <a href="/pole/create/{{ teamId }}">Créer les pôles</a>
     </div>
     {% else %} {% for pole in poles %}
     <div class="equipe">
-        <a href="/pole/{{ pole.id }}"><h5>Pole {{ pole.getName() }}</h5></a>
+        <a href="/pole/{{ pole.id }}"><h5>{{ pole.getName() }}</h5></a>
         <div class="equipe_person">
             {% if pole.getChiefs() is empty %}
             <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef de pôle</center>
@@ -23,7 +23,7 @@
                     <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
                     <p class="person_poste">Chef de pôle</p>
                     <p class="person_email person_info_hidden">Mail: {{ chief.getPeople().getEmail() }}</p>
-                    <p class="person_phone person_info_hidden">Tel: {{ chief.getPeople().getPhone() }}</p>
+                    <p class="person_phone person_info_hidden">Tél: {{ chief.getPeople().getPhone() }}</p>
                     <p class="person_address person_info_hidden">Adresse: {{ chief.getPeople().getAddress() }} {{ chief.getPeople().getZipcode() }} {{ chief.getPeople().getCity() }}</p>
                     <p class="person_permis person_info_hidden">Permis B: {% if chief.getPeople().hasDriverLicense() %}oui{% else %}non{% endif %}</p>
                 </div>
@@ -31,8 +31,5 @@
             {% endfor %} {% endif %}
         </div>
     </div>
-        </div>
-    {% endfor %}
-    {% endif %}
 </div>
-{% endblock %}
+{% endfor %} {% endif %} {% endblock %}
