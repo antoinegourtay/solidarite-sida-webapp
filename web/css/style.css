@@ -325,7 +325,7 @@ header ul li {
 
 .person_photo {
     background: url(../images/06.jpg);
-    height: 90px;
+    height: 112%;
     width: 70px;
     background-size: cover;
     border-radius: 10px;
