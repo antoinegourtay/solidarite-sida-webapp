@@ -21,7 +21,7 @@ header {
     font-size: 13px;
 }
 
-.header_container ul a{
+.header_container ul a {
     float: initial;
     margin-top: 22px;
 }
@@ -38,7 +38,7 @@ header ul {
 
 header ul li {
     display: inline;
-    margin-left: 40px;
+    margin-right: 30px;
     font-size: 13px;
 }
 
@@ -70,7 +70,7 @@ header ul li {
     box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     margin-top: 0px;
-    margin-left: 290px;
+    margin-left: 64%;
     border-radius: 5px;
 }
 
@@ -87,13 +87,20 @@ header ul li {
     display: block;
 }
 
+.header-buttons {
+    float: right;
+}
+
+.dropdown-name {
+    float: right;
+}
 
 
 .menu-dropdown img {
     border-radius: 2px;
     margin-right: 1%;
     margin-top: -5px;
-    width: 3%;
+    width: auto;
     max-height: 23px;
     float: right;
 }
