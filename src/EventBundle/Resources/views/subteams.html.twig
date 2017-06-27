@@ -1,7 +1,6 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Equipes > Poles > Sous Equipes
 <a href="/subteam/create/{{ poleId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Ajouter des sous-équipes</a>
 <a href="/team/edit/{{ poleId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Répartir les bénévoles</a>
-<div class="equipe_container">
     {% if subteams is empty %}
     <div style="text-align: center; width: 100%; margin-top: 20px">
         Il n'y a aucune sous-équipe
@@ -10,7 +9,9 @@
         <a href="/subteam/create/{{ poleId }}">Créer les sous-équipes</a>
     </div>
     {% else %} {% for subteam in subteams %}
-    <div class="equipe">
+        <div class="equipe_container">
+
+        <div class="equipe">
         <a href="/trombinoscope/{{ subteam.id }}"><h5>Sous-Équipe {{ subteam.getName() }}</h5></a>
         <div class="equipe_person">
             {% set subteamPeople = peopleRepository.findBy({'subteam_id': subteam.getId()}) %} {% if subteamPeople is empty %}
