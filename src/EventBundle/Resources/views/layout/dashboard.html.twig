@@ -30,6 +30,7 @@
         <div class="controls_bar">
             <h5>{% block title %}{% endblock %}</h5>
         </div>
+
         <div class="controls_bar end">
             {% block controls %}
             <ul>
@@ -41,8 +42,16 @@
             </ul>
             {% endblock %}
         </div>
+        <li class="sort-by-dropdown">Trier par : <span class="sort-by-dropdown-span">Prénom</span> &darr;
+            <div class="sort-by-dropdown-content">
+                <a class="sort-by-dropdown-a" href="">Prénom</a>
+                <a class="sort-by-dropdown-a" href="">Nom</a>
+            </div>
+        </li>
         <hr>
     </div>
+
+
 
     {% block content %}{% endblock %}
 
