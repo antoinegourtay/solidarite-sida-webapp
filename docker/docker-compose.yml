@@ -4,6 +4,6 @@ hetic_solidarite_sida_database:
         - "3306:3306"
     environment:
         - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=symfony
+        - MYSQL_DATABASE=solidarite_sida
     volumes:
         - "./my.cnf:/etc/my.cnf"
