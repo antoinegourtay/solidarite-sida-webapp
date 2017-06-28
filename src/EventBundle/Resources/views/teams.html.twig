@@ -2,7 +2,12 @@
 
 {% block page %}Equipes{% endblock %}
 
-{% block title %} <a href="/zones">Zones</a> > Équipes {% endblock %} {% block content %}
+{% block title %}
+    <a href="/zones">Zones</a> > Équipes
+{% endblock %}
+
+{% block content %}
+
     {% if teams is empty %}
     <div style="text-align: center; width: 100%; margin-top: 20px">
         Il n'y a aucune équipe

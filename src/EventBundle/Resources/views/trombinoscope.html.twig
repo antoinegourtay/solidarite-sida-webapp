@@ -2,11 +2,22 @@
 
 {% block page %}Trombinoscope{% endblock %}
 
-{% block title %} Zones > Équipes > Pôles > Sous-Équipes > Trombinoscope {% endblock %} {% block content %}
+{% block title %}
+    {% set poleArianne = subteamRepository.findBy({id: subteamId})[0].getPoleId() %}
+    {% set teamArianne = poleRepository.findBy({id: poleArianne})[0].getTeamId() %}
+    {% set zoneArianne = teamRepository.findBy({id: teamArianne})[0].getZoneId() %}
+    <a href="/zones">Zones</a> >
+    <a href="/zone/{{ zoneArianne }}">Équipes</a> >
+    <a href="/team/{{ teamArianne }}">Pôles</a> >
+    <a href="/pole/{{ poleArianne }}">Sous-Équipes</a> >
+    Trombinoscope
+{% endblock %}
+
+{% block content %}
     {% if people is empty %}
-        <div style="text-align: center; width: 100%; margin-top: 20px">Il n'y a personne dans la sous-équipe
-        <br>
-        <br>
+        <div style="text-align: center; width: 100%; margin-top: 20px">
+            Il n'y a personne dans la sous-équipe
+            <br><br>
         </div>
     {% else %}
 

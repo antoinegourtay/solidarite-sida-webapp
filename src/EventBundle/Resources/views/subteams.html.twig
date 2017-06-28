@@ -2,7 +2,14 @@
 
 {% block page %}Sous équipes{% endblock %}
 
-{% block title %} <a href="/zones">Zones</a> > Équipes > Pôles > Sous-Équipes
+{% block title %}
+    {% set teamArianne = poleRepository.findBy({id: poleId})[0].getTeamId() %}
+    {% set zoneArianne = teamRepository.findBy({id: teamArianne})[0].getZoneId() %}
+    <a href="/zones">Zones</a> >
+    <a href="/zone/{{ zoneArianne }}">Équipes</a> >
+    <a href="/team/{{ teamArianne }}">Pôles</a> >
+    Sous-Équipes
+
     <a href="/subteam/create/{{ poleId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Ajouter des sous-équipes</a>
     <a href="/team/edit/{{ poleId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Répartir les bénévoles</a>
 {% endblock %}
