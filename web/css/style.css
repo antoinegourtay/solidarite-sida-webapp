@@ -851,3 +851,47 @@ p.team_edit.bene_edit {
     padding-bottom: 6px;
     border-radius: 5px;
 }
+
+@media print {
+    header,
+    .controls_container {
+        display: none;
+    }
+}
+
+.print {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.print h1 {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.print h2 {
+    font-size: 22px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.print h3 {
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+.print h4 {
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 30px;
+}
+
+.print .equipe {
+    margin-left: 40px;
+    margin-bottom: 20px;
+}

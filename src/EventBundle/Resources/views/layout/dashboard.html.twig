@@ -50,7 +50,7 @@
             </ul>
             {% endblock %}
         </div>
-        {% if app.request.get('_route') == 'subteam_trombinoscope' %}
+        {% if app.request.get('_route') == 'subteam_trombinoscope' or app.request.get('_route') == 'print' %}
             <li class="sort-by-dropdown">Trier par :
                 {% if app.request.query.get('order') == 'lastname' %}
                     <span class="sort-by-dropdown-span">Nom &darr; </span>

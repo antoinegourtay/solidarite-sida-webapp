@@ -1,0 +1,23 @@
+<div class="equipe_container">
+    <div class="equipe">
+        <div class="equipe_person">
+            {% for stPeople in people %}
+                <div class="person_card">
+                    <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ stPeople.getFirstName }} {{ stPeople.getLastName }}.jpg">
+                    <div class="person_info">
+                        <span>{{ stPeople.getFirstName() }} {{ stPeople.getLastName() }}</span>
+                        {% if subteamHasChiefRepository.findBy({'people_id': stPeople.getId(), 'subteam_id': subteamId}) is not empty %}
+                            <p class="person_poste">Chef d'équipe</p>
+                        {% elseif subteamHasAdjointRepository.findBy({'people_id': stPeople.getId(), 'subteam_id': subteamId}) is not empty %}
+                            <p class="person_poste">Adjoint</p>
+                        {% endif %}
+                        <p class="person_email person_info_hidden">Mail: {{ stPeople.getEmail() }}</p>
+                        <p class="person_phone person_info_hidden">Tél: {{ stPeople.getPhone() }}</p>
+                        <p class="person_address person_info_hidden">Adresse: {{ stPeople.getAddress() }} {{ stPeople.getZipcode() }} {{ stPeople.getCity() }}</p>
+                        <p class="person_permis person_info_hidden">Permis B: {% if stPeople.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
