@@ -10,6 +10,16 @@ header {
     box-shadow: 0px 2px 1px #eeeeee;
 }
 
+/* CREDENTIALS HOME PAGE */
+
+.error-login {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 15px;
+    color: #CC4125
+}
+
 .header_container {
     width: 80vw;
     margin: 0 auto;
@@ -294,6 +304,16 @@ print-dropdown-content-a {
 
 .left_container form input[type=password] {
     border: solid 1px #9b9b9b;
+    padding-left: 15px;
+}
+
+.left_container form input[type=emailError] {
+    border: solid 1px #CC4125;
+    padding-left: 15px;
+}
+
+.left_container form input[type=passwordError] {
+    border: solid 1px #CC4125;
     padding-left: 15px;
 }
 

@@ -31,7 +31,7 @@ class PeopleController extends Controller
 
             return $this->redirectToRoute('dashboard');
         } catch (\InvalidArgumentException $exception) {
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('homepage', array('error-message' => 'Les identifiants de connexion sont incorrects'));
         }
     }
 

@@ -15,6 +15,20 @@
                 <h1>Solidarité Sida</h1>
                 <h2>Trombinoscope</h2>
 
+                {% if app.request.query.get("error-message") %}
+                    <div class="error-login">
+                        {{ app.request.query.get('error-message') }}
+                    </div>
+                    <form action="/login" method="POST">
+                        <p>Email</p>
+                        <input type="emailError" name="email" placeholder="adresse@email.com">
+                        <br>
+                        <p>Mot de passe</p>
+                        <input type="passwordError" name="password" placeholder="**********">
+                        <br>
+                        <input type="submit" value="Se connecter">
+                    </form>
+                {% else %}
                 <form action="/login" method="POST">
                     <p>Email</p>
                         <input type="email" name="email" placeholder="adresse@email.com">
@@ -24,6 +38,7 @@
                     <br>
                     <input type="submit" value="Se connecter">
                 </form>
+                {% endif %}
             </div>
         </div>
 
