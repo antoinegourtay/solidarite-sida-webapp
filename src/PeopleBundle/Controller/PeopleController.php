@@ -82,6 +82,9 @@ class PeopleController extends Controller
         $csvFile = $request->files->get('csvFile');
         $people = CSVImporter::import($csvFile->getRealPath());
         $em = $this->getDoctrine()->getEntityManager();
+        $numberOfTeams = 0;
+        $numberOfChiefs = 0;
+        $numberOfBenevoles = 0;
 
         foreach ($people as $person) {
             // Check if the zone already exists
@@ -103,6 +106,7 @@ class PeopleController extends Controller
                 $newTeam->setZone($newZone);
                 $em->persist($newTeam);
                 $em->flush();
+                $numberOfTeams++;
             } else {
                 $newTeam = $teamEntry[0];
             }
@@ -127,6 +131,7 @@ class PeopleController extends Controller
                         $newChiefOfTeam->setTeamId($newTeam->getId());
                         $em->persist($newChiefOfTeam);
                         $em->flush();
+                        $numberOfChiefs++;
                     }
                 } else {
                     // if was chief and not chief anymore we delete bond
@@ -155,6 +160,10 @@ class PeopleController extends Controller
                 }
             }
 
+            if ($person['chief'] == "0") {
+                $numberOfBenevoles++;
+            }
+
             // Update user informations
             $newPerson->setFirstName($person['firstName']);
             $newPerson->setLastName($person['lastName']);
@@ -170,7 +179,11 @@ class PeopleController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('dashboard');
+        return $this->render('@EventBundle/imported.html.twig', [
+            'chiefs'    => $numberOfChiefs,
+            'benevoles' => $numberOfBenevoles,
+            'teams'     => $numberOfTeams
+        ]);
     }
 
     /**
