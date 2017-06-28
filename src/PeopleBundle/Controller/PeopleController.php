@@ -3,6 +3,7 @@
 namespace PeopleBundle\Controller;
 
 use EventBundle\Entity\Team;
+use EventBundle\Entity\TeamHasChief;
 use EventBundle\Entity\Zone;
 use PeopleBundle\Entity\People;
 use PeopleBundle\Helper\RoleHelper;
@@ -113,6 +114,45 @@ class PeopleController extends Controller
                 $newPerson->setEmail($person['email']);
             } else {
                 $newPerson = $databaseEntry;
+
+                // Check if the user is chief of a team
+                $chiefOfTeam = $this->get('TeamHasChiefRepository')->findBy(['people_id' => $newPerson->getId(), 'team_id' => $newTeam->getId()]);
+                if (!$chiefOfTeam) {
+                    // If was not chief and now chief we create bond
+                    if ($person['chief'] == "1") {
+                        $newChiefOfTeam = new TeamHasChief();
+                        $newChiefOfTeam->setPeople($newPerson);
+                        $newChiefOfTeam->setPeopleId($newPerson->getId());
+                        $newChiefOfTeam->setTeam($newTeam);
+                        $newChiefOfTeam->setTeamId($newTeam->getId());
+                        $em->persist($newChiefOfTeam);
+                        $em->flush();
+                    }
+                } else {
+                    // if was chief and not chief anymore we delete bond
+                    if ($person['chief'] == "0") {
+                        // Team chiefs
+                        $qb = $em->createQueryBuilder();
+                        $qb->delete('TeamHasChief', 'thc');
+                        $qb->where('thc.people_id = :user');
+                        $qb->where('thc.team_id = :team');
+                        $qb->setParameter('user', $newPerson->getId());
+                        $qb->setParameter('team', $newTeam->getId());
+                        $qb->execute();
+
+                        // Poles chiefs
+                        $poles = $this->get('PoleRepository')->findBy(['team_id' => $newTeam->getId()]);
+                        foreach($poles as $pole) {
+                            $qb = $em->createQueryBuilder();
+                            $qb->delete('PoleHasChief', 'phc');
+                            $qb->where('phc.people_id = :user');
+                            $qb->where('phc.pole_id = :pole');
+                            $qb->setParameter('user', $newPerson->getId());
+                            $qb->setParameter('pole', $pole->getId());
+                            $qb->execute();
+                        }
+                    }
+                }
             }
 
             // Update user informations

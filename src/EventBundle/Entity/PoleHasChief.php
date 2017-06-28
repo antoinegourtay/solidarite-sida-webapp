@@ -84,4 +84,20 @@ class PoleHasChief
     {
         return $this->pole;
     }
+
+    /**
+     * @param mixed $pole
+     */
+    public function setPole($pole)
+    {
+        $this->pole = $pole;
+    }
+
+    /**
+     * @param mixed $people
+     */
+    public function setPeople($people)
+    {
+        $this->people = $people;
+    }
 }

@@ -84,4 +84,20 @@ class TeamHasChief
     {
         return $this->team;
     }
+
+    /**
+     * @param mixed $team
+     */
+    public function setTeam($team)
+    {
+        $this->team = $team;
+    }
+
+    /**
+     * @param mixed $people
+     */
+    public function setPeople($people)
+    {
+        $this->people = $people;
+    }
 }

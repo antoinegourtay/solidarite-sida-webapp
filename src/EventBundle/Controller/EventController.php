@@ -2,6 +2,7 @@
 namespace EventBundle\Controller;
 
 use EventBundle\Entity\Pole;
+use EventBundle\Entity\PoleHasChief;
 use EventBundle\Entity\Subteam;
 use EventBundle\Entity\SubteamHasAdjoint;
 use PeopleBundle\Helper\RoleHelper;
@@ -215,7 +216,8 @@ class EventController extends Controller
     }
 
     /**
-     * @Route("/trombinoscope/{subteam}", name="subteam_trombinoscope",requirements={"subteam": "\d+"})
+     * @Route("/trombinoscope/{subteam}", name="subteam_trombinoscope",requirements={"subteam":
+     *     "\d+"})
      * @Method({ "GET" })
      */
     public function trombinoscopeAction(Request $request, $subteam){
@@ -306,6 +308,17 @@ class EventController extends Controller
             $pole->setTeam($team[0]);
             $em->persist($pole);
             $em->flush();
+
+            // Set team chiefs as pole chiefs by default
+            foreach($team[0]->getChiefs() as $chief) {
+                $poleHasChief = new PoleHasChief();
+                $poleHasChief->setPeople($chief->getPeople());
+                $poleHasChief->setPeopleId($chief->getPeople()->getId());
+                $poleHasChief->setPole($pole);
+                $poleHasChief->setPoleId($pole->getId());
+                $em->persist($poleHasChief);
+                $em->flush();
+            }
         }
 
         return $this->redirectToRoute('team', ['team' => $teamId]);
