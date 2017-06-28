@@ -1,6 +1,6 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %}
 
-{% block page %}Trombinoscope{% endblock %}
+{% block page %}{{ subteamRepository.findBy({id: subteamId})[0].getName() }}{% endblock %}
 
 {% block title %}
     {% set poleArianne = subteamRepository.findBy({id: subteamId})[0].getPoleId() %}

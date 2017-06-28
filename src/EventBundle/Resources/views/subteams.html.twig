@@ -1,6 +1,6 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %}
 
-{% block page %}Sous équipes{% endblock %}
+{% block page %}{{ poleRepository.findBy({id: poleId})[0].getName() }}{% endblock %}
 
 {% block title %}
     {% set teamArianne = poleRepository.findBy({id: poleId})[0].getTeamId() %}

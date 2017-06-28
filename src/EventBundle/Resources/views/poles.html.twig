@@ -1,6 +1,6 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %}
 
-{% block page %}Poles{% endblock %}
+{% block page %}{{ teamRepository.findBy({id: teamId})[0].getName() }}{% endblock %}
 
 {% block title %}
     {% set zoneArianne = teamRepository.findBy({id: teamId})[0].getZoneId() %}

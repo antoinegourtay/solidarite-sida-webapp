@@ -1,6 +1,6 @@
 {% extends "@EventBundle/layout/dashboard.html.twig" %}
 
-{% block page %}Equipes{% endblock %}
+{% block page %}{{ zoneRepository.findBy({id: zoneId})[0].getName() }}{% endblock %}
 
 {% block title %}
     <a href="/zones">Zones</a> > Équipes
