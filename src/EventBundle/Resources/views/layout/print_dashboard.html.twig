@@ -15,7 +15,7 @@
             <a href="/dashboard">
                 <li class="print-dropdown">
                     <div class="print-dropdown-name">{{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }} &darr; </div>
-                    <img src="../images/06.jpg" alt="">
+                    <img onerror="this.src='/images/defaultPicture.png'" class="profile-pic" src="/images/benevoles/{{ current_user.get().getFirstName }} {{ current_user.get().getLastName }}.jpg">
                     <div class="print-dropdown-content">
                         <a class="dropdown-content-a" href="/logout">Déconnexion</a>
                         <a class="dropdown-content-a" href="https://www.youtube.com/watch?v=0lej8BJ18hw&feature=youtu.be">Tutoriel</a>
@@ -24,4 +24,6 @@
             </a>
         </ul>
     </div>
+
+    {% block container %}{% endblock %}
 </header>

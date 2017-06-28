@@ -1,1 +1,40 @@
 {% extends "@EventBundle/layout/print_dashboard.html.twig" %}
+
+{% if people is empty %}
+    <div style="text-align: center; width: 100%; margin-top: 20px">Il n'y a personne dans la sous-équipe
+        <br>
+        <br>
+    </div>
+{% else %}
+
+    <div class="equipe_container">
+
+        <div class="equipe">
+            <div class="equipe_person">
+                {% if people is empty %}
+                    <center style="margin: 20px; font-size: 13px">Il n'y a aucun membre dans la sous-équipe</center>
+                {% else %}
+                    {% for stPeople in people %}
+                        <div class="person_card">
+                            <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ stPeople.getFirstName }} {{ stPeople.getLastName }}.jpg">
+                            <div class="person_info">
+                                <span>{{ stPeople.getFirstName() }} {{ stPeople.getLastName() }}</span>
+                                {% if subteamHasChiefRepository.findBy({'people_id': stPeople.getId(), 'subteam_id': subteamId}) is not empty %}
+                                    <p class="person_poste">Chef d'équipe</p>
+                                {% elseif subteamHasAdjointRepository.findBy({'people_id': stPeople.getId(), 'subteam_id': subteamId}) is not empty %}
+                                    <p class="person_poste">Adjoint</p>
+                                {% endif %}
+                                <p class="person_email person_info_hidden">Mail: {{ stPeople.getEmail() }}</p>
+                                <p class="person_phone person_info_hidden">Tél: {{ stPeople.getPhone() }}</p>
+                                <p class="person_address person_info_hidden">Adresse: {{ stPeople.getAddress() }} {{ stPeople.getZipcode() }} {{ stPeople.getCity() }}</p>
+                                <p class="person_permis person_info_hidden">Permis B: {% if stPeople.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+</div>
+{% endblock %}
