@@ -84,4 +84,20 @@ class ZoneHasChief
     {
         return $this->zone;
     }
+
+    /**
+     * @param mixed $people
+     */
+    public function setPeople($people)
+    {
+        $this->people = $people;
+    }
+
+    /**
+     * @param mixed $zone
+     */
+    public function setZone($zone)
+    {
+        $this->zone = $zone;
+    }
 }

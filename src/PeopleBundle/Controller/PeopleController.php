@@ -5,6 +5,7 @@ namespace PeopleBundle\Controller;
 use EventBundle\Entity\Team;
 use EventBundle\Entity\TeamHasChief;
 use EventBundle\Entity\Zone;
+use EventBundle\Entity\ZoneHasChief;
 use PeopleBundle\Entity\People;
 use PeopleBundle\Helper\RoleHelper;
 use PeopleBundle\Importer\CSVImporter;
@@ -158,6 +159,18 @@ class PeopleController extends Controller
                         }
                     }
                 }
+            }
+
+            // Check if the user is coordo
+            $chiefOfZone = $this->get('ZoneHasChiefRepository')->findBy(['people_id' => $newPerson->getId(), 'zone_id' => $newZone->getId()]);
+            if (!$chiefOfZone && $person['coordo'] == "1") {
+                $newZoneHasChief = new ZoneHasChief();
+                $newZoneHasChief->setPeopleId($newPerson->getId());
+                $newZoneHasChief->setPeople($newPerson);
+                $newZoneHasChief->setZoneId($newZone->getId());
+                $newZoneHasChief->setZone($newZone);
+                $em->persist($newZoneHasChief);
+                $em->flush();
             }
 
             if ($person['chief'] == "0") {
