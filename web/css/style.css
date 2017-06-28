@@ -476,10 +476,43 @@ print-dropdown-content-a {
     width:240px;
 }
 
-.person_info .person_poste {
+.person_info .person_poste_coordo {
     background-color: #FF8181;
     padding: 7px;
     color: #82254B;
+    font-size: 11px;
+    width: 95px;
+    border-radius: 15px;
+    padding-left: 12px;
+    margin-top: 10px;
+}
+
+.person_info .person_poste_equipe {
+    background-color: #80CEFF;
+    padding: 7px;
+    color: #305B81;
+    font-size: 11px;
+    width: 95px;
+    border-radius: 15px;
+    padding-left: 12px;
+    margin-top: 10px;
+}
+
+.person_info .person_poste_adjoint {
+    background-color: #aee86f;
+    padding: 7px;
+    color: #476428;
+    font-size: 11px;
+    width: 95px;
+    border-radius: 15px;
+    padding-left: 12px;
+    margin-top: 10px;
+}
+
+.person_info .person_poste_benevole {
+    background-color: #ffec7c;
+    padding: 7px;
+    color: #746000;
     font-size: 11px;
     width: 95px;
     border-radius: 15px;

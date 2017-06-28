@@ -26,7 +26,9 @@
                             {% if subteamHasChiefRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
                                 <p class="person_poste">Chef d'équipe</p>
                             {% elseif subteamHasAdjointRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
-                                <p class="person_poste">Adjoint</p>
+                                <p class="person_poste_adjoint">Adjoint</p>
+                            {% else %}
+                                <p class="person_poste_benevole">Bénévole</p>
                             {% endif %}
                             <p class="person_email person_info_hidden">Mail: {{ people.getEmail() }}</p>
                             <p class="person_phone person_info_hidden">Tél: {{ people.getPhone() }}</p>
