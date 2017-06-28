@@ -9,7 +9,9 @@
 <body>
     <header>
         <div class="header_container">
-            <a href="javascript:history.back()">Retour</a>
+            {% if app.request.get('_route') != 'zones' %}
+                <a href="javascript:history.back()">Retour</a>
+            {% endif %}
             <ul>
 
                 <a href="/dashboard">
@@ -50,25 +52,7 @@
             </ul>
             {% endblock %}
         </div>
-        {% if app.request.get('_route') == 'zone_edit' %}
-            <hr>
-        {% elseif app.request.get('_route') == 'pole_create'%}
-            <hr>
-        {% elseif app.request.get('_route') == 'pole_create_validate' %}
-            <hr>
-        {% elseif app.request.get('_route') == 'subteam_create' %}
-            <hr>
-        {% elseif app.request.get('_route') == 'subteam_create_validate' %}
-            <hr>
-        {% else %}
-            <li class="sort-by-dropdown">Trier par : <span class="sort-by-dropdown-span">Prénom &darr; </span>
-                <div class="sort-by-dropdown-content">
-                    <a class="sort-by-dropdown-a" href="">Prénom</a>
-                    <a class="sort-by-dropdown-a" href="">Nom</a>
-                </div>
-            </li>
-            <hr>
-        {% endif %}
+        <hr>
     </div>
 
 
