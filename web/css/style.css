@@ -998,3 +998,53 @@ p.team_edit.bene_edit {
     border-radius: 10px;
     cursor: pointer;
 }
+
+.callsheet table{
+    margin-top: 20px;
+}
+
+.callsheet h2{
+    margin-left: 20px;
+    font-size: 26px;
+    margin-top: 5px;
+}
+
+.callsheet h3{
+    margin-left: 40px;
+    font-size: 21px;
+    margin-top: 5px;
+}
+
+.callsheet h4{
+    margin-left: 60px;
+    font-size: 18px;
+    margin-top: 5px;
+}
+
+.callsheet h5{
+    margin-left: 80px;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.callsheet .bold{
+    font-weight: 700;
+}
+
+.callsheet td,th{
+    border: thin solid #000000;
+}
+
+.callsheet th{
+    width: 250px;
+    height: 50px;
+}
+
+.callsheet th p{
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+.callsheet .cochage{
+    width: 100px;
+}

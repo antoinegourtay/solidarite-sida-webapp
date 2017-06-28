@@ -278,6 +278,16 @@ class PeopleController extends Controller
         ]);
     }
 
+    /**
+     * @Route("/callsheet", name="callsheet")
+     *
+     */
+    public function pif() {
+
+        return $this->render('@EventBundle/pdf/callsheet.html.twig', []);
+
+    }
+
 
     /**
      * @Route("/printtrombi", name="print_trombinoscope_action")
