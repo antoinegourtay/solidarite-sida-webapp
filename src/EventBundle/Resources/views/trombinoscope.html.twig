@@ -18,7 +18,7 @@
                         <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ stPeople.getId }}.jpg">
                         <div class="person_info">
                             <span>{{ stPeople.getFirstName() }} {{ stPeople.getLastName() }}</span>
-                            {% if peopleRepository.findBy({'id': stPeople.getId(), 'team_id': subteamId}) == subteamHasChiefRepository.findBy({'people_id': stPeople.getId(), 'subteam_id': subteamId}) %}
+                            {% if subteamHasChiefRepository.findBy({'people_id': stPeople.getId(), 'subteam_id': subteamId}) %}
                                 <p class="person_poste_equipe">Chef d'équipe</p>
                             {% elseif subteamHasAdjointRepository.findBy({'people_id': stPeople.getId(), 'subteam_id': subteamId}) is not empty %}
                                 <p class="person_poste_adjoint">Adjoint</p>
