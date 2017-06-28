@@ -28,7 +28,7 @@
                     {% if app.request.get('_route') != 'print' %}
                         {% if current_user.get().isAdmin() %}<a href="/import"><li>IMPORTER</li></a>
                         {% endif %}
-                        <a href="/print"><li class="orange_button">IMPRESSION</li></a>
+                        {% if printingLink is defined %}<a href="{{ printingLink }}"><li class="orange_button">IMPRESSION</li></a>{% endif %}
                     {% endif %}
 
 

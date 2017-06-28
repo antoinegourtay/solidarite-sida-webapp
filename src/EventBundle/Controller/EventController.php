@@ -97,7 +97,8 @@ class EventController extends Controller
         }
 
         return $this->render('@EventBundle/zones.html.twig', [
-            'zones' => $zones,
+            'zones'        => $zones,
+            'printingLink' => '/print?volontaria=true',
         ]);
     }
 
@@ -135,6 +136,7 @@ class EventController extends Controller
         return $this->render('@EventBundle/teams.html.twig', [
             'zoneId' => $zone,
             'teams'  => $teams,
+            'printingLink' => '/print?type=zone&id='. $zone,
         ]);
     }
 
@@ -173,6 +175,7 @@ class EventController extends Controller
         return $this->render('@EventBundle/poles.html.twig', [
             'teamId' => $team,
             'poles'  => $poles,
+            'printingLink' => '/print?type=team&id='. $team,
         ]);
     }
 
@@ -212,6 +215,7 @@ class EventController extends Controller
         return $this->render('@EventBundle/subteams.html.twig', [
             'poleId'    => $pole,
             'subteams'  => $subteams,
+            'printingLink' => '/print?type=pole&id='. $pole,
         ]);
     }
 
@@ -251,6 +255,7 @@ class EventController extends Controller
         return $this->render('@EventBundle/trombinoscope.html.twig', [
             'subteamId' => $subteam,
             'people'    => $people,
+            'printingLink' => '/print?type=subteam&id='. $subteam,
         ]);
     }
 

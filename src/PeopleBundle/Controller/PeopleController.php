@@ -207,85 +207,62 @@ class PeopleController extends Controller
             return $this->redirectToRoute('dashboard');
         }
 
-        $order = $request->query->get('order');
-        $ordering = ['first_name' => 'ASC'];
+        $volontaria = $request->query->get('volontaria');
+        $type = $request->query->get('type');
+        $id = $request->query->get('id');
 
-        if ($order == 'lastname') {
-            $ordering = ['last_name' => 'ASC'];
-        }
-
-        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::VOLONTARIA) {
+        if ($volontaria === 'true') {
             $zones = $this->get('zoneRepository')->findAll();
 
             return $this->render('@EventBundle/print.html.twig', [
                 'zones' => $zones,
-                'ordering' => $ordering,
             ]);
-
-        } else {
-            if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::COORDINATOR) {
-                $ids = $this->get('ZoneHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
-                $ids = array_reduce($ids, function ($previous, $zone) {
-                    $previous[] = $zone->getZoneId();
-
-                    return $previous;
-                }, []);
-                $zones = $this->get('ZoneRepository')->findBy(['id' => $ids]);
-
-                return $this->render('@EventBundle/print.html.twig', [
-                    'zones' => $zones,
-                    'ordering' => $ordering,
-
-                ]);
-            } else {
-                if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_TEAM) {
-                    $ids = $this->get('TeamHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
-                    $ids = array_reduce($ids, function ($previous, $team) {
-                        $previous[] = $team->getTeamId();
-
-                        return $previous;
-                    }, []);
-                    $teams = $this->get('TeamRepository')->findBy(['id' => $ids]);
-
-                    return $this->render('@EventBundle/print.html.twig', [
-                        'teams' => $teams,
-                        'ordering' => $ordering,
-                    ]);
-
-                } else {
-                    if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_POLE) {
-                        $ids = $this->get('PoleHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
-                        $ids = array_reduce($ids, function ($previous, $pole) {
-                            $previous[] = $pole->getPoleId();
-
-                            return $previous;
-                        }, []);
-                        $poles = $this->get('PoleRepository')->findBy(['id' => $ids]);
-
-                        return $this->render('@EventBundle/print.html.twig', [
-                            'poles' => $poles,
-                            'ordering' => $ordering,
-                        ]);
-
-                    } else {
-                        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM) {
-                            $ids = $this->get('SubteamHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
-                            $ids = array_reduce($ids, function ($previous, $subteam) {
-                                $previous[] = $subteam->getSubteamId();
-
-                                return $previous;
-                            }, []);
-                            $subteams = $this->get('subteamRepository')->findBy(['id' => $ids]);
-
-                            return $this->render('@EventBundle/print.html.twig', [
-                                'subteams' => $subteams,
-                                'ordering' => $ordering,
-                            ]);
-                        }
-                    }
-                }
-            }
         }
+
+        if ($id && $type == 'zone') {
+            $zones = $this->get('ZoneRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/print.html.twig', [
+                'zones' => $zones,
+            ]);
+        }
+
+        if ($id && $type == 'team') {
+            $teams = $this->get('TeamRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/print.html.twig', [
+                'zones' => false,
+                'teams' => $teams,
+            ]);
+        }
+
+        if ($id && $type == 'pole') {
+            $poles = $this->get('PoleRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/print.html.twig', [
+                'zones'    => false,
+                'teams'    => false,
+                'poles'    => $poles,
+            ]);
+        }
+
+        if ($id && $type == 'subteam') {
+            $subteams = $this->get('subteamRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/print.html.twig', [
+                'zones'    => false,
+                'teams'    => false,
+                'poles'    => false,
+                'subteams' => $subteams,
+            ]);
+        }
+
+        return $this->render('@EventBundle/print.html.twig', [
+            'zones'    => false,
+            'teams'    => false,
+            'poles'    => false,
+            'subteams' => false,
+        ]);
     }
 
 
