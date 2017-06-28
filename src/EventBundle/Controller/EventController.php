@@ -5,6 +5,7 @@ use EventBundle\Entity\Pole;
 use EventBundle\Entity\PoleHasChief;
 use EventBundle\Entity\Subteam;
 use EventBundle\Entity\SubteamHasAdjoint;
+use EventBundle\Entity\SubteamHasChief;
 use PeopleBundle\Helper\RoleHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -384,6 +385,22 @@ class EventController extends Controller
             $subteam->setPole($pole[0]);
             $em->persist($subteam);
             $em->flush();
+
+            // Set team chiefs as pole chiefs by default
+            foreach($pole[0]->getChiefs() as $chief) {
+                $subteamHasChief = new SubteamHasChief();
+                $subteamHasChief->setPeople($chief->getPeople());
+                $subteamHasChief->setPeopleId($chief->getPeople()->getId());
+                $subteamHasChief->setSubteam($subteam);
+                $subteamHasChief->setSubteamId($subteam->getId());
+                $em->persist($subteamHasChief);
+                $em->flush();
+
+                $chief->getPeople()->setSubteam($subteam);
+                $chief->getPeople()->setSubteamId($subteam->getId());
+                $em->persist($chief->getPeople());
+                $em->flush();
+            }
         }
 
         return $this->redirectToRoute('pole', ['pole' => $poleId]);
