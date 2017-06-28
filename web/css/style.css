@@ -452,8 +452,8 @@ print-dropdown-content-a {
     margin-bottom: 15px;
 }
 
-.person_card img{
-    height: 100%;
+.person_card .img {
+    height: 100px;
     width: 90px;
     object-fit: cover;
     border-radius: 10px;
