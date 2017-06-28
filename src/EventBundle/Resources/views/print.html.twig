@@ -5,7 +5,7 @@
 {% block content %}
 <div class="print">
 
-{# VOLONTARIA #}
+{# VOLONTARIAT #}
 {% if zones %}
     {% for zone in zones %}
         <h1>{{ zone.name }}</h1>
@@ -139,7 +139,5 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="application/javascript">
-    window.print();
-</script>
+
 {% endblock %}

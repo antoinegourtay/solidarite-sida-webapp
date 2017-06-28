@@ -25,8 +25,12 @@
                     </li>
                 </a>
                 <div class="header-buttons">
-                    {% if current_user.get().isAdmin() %}<a href="/import"><li>IMPORTER</li></a>{% endif %}
-                    <a href="/print"><li class="orange_button">IMPRESSION</li></a>
+                    {% if app.request.get('_route') != 'print' %}
+                        {% if current_user.get().isAdmin() %}<a href="/import"><li>IMPORTER</li></a>
+                        {% endif %}
+                        <a href="/print"><li class="orange_button">IMPRESSION</li></a>
+                    {% endif %}
+
 
                 </div>
             </ul>
@@ -50,7 +54,7 @@
             </ul>
             {% endblock %}
         </div>
-        {% if app.request.get('_route') == 'subteam_trombinoscope' or app.request.get('_route') == 'print' %}
+        {% if app.request.get('_route') == 'subteam_trombinoscope' %}
             <li class="sort-by-dropdown">Trier par :
                 {% if app.request.query.get('order') == 'lastname' %}
                     <span class="sort-by-dropdown-span">Nom &darr; </span>
