@@ -473,7 +473,7 @@ print-dropdown-content-a {
 }
 
 .person_card img {
-    height: 100px;
+    height: 100%;
     width: 90px;
     object-fit: cover;
     border-radius: 10px;
