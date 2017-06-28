@@ -234,21 +234,21 @@ class EventController extends Controller
             return $this->redirectToRoute('dashboard');
         }
 
-        // Only display subteams where the current user is the chief if he is subteam chief
-        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM) {
-            $ids = $this->get('SubteamHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
-            $ids = array_reduce($ids, function ($previous, $subteam) {
-                $previous[] = $subteam->getSubteamId();
-                return $previous;
-            }, []);
-            $people = $this->get('SubteamRepository')->findBy(['id' => $ids]);
-        } else {
-            $people = $this->get('SubteamRepository')->findBy(['id' => $subteam]);
+        $order = $request->query->get('order');
+        $ordering =  ['first_name' => 'ASC'];
+
+        if ($order == 'lastname') {
+            $ordering =  ['last_name' => 'ASC'];
         }
 
+        $people = $this->get('PeopleRepository')->findBy(
+            ['subteam_id' => $subteam],
+            $ordering
+        );
+
         return $this->render('@EventBundle/trombinoscope.html.twig', [
-            'subteamId'    => $subteam,
-            'people'  => $people,
+            'subteamId' => $subteam,
+            'people'    => $people,
         ]);
     }
 

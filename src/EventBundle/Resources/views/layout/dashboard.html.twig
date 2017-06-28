@@ -52,6 +52,19 @@
             </ul>
             {% endblock %}
         </div>
+        {% if app.request.get('_route') == 'subteam_trombinoscope' %}
+            <li class="sort-by-dropdown">Trier par :
+                {% if app.request.query.get('order') == 'lastname' %}
+                    <span class="sort-by-dropdown-span">Nom &darr; </span>
+                {% else %}
+                    <span class="sort-by-dropdown-span">Prénom &darr; </span>
+                {% endif %}
+                <div class="sort-by-dropdown-content">
+                    <a class="sort-by-dropdown-a" href="?order=firstname">Prénom</a>
+                    <a class="sort-by-dropdown-a" href="?order=lastname">Nom</a>
+                </div>
+-            </li>
+        {% endif %}
         <hr>
     </div>
 
