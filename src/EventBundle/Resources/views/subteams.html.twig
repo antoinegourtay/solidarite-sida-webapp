@@ -24,7 +24,7 @@
                         <div class="person_info">
                             <span>{{ people.getFirstName() }} {{ people.getLastName() }}</span>
                             {% if subteamHasChiefRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
-                                <p class="person_poste">Chef d'équipe</p>
+                                <p class="person_poste_equipe">Chef d'équipe</p>
                             {% elseif subteamHasAdjointRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}
                                 <p class="person_poste_adjoint">Adjoint</p>
                             {% else %}
