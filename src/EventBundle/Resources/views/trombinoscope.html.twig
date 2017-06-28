@@ -1,4 +1,8 @@
-{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Équipes > Pôles > Sous-Équipes > Trombinoscope {% endblock %} {% block content %}
+{% extends "@EventBundle/layout/dashboard.html.twig" %}
+
+{% block page %}Trombinoscope{% endblock %}
+
+{% block title %} Zones > Équipes > Pôles > Sous-Équipes > Trombinoscope {% endblock %} {% block content %}
     {% if people is empty %}
         <div style="text-align: center; width: 100%; margin-top: 20px">Il n'y a personne dans la sous-équipe
         <br>
