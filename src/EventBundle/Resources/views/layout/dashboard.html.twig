@@ -15,7 +15,9 @@
                 <a href="/dashboard">
                     <li class="menu-dropdown">
                         <div class="dropdown-name">{{ current_user.get().getFirstName() }} {{ current_user.get().getLastName() }} &darr; </div>
-                        <img src="../../images/07.jpg" alt="">
+                        <object class="profile-pic" data="/images/defaultPicture.png" type="image/png">
+                            <img class="profile-pic" src="/images/benevoles/{{ current_user.get().getFirstName }} {{ current_user.get().getLastName }}.jpg">
+                        </object>
                         <div class="dropdown-content">
                             <a class="dropdown-content-a" href="/logout">Déconnexion</a>
                             <a class="dropdown-content-a" href="https://www.youtube.com/watch?v=0lej8BJ18hw&feature=youtu.be">Tutoriel</a>
