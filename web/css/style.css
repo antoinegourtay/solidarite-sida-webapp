@@ -307,12 +307,12 @@ print-dropdown-content-a {
     padding-left: 15px;
 }
 
-.left_container form input[type=emailError] {
+.left_container form input[name=emailError] {
     border: solid 1px #CC4125;
     padding-left: 15px;
 }
 
-.left_container form input[type=passwordError] {
+.left_container form input[name=passwordError] {
     border: solid 1px #CC4125;
     padding-left: 15px;
 }
