@@ -238,12 +238,13 @@ class PeopleController extends Controller
 
     /**
      * @Route("/printtrombi", name="print_trombinoscope_action")
+     *
      */
     public function printTrombiAction(Request $request, $informations, $format, $peoplePerLine)
     {
         $pdf = $this->get('knp_snappy.pdf');
         /* Here we will put the options we want */
-        $pdf->setOption('page-size', 'A4');
+        $pdf->setOption('page-size', $format);
         /**
          * We retrive the data from the entities we need with doctrine
          */
@@ -269,6 +270,10 @@ class PeopleController extends Controller
         );
     }
 
+
+    /**
+     * @Route("/printcallsheet", name="print_trombinoscope_callsheet")
+     */
     public function printCallsheetAction(Request $request, $informations, $numberOfColumns)
     {
         $pdf = $this->get('knp_snappy.pdf');
