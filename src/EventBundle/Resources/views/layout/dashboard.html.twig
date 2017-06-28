@@ -44,7 +44,7 @@
         </div>
 
         <div class="controls_bar end">
-            {% if app.request.get('_route') != 'print' %}
+            {% if  app.request.get('_route') == 'print' %}
             {% block controls %}
             <ul>
                 <li>Afficher :</li>
