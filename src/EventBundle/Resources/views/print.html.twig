@@ -3,9 +3,39 @@
 {% block title %}Impression{% endblock %}
 
 {% block content %}
-<div class="print">
 
-{# VOLONTARIAT #}
+
+<div class="print">
+    <div class="print_controlers"> 
+        <p>Informations</p> 
+        <ul> 
+            <li id="display_phone"><img src="/images/tel.png" width="45"></li> 
+            <li id="display_email"><img src="/images/mail.png" width="45"></li> 
+            <li id="display_address"><img src="/images/adresse.png" width="45"></li> 
+            <li id="display_permis"><img src="/images/permis.png" width="45"></li> 
+        </ul> 
+        <p>Format</p> 
+        <ul> 
+            <li id="display_phone"><img src="/images/tel.png" width="45"></li> 
+            <li id="display_email"><img src="/images/mail.png" width="45"></li> 
+            <li id="display_address"><img src="/images/adresse.png" width="45"></li> 
+            <li id="display_permis"><img src="/images/permis.png" width="45"></li> 
+        </ul> 
+        <p>Nombres de photos par ligne</p> 
+        <ul> 
+            <li id="display_phone"><img src="/images/tel.png" width="45"></li> 
+            <li id="display_email"><img src="/images/mail.png" width="45"></li> 
+            <li id="display_address"><img src="/images/adresse.png" width="45"></li> 
+            <li id="display_permis"><img src="/images/permis.png" width="45"></li> 
+        </ul> 
+    </div>
+     <div class="print_buttons"> 
+        <button>Imprimer Trombinoscope</button> 
+        <button>Imprimer Feuille d'appel</button> 
+    </div> 
+
+
+    {# VOLONTARIAT #}
 {% if zones %}
     {% for zone in zones %}
         <h1>{{ zone.name }}</h1>
@@ -20,7 +50,7 @@
                             <div class="equipe_person">
                                 {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                                     <div class="person_card">
-                                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg">
+                                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ getPerson.getId }}.jpg">
                                         <div class="person_info">
                                             <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
                                             {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}

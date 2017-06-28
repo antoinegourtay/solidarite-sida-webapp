@@ -441,6 +441,7 @@ class EventController extends Controller
         ]);
     }
 
+
     /**
      * @Route("/api/team/{team}/people/available", name="api_team_available_people")
      * @Method({ "GET" })
