@@ -1,4 +1,4 @@
-{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} Zones > Équipes > Pôles
+{% extends "@EventBundle/layout/dashboard.html.twig" %} {% block title %} <a href="/zones">Zones</a> > Équipes > Pôles
 
     <a href="/pole/create/{{ teamId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Ajouter des pôles</a>
     <a href="/team/edit/{{ teamId }}" style="margin-left: 15px; text-decoration: none; background: #ffc400; color: white; padding: 2px 5px; font-size: 13px; border-radius: 2px;">Répartir les bénévoles</a> {% endblock %} {% block content %}
