@@ -15,7 +15,7 @@
             {% else %}
                 {% for stPeople in people %}
                     <div class="person_card">
-                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ stPeople.getFirstName }} {{ stPeople.getLastName }}.jpg">
+                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ stPeople.getId }}.jpg">
                         <div class="person_info">
                             <span>{{ stPeople.getFirstName() }} {{ stPeople.getLastName() }}</span>
                             {% if subteamHasChiefRepository.findBy({'people_id': stPeople.getId(), 'subteam_id': subteamId}) is not empty %}

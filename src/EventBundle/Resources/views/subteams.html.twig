@@ -20,7 +20,7 @@
                     <center style="margin: 20px; font-size: 13px">Il n'y a aucun membre dans la sous-équipe</center>
                 {% else %} {% for people in subteamPeople %}
                     <div class="person_card">
-                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ people.getFirstName }} {{ people.getLastName }}.jpg">
+                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ people.getId }}.jpg">
                         <div class="person_info">
                             <span>{{ people.getFirstName() }} {{ people.getLastName() }}</span>
                             {% if subteamHasChiefRepository.findBy({'people_id': people.getId(), 'subteam_id': subteam.getId()}) is not empty %}

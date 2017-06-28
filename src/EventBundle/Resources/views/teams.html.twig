@@ -15,7 +15,7 @@
             <center style="margin: 20px; font-size: 13px">Il n'y a aucun chef d'équipe</center>
             {% else %} {% for chief in team.getChiefs() %}
             <div class="person_card">
-                <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ chief.getPeople().getFirstName }} {{ chief.getPeople().getLastName }}.jpg">
+                <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ chief.getPeople().getId }}.jpg">
                 <div class="person_info">
                     <span>{{ chief.getPeople().getFirstName() }} {{ chief.getPeople().getLastName() }}</span>
                     <p class="person_poste">Chef d'équipe</p>
