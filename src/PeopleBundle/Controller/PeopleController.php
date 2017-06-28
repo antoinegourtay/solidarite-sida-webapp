@@ -1,4 +1,5 @@
 <?php
+
 namespace PeopleBundle\Controller;
 
 use EventBundle\Entity\Team;
@@ -26,6 +27,7 @@ class PeopleController extends Controller
         try {
             $user = $this->container->get('AuthenticationService')->login($email, $password);
             $request->getSession()->set('user.email', $user->getEmail());
+
             return $this->redirectToRoute('dashboard');
         } catch (\InvalidArgumentException $exception) {
             return $this->redirectToRoute('homepage');
@@ -80,7 +82,7 @@ class PeopleController extends Controller
         $people = CSVImporter::import($csvFile->getRealPath());
         $em = $this->getDoctrine()->getEntityManager();
 
-        foreach($people as $person) {
+        foreach ($people as $person) {
             // Check if the zone already exists
             $zoneEntry = $this->get('ZoneRepository')->getFromName($person['zone']);
             if (!$zoneEntry) {
@@ -153,81 +155,151 @@ class PeopleController extends Controller
         }
 
         $order = $request->query->get('order');
-        $ordering =  ['first_name' => 'ASC'];
+        $ordering = ['first_name' => 'ASC'];
 
         if ($order == 'lastname') {
-            $ordering =  ['last_name' => 'ASC'];
+            $ordering = ['last_name' => 'ASC'];
         }
 
-        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::VOLONTARIA){
+        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::VOLONTARIA) {
             $zones = $this->get('zoneRepository')->findAll();
 
             return $this->render('@EventBundle/print.html.twig', [
                 'zones' => $zones,
-                'ordering'  => $ordering,
+                'ordering' => $ordering,
             ]);
 
-        } else if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::COORDINATOR){
-            $ids = $this->get('ZoneHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
-            $ids = array_reduce($ids, function ($previous, $zone) {
-                $previous[] = $zone->getZoneId();
-                return $previous;
-            }, []);
-            $zones = $this->get('ZoneRepository')->findBy(['id' => $ids]);
+        } else {
+            if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::COORDINATOR) {
+                $ids = $this->get('ZoneHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
+                $ids = array_reduce($ids, function ($previous, $zone) {
+                    $previous[] = $zone->getZoneId();
 
-            return $this->render('@EventBundle/print.html.twig', [
-                'zones' => $zones,
-                'ordering'  => $ordering,
+                    return $previous;
+                }, []);
+                $zones = $this->get('ZoneRepository')->findBy(['id' => $ids]);
 
-            ]);
-        } else if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_TEAM){
-            $ids = $this->get('TeamHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
-            $ids = array_reduce($ids, function ($previous, $team) {
-                $previous[] = $team->getTeamId();
-                return $previous;
-            }, []);
-            $teams = $this->get('TeamRepository')->findBy(['id' => $ids]);
+                return $this->render('@EventBundle/print.html.twig', [
+                    'zones' => $zones,
+                    'ordering' => $ordering,
 
-            return $this->render('@EventBundle/print.html.twig', [
-                'teams'  => $teams,
-                'ordering'  => $ordering,
-            ]);
+                ]);
+            } else {
+                if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_TEAM) {
+                    $ids = $this->get('TeamHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
+                    $ids = array_reduce($ids, function ($previous, $team) {
+                        $previous[] = $team->getTeamId();
 
-        } else if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_POLE){
-            $ids = $this->get('PoleHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
-            $ids = array_reduce($ids, function ($previous, $pole) {
-                $previous[] = $pole->getPoleId();
-                return $previous;
-            }, []);
-            $poles = $this->get('PoleRepository')->findBy(['id' => $ids]);
+                        return $previous;
+                    }, []);
+                    $teams = $this->get('TeamRepository')->findBy(['id' => $ids]);
 
-            return $this->render('@EventBundle/print.html.twig', [
-                'poles'  => $poles,
-                'ordering'  => $ordering,
-            ]);
+                    return $this->render('@EventBundle/print.html.twig', [
+                        'teams' => $teams,
+                        'ordering' => $ordering,
+                    ]);
 
-        } else if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM){
-            $ids = $this->get('SubteamHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
-            $ids = array_reduce($ids, function ($previous, $subteam) {
-                $previous[] = $subteam->getSubteamId();
-                return $previous;
-            }, []);
-            $subteams = $this->get('subteamRepository')->findBy(['id' => $ids]);
+                } else {
+                    if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_POLE) {
+                        $ids = $this->get('PoleHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
+                        $ids = array_reduce($ids, function ($previous, $pole) {
+                            $previous[] = $pole->getPoleId();
 
-            return $this->render('@EventBundle/print.html.twig', [
-                'subteams'  => $subteams,
-                'ordering'  => $ordering,
-            ]);
+                            return $previous;
+                        }, []);
+                        $poles = $this->get('PoleRepository')->findBy(['id' => $ids]);
+
+                        return $this->render('@EventBundle/print.html.twig', [
+                            'poles' => $poles,
+                            'ordering' => $ordering,
+                        ]);
+
+                    } else {
+                        if ($this->get('CurrentUser')->get()->getRole() === RoleHelper::CHIEF_SUBTEAM) {
+                            $ids = $this->get('SubteamHasChiefRepository')->findBy(['people_id' => $this->get('CurrentUser')->get()->getId()]);
+                            $ids = array_reduce($ids, function ($previous, $subteam) {
+                                $previous[] = $subteam->getSubteamId();
+
+                                return $previous;
+                            }, []);
+                            $subteams = $this->get('subteamRepository')->findBy(['id' => $ids]);
+
+                            return $this->render('@EventBundle/print.html.twig', [
+                                'subteams' => $subteams,
+                                'ordering' => $ordering,
+                            ]);
+                        }
+                    }
+                }
+            }
         }
+    }
+
+
+    /**
+     * @Route("/printtrombi", name="print_trombinoscope_action")
+     */
+    public function printTrombiAction(Request $request, $informations, $format, $peoplePerLine)
+    {
+        $pdf = $this->get('knp_snappy.pdf');
+        /* Here we will put the options we want */
+        $pdf->setOption('page-size', 'A4');
+        /**
+         * We retrive the data from the entities we need with doctrine
+         */
+        $em = $this->getDoctrine()->getRepository('AppBundle:Affectation');
+        /**
+         * In the array, we put the data we want to pass to the twig template
+         */
+        $html = $this->renderView('@EventBundle/pdf/trombi.html.twig', array(
+            'title' => 'Trombinoscope d\'équipe',
+        ));
+        $filename = 'Trombinoscope';
+
+        /**
+         * The response for the pdf file output
+         */
+        return new Response(
+            $pdf->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="'.$filename.'.pdf"',
+            )
+        );
+    }
+
+    public function printCallsheetAction(Request $request, $informations, $numberOfColumns)
+    {
+        $pdf = $this->get('knp_snappy.pdf');
+        /* Here we will put the options we want */
+        $pdf->setOption('page-size', 'A4');
+        /**
+         * In the array, we put the data we want to pass to the twig template
+         */
+        $html = $this->renderView('@EventBundle/pdf/callsheet.html.twig', array(
+            'title' => 'Feuille d\'appel'
+        ));
+        $filename = 'Trombinoscope';
+        return new Response(
+            $pdf->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
+            )
+        );
     }
 
     /**
      * @Route("logout", name="logout")
      * @return mixed
      */
-    public function logout(){
+    public function logout()
+    {
         $this->get('security.context')->setToken(null);
         $this->get('request')->getSession()->invalidate();
+
         return $this->redirectToRoute('homepage');
     }
 }

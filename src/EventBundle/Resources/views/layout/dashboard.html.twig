@@ -44,6 +44,7 @@
         </div>
 
         <div class="controls_bar end">
+            {% if app.request.get('_route') != 'print' %}
             {% block controls %}
             <ul>
                 <li>Afficher :</li>
@@ -53,6 +54,7 @@
                 <li id="display_permis"><img src="/images/permis.png" width="30"></li>
             </ul>
             {% endblock %}
+            {% endif %}
         </div>
         {% if app.request.get('_route') == 'subteam_trombinoscope' %}
             <li class="sort-by-dropdown">Trier par :
