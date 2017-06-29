@@ -165,10 +165,10 @@ class PeopleController extends Controller
             $chiefOfZone = $this->get('ZoneHasChiefRepository')->findBy(['people_id' => $newPerson->getId(), 'zone_id' => $newZone->getId()]);
             if (!$chiefOfZone && $person['coordo'] == "1") {
                 $newZoneHasChief = new ZoneHasChief();
-                $newZoneHasChief->setPeopleId($newPerson->getId());
                 $newZoneHasChief->setPeople($newPerson);
-                $newZoneHasChief->setZoneId($newZone->getId());
+                $newZoneHasChief->setPeopleId($newPerson->getId());
                 $newZoneHasChief->setZone($newZone);
+                $newZoneHasChief->setZoneId($newZone->getId());
                 $em->persist($newZoneHasChief);
                 $em->flush();
             }
