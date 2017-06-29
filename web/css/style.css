@@ -1168,3 +1168,8 @@ p.team_edit.bene_edit {
 .personne_permis{
     width: 75px;
 }
+
+.callsheet table th {
+    vertical-align: top;
+    text-align: center;
+}

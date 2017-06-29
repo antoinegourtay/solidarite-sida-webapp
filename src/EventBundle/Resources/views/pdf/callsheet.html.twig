@@ -16,7 +16,7 @@
             {% for pole in poleRepository.findBy({'team_id': team.id}) %}
                 {% for subteam in subteamRepository.findBy({'pole_id': pole.id}) %}
                 <h3 style="margin-top: 20px; text-align: center">{{ zone.name }} - {{ team.name }} - {{ pole.name }} - {{ subteam.name }}</h3>
-                <table>
+                <table style="page-break-after: always">
                     <tr>
                         <th></th>
                         <th><p class="bold">Nom</p></th>
@@ -35,8 +35,8 @@
                         <th class="cochage"></th>
                     </tr>
 
-                    {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
-                    <tr>
+                    {% for i, person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
+                    <tr {% if i % 9 == 0 %}style="page-break-after: always; page-break-inside: avoid"{% endif %}>
                         <th class="personne_image"><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" width="45"></th>
                         <th><p>{{ person.firstName }}</p></th>
                         <th><p>{{ person.lastName }}</p></th>
