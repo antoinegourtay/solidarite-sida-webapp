@@ -1054,7 +1054,7 @@ p.team_edit.bene_edit {
 }
 
 .callsheet .cochage{
-    width: 100px;
+    width: 30px;
 }
 
 .person_info_subteam .person_poste_coordo {
@@ -1139,4 +1139,32 @@ p.team_edit.bene_edit {
     margin-left: 80px;
     font-size: 15px;
     margin-top: 5px;
+}
+
+.personne_image{
+    width: 50px;
+}
+
+.personne_nom{
+    width: 75px;
+}
+
+.personne_prenom{
+    width: 75px;
+}
+
+.personne_telephone{
+    width: 75px;
+}
+
+.personne_email{
+    width: 75px;
+}
+
+.personne_adresse{
+    width: 75px;
+}
+
+.personne_permis{
+    width: 75px;
 }
