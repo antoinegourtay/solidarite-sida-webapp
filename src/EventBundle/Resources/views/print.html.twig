@@ -3,25 +3,9 @@
 {% block title %}Impression{% endblock %}
 
 {% block content %}
-
-
 <div class="print">
     <div class="print_controlers"> 
-        <p>Informations</p> 
-        <ul> 
-            <li id="display_phone"><img src="/images/tel.png" width="45"></li> 
-            <li id="display_email"><img src="/images/mail.png" width="45"></li> 
-            <li id="display_address"><img src="/images/adresse.png" width="45"></li> 
-            <li id="display_permis"><img src="/images/permis.png" width="45"></li> 
-        </ul> 
-        <p>Format</p> 
-        <ul> 
-            <li id="display_phone"><img src="/images/tel.png" width="45"></li> 
-            <li id="display_email"><img src="/images/mail.png" width="45"></li> 
-            <li id="display_address"><img src="/images/adresse.png" width="45"></li> 
-            <li id="display_permis"><img src="/images/permis.png" width="45"></li> 
-        </ul> 
-        <p>Nombres de photos par ligne</p> 
+        <p>Informations à afficher</p> 
         <ul> 
             <li id="display_phone"><img src="/images/tel.png" width="45"></li> 
             <li id="display_email"><img src="/images/mail.png" width="45"></li> 
@@ -30,148 +14,63 @@
         </ul> 
     </div>
      <div class="print_buttons"> 
-        <button>Imprimer Trombinoscope</button> 
-        <button>Imprimer Feuille d'appel</button> 
+        <a class="button" id="btn_print" data-href="{{ printingRouter }}" href="{{ printingRouter }}">Imprimer Trombinoscope</a> 
+        <a class="button">Imprimer Feuille d'appel</a> 
     </div> 
-
-
-    {# VOLONTARIAT #}
-{% if zones %}
-    {% for zone in zones %}
-        <h1>{{ zone.name }}</h1>
-        {% for team in teamRepository.findBy({'zone_id': zone.id}) %}
-            <h2>{{ team.name }}</h2>
-            {% for pole in poleRepository.findBy({'team_id': team.id}) %}
-                <h3>{{ pole.name }}</h3>
-                {% for subteam in subteamRepository.findBy({'pole_id': pole.id}) %}
-                    <h4>{{ subteam.name }}</h4>
-                    <div class="equipe_container">
-                        <div class="equipe">
-                            <div class="equipe_person">
-                                {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
-                                    <div class="person_card">
-                                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ getPerson.getId }}.jpg">
-                                        <div class="person_info">
-                                            <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
-                                            {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                                <p class="person_poste">Chef d'équipe</p>
-                                            {% elseif subteamHasAdjointRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                                <p class="person_poste">Adjoint</p>
-                                            {% endif %}
-                                            <p class="person_email person_info_hidden">Mail: {{ person.getEmail() }}</p>
-                                            <p class="person_phone person_info_hidden">Tél: {{ person.getPhone() }}</p>
-                                            <p class="person_address person_info_hidden">Adresse: {{ person.getAddress() }} {{ person.getZipcode() }} {{ person.getCity() }}</p>
-                                            <p class="person_permis person_info_hidden">Permis B: {% if person.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        {% endfor %}
-        <hr style="margin-top: 20px; margin-bottom: 20px">
-    {% endfor %}
-{% elseif teams %}
-    {% for team in teams %}
-        <h2>{{ team.name }}</h2>
-        {% for pole in poleRepository.findBy({'team_id': team.id}) %}
-            <h3>{{ pole.name }}</h3>
-            {% for subteam in subteamRepository.findBy({'pole_id': pole.id}) %}
-                <h4>{{ subteam.name }}</h4>
-                <div class="equipe_container">
-                    <div class="equipe">
-                        <div class="equipe_person">
-                            {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
-                                <div class="person_card">
-                                    <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
-                                    <div class="person_info">
-                                        <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
-                                        {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                            <p class="person_poste">Chef d'équipe</p>
-                                        {% elseif subteamHasAdjointRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                            <p class="person_poste">Adjoint</p>
-                                        {% endif %}
-                                        <p class="person_email person_info_hidden">Mail: {{ person.getEmail() }}</p>
-                                        <p class="person_phone person_info_hidden">Tél: {{ person.getPhone() }}</p>
-                                        <p class="person_address person_info_hidden">Adresse: {{ person.getAddress() }} {{ person.getZipcode() }} {{ person.getCity() }}</p>
-                                        <p class="person_permis person_info_hidden">Permis B: {% if person.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% endfor %}
-    {% endfor %}
-{% elseif poles %}
-    {% for pole in poles %}
-        <h3>{{ pole.name }}</h3>
-        {% for subteam in subteamRepository.findBy({'pole_id': pole.id}) %}
-            <h4>{{ subteam.name }}</h4>
-            <div class="equipe_container">
-                <div class="equipe">
-                    <div class="equipe_person">
-                        {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
-                            <div class="person_card">
-                                <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
-                                <div class="person_info">
-                                    <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
-                                    {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                        <p class="person_poste">Chef d'équipe</p>
-                                    {% elseif subteamHasAdjointRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                        <p class="person_poste">Adjoint</p>
-                                    {% endif %}
-                                    <p class="person_email person_info_hidden">Mail: {{ person.getEmail() }}</p>
-                                    <p class="person_phone person_info_hidden">Tél: {{ person.getPhone() }}</p>
-                                    <p class="person_address person_info_hidden">Adresse: {{ person.getAddress() }} {{ person.getZipcode() }} {{ person.getCity() }}</p>
-                                    <p class="person_permis person_info_hidden">Permis B: {% if person.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    {% endfor %}
-{% elseif subteams %}
-    {% for subteam in subteams %}
-        <h4>{{ subteam.name }}</h4>
-        <div class="equipe_container">
-            <div class="equipe">
-                <div class="equipe_person">
-                    {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
-                        <div class="person_card">
-                            <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
-                            <div class="person_info">
-                                <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
-                                {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                    <p class="person_poste">Chef d'équipe</p>
-                                {% elseif subteamHasAdjointRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                    <p class="person_poste">Adjoint</p>
-                                {% endif %}
-                                <p class="person_email person_info_hidden">Mail: {{ person.getEmail() }}</p>
-                                <p class="person_phone person_info_hidden">Tél: {{ person.getPhone() }}</p>
-                                <p class="person_address person_info_hidden">Adresse: {{ person.getAddress() }} {{ person.getZipcode() }} {{ person.getCity() }}</p>
-                                <p class="person_permis person_info_hidden">Permis B: {% if person.hasDriverLicense() %}oui{% else %}non{% endif %}</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-{% else %}
-    <div style="text-align: center; margin-top: 30px">
-        <h3>Une erreur est survenue</h3>
-    </div>
-{% endif %}
-
 </div>
 {% endblock %}
 
 {% block javascript %}
+<script type="application/javascript">
+    let queryParams = [];
+    $('#display_phone').on('click', function (event) {
+        event.preventDefault();
+        const position = queryParams.indexOf('phone');
+        if (position > -1) {
+            queryParams = queryParams.filter((param) => param !== 'phone');
+        } else {
+            queryParams.push('phone');
+        }
 
+        buildParams();
+    });
+    $('#display_email').on('click', function (event) {
+        event.preventDefault();
+        const position = queryParams.indexOf('email');
+        if (position > -1) {
+            queryParams = queryParams.filter((param) => param !== 'email');
+        } else {
+            queryParams.push('email');
+        }
+
+        buildParams();
+    });
+    $('#display_address').on('click', function (event) {
+        event.preventDefault();
+        const position = queryParams.indexOf('address');
+        if (position > -1) {
+            queryParams = queryParams.filter((param) => param !== 'address');
+        } else {
+            queryParams.push('address');
+        }
+
+        buildParams();
+    });
+    $('#display_permis').on('click', function (event) {
+        event.preventDefault();
+        const position = queryParams.indexOf('permis');
+        if (position > -1) {
+            queryParams = queryParams.filter((param) => param !== 'permis');
+        } else {
+            queryParams.push('permis');
+        }
+
+        buildParams();
+    });
+
+    function buildParams() {
+        let link = $('#btn_print').attr('data-href');
+        $('#btn_print').attr('href', link + '&data='+ queryParams.join(','));
+    }
+</script>
 {% endblock %}

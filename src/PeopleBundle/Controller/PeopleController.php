@@ -200,10 +200,97 @@ class PeopleController extends Controller
     }
 
     /**
+     * @Route("/printing", name="printing")
+     * @Method({ "GET" })
+     */
+    public function printingAction(Request $request)
+    {
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        $volontaria = $request->query->get('volontaria');
+        $type = $request->query->get('type');
+        $id = $request->query->get('id');
+        $data = $request->query->get('data');
+
+        if ($data) {
+            $data = explode(',', $data);
+        }
+
+        if ($volontaria === 'true') {
+            $zones = $this->get('zoneRepository')->findAll();
+
+            return $this->render('@EventBundle/printing.html.twig', [
+                'zones' => $zones,
+                'data'  => $data,
+            ]);
+        }
+
+        if ($id && $type == 'zone') {
+            $zones = $this->get('ZoneRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/printing.html.twig', [
+                'zones' => $zones,
+                'data'  => $data,
+            ]);
+        }
+
+        if ($id && $type == 'team') {
+            $teams = $this->get('TeamRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/printing.html.twig', [
+                'zones' => false,
+                'teams' => $teams,
+                'data'  => $data,
+            ]);
+        }
+
+        if ($id && $type == 'pole') {
+            $poles = $this->get('PoleRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/printing.html.twig', [
+                'zones'    => false,
+                'teams'    => false,
+                'poles'    => $poles,
+                'data'     => $data,
+            ]);
+        }
+
+        if ($id && $type == 'subteam') {
+            $subteams = $this->get('subteamRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/printing.html.twig', [
+                'zones'    => false,
+                'teams'    => false,
+                'poles'    => false,
+                'subteams' => $subteams,
+                'data'     => $data,
+            ]);
+        }
+
+        return $this->render('@EventBundle/printing.html.twig', [
+            'zones'    => false,
+            'teams'    => false,
+            'poles'    => false,
+            'subteams' => false,
+        ]);
+    }
+
+    /**
      * @Route("/print", name="print")
      * @Method({ "GET" })
      */
-    //TODO: Handle errors with actions @Nico
     public function printAction(Request $request)
     {
         if (!$this->get('CurrentUser')->isAuthenticated()) {
@@ -224,57 +311,8 @@ class PeopleController extends Controller
         $type = $request->query->get('type');
         $id = $request->query->get('id');
 
-        if ($volontaria === 'true') {
-            $zones = $this->get('zoneRepository')->findAll();
-
-            return $this->render('@EventBundle/print.html.twig', [
-                'zones' => $zones,
-            ]);
-        }
-
-        if ($id && $type == 'zone') {
-            $zones = $this->get('ZoneRepository')->findBy(['id' => $id]);
-
-            return $this->render('@EventBundle/print.html.twig', [
-                'zones' => $zones,
-            ]);
-        }
-
-        if ($id && $type == 'team') {
-            $teams = $this->get('TeamRepository')->findBy(['id' => $id]);
-
-            return $this->render('@EventBundle/print.html.twig', [
-                'zones' => false,
-                'teams' => $teams,
-            ]);
-        }
-
-        if ($id && $type == 'pole') {
-            $poles = $this->get('PoleRepository')->findBy(['id' => $id]);
-
-            return $this->render('@EventBundle/print.html.twig', [
-                'zones'    => false,
-                'teams'    => false,
-                'poles'    => $poles,
-            ]);
-        }
-
-        if ($id && $type == 'subteam') {
-            $subteams = $this->get('subteamRepository')->findBy(['id' => $id]);
-
-            return $this->render('@EventBundle/print.html.twig', [
-                'zones'    => false,
-                'teams'    => false,
-                'poles'    => false,
-                'subteams' => $subteams,
-            ]);
-        }
-
         return $this->render('@EventBundle/print.html.twig', [
-            'zones'    => false,
-            'teams'    => false,
-            'poles'    => false,
-            'subteams' => false,
+            'printingRouter' => '/printing?type='. $type .'&id='. $id,
         ]);
     }
 
@@ -285,68 +323,6 @@ class PeopleController extends Controller
     public function pif() {
 
         return $this->render('@EventBundle/pdf/callsheet.html.twig', []);
-
-    }
-
-
-    /**
-     * @Route("/printtrombi", name="print_trombinoscope_action")
-     *
-     */
-    public function printTrombiAction(Request $request, $informations, $format, $peoplePerLine)
-    {
-        $pdf = $this->get('knp_snappy.pdf');
-        /* Here we will put the options we want */
-        $pdf->setOption('page-size', $format);
-        /**
-         * We retrive the data from the entities we need with doctrine
-         */
-        $em = $this->getDoctrine()->getRepository('AppBundle:Affectation');
-        /**
-         * In the array, we put the data we want to pass to the twig template
-         */
-        $html = $this->renderView('@EventBundle/pdf/trombi.html.twig', array(
-            'title' => 'Trombinoscope d\'équipe',
-        ));
-        $filename = 'Trombinoscope';
-
-        /**
-         * The response for the pdf file output
-         */
-        return new Response(
-            $pdf->getOutputFromHtml($html),
-            200,
-            array(
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="'.$filename.'.pdf"',
-            )
-        );
-    }
-
-
-    /**
-     * @Route("/printcallsheet", name="print_trombinoscope_callsheet")
-     */
-    public function printCallsheetAction(Request $request, $informations, $numberOfColumns)
-    {
-        $pdf = $this->get('knp_snappy.pdf');
-        /* Here we will put the options we want */
-        $pdf->setOption('page-size', 'A4');
-        /**
-         * In the array, we put the data we want to pass to the twig template
-         */
-        $html = $this->renderView('@EventBundle/pdf/callsheet.html.twig', array(
-            'title' => 'Feuille d\'appel'
-        ));
-        $filename = 'Trombinoscope';
-        return new Response(
-            $pdf->getOutputFromHtml($html),
-            200,
-            array(
-                'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
-            )
-        );
     }
 
     /**
