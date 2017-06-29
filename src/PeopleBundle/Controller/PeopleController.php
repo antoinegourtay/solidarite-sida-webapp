@@ -145,33 +145,33 @@ class PeopleController extends Controller
                 $newPerson->setTeam($newTeam);
                 $em->persist($newPerson);
                 $em->flush();
+            }
 
-                // Check if the user is coordo
-                $chiefOfZone = $this->get('ZoneHasChiefRepository')->findBy(['people_id' => $newPerson->getId(), 'zone_id' => $newZone->getId()]);
-                if (!$chiefOfZone && $person['coordo'] == "1") {
-                    $newZoneHasChief = new ZoneHasChief();
-                    $newZoneHasChief->setPeople($newPerson);
-                    $newZoneHasChief->setPeopleId($newPerson->getId());
-                    $newZoneHasChief->setZone($newZone);
-                    $newZoneHasChief->setZoneId($newZone->getId());
-                    $em->persist($newZoneHasChief);
+            // Check if the user is coordo
+            $chiefOfZone = $this->get('ZoneHasChiefRepository')->findBy(['people_id' => $newPerson->getId(), 'zone_id' => $newZone->getId()]);
+            if (!$chiefOfZone && $person['coordo'] == "1") {
+                $newZoneHasChief = new ZoneHasChief();
+                $newZoneHasChief->setPeople($newPerson);
+                $newZoneHasChief->setPeopleId($newPerson->getId());
+                $newZoneHasChief->setZone($newZone);
+                $newZoneHasChief->setZoneId($newZone->getId());
+                $em->persist($newZoneHasChief);
+                $em->flush();
+            }
+
+            // Check if the user is chief of a team
+            $chiefOfTeam = $this->get('TeamHasChiefRepository')->findBy(['people_id' => $newPerson->getId(), 'team_id' => $newTeam->getId()]);
+            if (!$chiefOfTeam) {
+                // If was not chief and now chief we create bond
+                if ($person['chief'] == "1") {
+                    $newChiefOfTeam = new TeamHasChief();
+                    $newChiefOfTeam->setPeople($newPerson);
+                    $newChiefOfTeam->setPeopleId($newPerson->getId());
+                    $newChiefOfTeam->setTeam($newTeam);
+                    $newChiefOfTeam->setTeamId($newTeam->getId());
+                    $em->persist($newChiefOfTeam);
                     $em->flush();
-                }
-
-                // Check if the user is chief of a team
-                $chiefOfTeam = $this->get('TeamHasChiefRepository')->findBy(['people_id' => $newPerson->getId(), 'team_id' => $newTeam->getId()]);
-                if (!$chiefOfTeam) {
-                    // If was not chief and now chief we create bond
-                    if ($person['chief'] == "1") {
-                        $newChiefOfTeam = new TeamHasChief();
-                        $newChiefOfTeam->setPeople($newPerson);
-                        $newChiefOfTeam->setPeopleId($newPerson->getId());
-                        $newChiefOfTeam->setTeam($newTeam);
-                        $newChiefOfTeam->setTeamId($newTeam->getId());
-                        $em->persist($newChiefOfTeam);
-                        $em->flush();
-                        $numberOfChiefs++;
-                    }
+                    $numberOfChiefs++;
                 }
             }
 
