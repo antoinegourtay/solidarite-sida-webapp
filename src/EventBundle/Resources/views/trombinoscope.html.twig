@@ -30,7 +30,7 @@
                 {% for stPeople in people %}
                     <div class="person_card">
                         <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ stPeople.getId }}.jpg">
-                        <div class="person_info">
+                        <div class="person_info_subteam">
                             <span>{{ stPeople.getFirstName() }} {{ stPeople.getLastName() }}</span>
                             {% if subteamHasChiefRepository.findBy({'people_id': stPeople.getId(), 'subteam_id': subteamId}) %}
                                 <p class="person_poste_equipe">Chef d'équipe</p>
