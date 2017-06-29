@@ -117,48 +117,34 @@ class PeopleController extends Controller
             if (!$databaseEntry) {
                 $newPerson = new People();
                 $newPerson->setEmail($person['email']);
+
+                // Update user informations
+                $newPerson->setFirstName($person['firstName']);
+                $newPerson->setLastName($person['lastName']);
+                $newPerson->setAddress($person['address']);
+                $newPerson->setZipcode($person['zipcode']);
+                $newPerson->setCity($person['city']);
+                $newPerson->setPhone($person['phone']);
+                $newPerson->setDriverLicense($person['driverLicense']);
+                $newPerson->setTeam($newTeam);
+
+                // SAVE CHANGES
+                $em->persist($newPerson);
+                $em->flush();
             } else {
+                /** @var People $newPerson */
                 $newPerson = $databaseEntry;
-
-                // Check if the user is chief of a team
-                $chiefOfTeam = $this->get('TeamHasChiefRepository')->findBy(['people_id' => $newPerson->getId(), 'team_id' => $newTeam->getId()]);
-                if (!$chiefOfTeam) {
-                    // If was not chief and now chief we create bond
-                    if ($person['chief'] == "1") {
-                        $newChiefOfTeam = new TeamHasChief();
-                        $newChiefOfTeam->setPeople($newPerson);
-                        $newChiefOfTeam->setPeopleId($newPerson->getId());
-                        $newChiefOfTeam->setTeam($newTeam);
-                        $newChiefOfTeam->setTeamId($newTeam->getId());
-                        $em->persist($newChiefOfTeam);
-                        $em->flush();
-                        $numberOfChiefs++;
-                    }
-                } else {
-                    // if was chief and not chief anymore we delete bond
-                    if ($person['chief'] == "0") {
-                        // Team chiefs
-                        $qb = $em->createQueryBuilder();
-                        $qb->delete('TeamHasChief', 'thc');
-                        $qb->where('thc.people_id = :user');
-                        $qb->where('thc.team_id = :team');
-                        $qb->setParameter('user', $newPerson->getId());
-                        $qb->setParameter('team', $newTeam->getId());
-                        $qb->execute();
-
-                        // Poles chiefs
-                        $poles = $this->get('PoleRepository')->findBy(['team_id' => $newTeam->getId()]);
-                        foreach($poles as $pole) {
-                            $qb = $em->createQueryBuilder();
-                            $qb->delete('PoleHasChief', 'phc');
-                            $qb->where('phc.people_id = :user');
-                            $qb->where('phc.pole_id = :pole');
-                            $qb->setParameter('user', $newPerson->getId());
-                            $qb->setParameter('pole', $pole->getId());
-                            $qb->execute();
-                        }
-                    }
-                }
+                // Update user informations
+                $newPerson->setFirstName($person['firstName']);
+                $newPerson->setLastName($person['lastName']);
+                $newPerson->setAddress($person['address']);
+                $newPerson->setZipcode($person['zipcode']);
+                $newPerson->setCity($person['city']);
+                $newPerson->setPhone($person['phone']);
+                $newPerson->setDriverLicense($person['driverLicense']);
+                $newPerson->setTeam($newTeam);
+                $em->persist($newPerson);
+                $em->flush();
             }
 
             // Check if the user is coordo
@@ -173,23 +159,25 @@ class PeopleController extends Controller
                 $em->flush();
             }
 
+            // Check if the user is chief of a team
+            $chiefOfTeam = $this->get('TeamHasChiefRepository')->findBy(['people_id' => $newPerson->getId(), 'team_id' => $newTeam->getId()]);
+            if (!$chiefOfTeam) {
+                // If was not chief and now chief we create bond
+                if ($person['chief'] == "1") {
+                    $newChiefOfTeam = new TeamHasChief();
+                    $newChiefOfTeam->setPeople($newPerson);
+                    $newChiefOfTeam->setPeopleId($newPerson->getId());
+                    $newChiefOfTeam->setTeam($newTeam);
+                    $newChiefOfTeam->setTeamId($newTeam->getId());
+                    $em->persist($newChiefOfTeam);
+                    $em->flush();
+                    $numberOfChiefs++;
+                }
+            }
+
             if ($person['chief'] == "0") {
                 $numberOfBenevoles++;
             }
-
-            // Update user informations
-            $newPerson->setFirstName($person['firstName']);
-            $newPerson->setLastName($person['lastName']);
-            $newPerson->setAddress($person['address']);
-            $newPerson->setZipcode($person['zipcode']);
-            $newPerson->setCity($person['city']);
-            $newPerson->setPhone($person['phone']);
-            $newPerson->setDriverLicense($person['driverLicense']);
-            $newPerson->setTeam($newTeam);
-
-            // SAVE CHANGES
-            $em->persist($newPerson);
-            $em->flush();
         }
 
         return $this->render('@EventBundle/imported.html.twig', [
