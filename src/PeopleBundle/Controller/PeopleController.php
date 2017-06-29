@@ -308,11 +308,13 @@ class PeopleController extends Controller
         }
 
         $volontaria = $request->query->get('volontaria');
+        $volontaria = $volontaria === 'true' ? '&volontaria=true' : '';
         $type = $request->query->get('type');
         $id = $request->query->get('id');
 
         return $this->render('@EventBundle/print.html.twig', [
-            'printingRouter' => '/printing?type='. $type .'&id='. $id,
+            'printingRouter' => '/printing?type='. $type .'&id='. $id . $volontaria,
+            'callsheetRouter'=> '/callsheet?type='. $type . '&id='. $id . $volontaria,
         ]);
     }
 
@@ -320,9 +322,88 @@ class PeopleController extends Controller
      * @Route("/callsheet", name="callsheet")
      *
      */
-    public function pif() {
+    public function callsheet(Request $request) {
 
-        return $this->render('@EventBundle/pdf/callsheet.html.twig', []);
+        if (!$this->get('CurrentUser')->isAuthenticated()) {
+            return $this->redirectToRoute('homepage');
+        }
+
+        if (
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::VOLONTARIA &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_TEAM &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_POLE &&
+            $this->get('CurrentUser')->get()->getRole() !== RoleHelper::CHIEF_SUBTEAM
+
+        ) {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        $volontaria = $request->query->get('volontaria');
+        $type = $request->query->get('type');
+        $id = $request->query->get('id');
+        $data = $request->query->get('data');
+
+        if ($data) {
+            $data = explode(',', $data);
+        }
+
+        if ($volontaria === 'true') {
+            $zones = $this->get('zoneRepository')->findAll();
+
+            return $this->render('@EventBundle/pdf/callsheet.html.twig', [
+                'zones' => $zones,
+                'data'  => $data,
+            ]);
+        }
+
+        if ($id && $type == 'zone') {
+            $zones = $this->get('ZoneRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/pdf/callsheet.html.twig', [
+                'zones' => $zones,
+                'data'  => $data,
+            ]);
+        }
+
+        if ($id && $type == 'team') {
+            $teams = $this->get('TeamRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/pdf/callsheet.html.twig', [
+                'zones' => false,
+                'teams' => $teams,
+                'data'  => $data,
+            ]);
+        }
+
+        if ($id && $type == 'pole') {
+            $poles = $this->get('PoleRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/pdf/callsheet.html.twig', [
+                'zones'    => false,
+                'teams'    => false,
+                'poles'    => $poles,
+                'data'     => $data,
+            ]);
+        }
+
+        if ($id && $type == 'subteam') {
+            $subteams = $this->get('subteamRepository')->findBy(['id' => $id]);
+
+            return $this->render('@EventBundle/pdf/callsheet.html.twig', [
+                'zones'    => false,
+                'teams'    => false,
+                'poles'    => false,
+                'subteams' => $subteams,
+                'data'     => $data,
+            ]);
+        }
+
+        return $this->render('EventBundle/pdf/callsheet.html.twig', [
+            'zones'    => false,
+            'teams'    => false,
+            'poles'    => false,
+            'subteams' => false,
+        ]);
     }
 
     /**

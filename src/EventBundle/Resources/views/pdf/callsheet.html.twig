@@ -8,74 +8,195 @@
 </head>
 <body>
 <div class="callsheet">
-    <h2>Zones Chaud</h2>
-    <h3>Équipes Chocolat</h3>
-    <h4>Pôles Caramel</h4>
-    <h5>Sous-équipe Trolo</h5>
-    <table>
-        <tr>
-            <th></th>
-            <th><p class="bold">Nom</p></th>
-            <th><p class="bold">Prénom</p></th>
-            <th><p class="bold">Téléphone</p></th>
-            <th><p class="bold">E-mail</p></th>
-            <th><p class="bold">Permis</p></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-        </tr>
-        <tr>
-            <th><img src="" width="45"></th>
-            <th><p>Agnès</p></th>
-            <th><p>Cortez</p></th>
-            <th><p>05.85.44.03.10</p></th>
-            <th><p>adresse@gmail.com</p></th>
-            <th><p>Oui</p></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-        </tr>
-        <tr>
-            <th><img src="" width="45"></th>
-            <th><p>Agnès</p></th>
-            <th><p>Cortez</p></th>
-            <th><p>05.85.44.03.10</p></th>
-            <th><p>adresse@gmail.com</p></th>
-            <th><p>Oui</p></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-        </tr>
-        <tr>
-            <th><img src="" width="45"></th>
-            <th><p>Agnès</p></th>
-            <th><p>Cortez</p></th>
-            <th><p>05.85.44.03.10</p></th>
-            <th><p>adresse@gmail.com</p></th>
-            <th><p>Oui</p></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-            <th class="cochage"></th>
-        </tr>
-    </table>
+    <h2 style="text-align: center">Feuille d'appel</h2>
+    {# VOLONTARIAT #}
+    {% if zones %}
+        {% for zone in zones %}
+        {% for team in teamRepository.findBy({'zone_id': zone.id}) %}
+            {% for pole in poleRepository.findBy({'team_id': team.id}) %}
+                {% for subteam in subteamRepository.findBy({'pole_id': pole.id}) %}
+                <h3 style="margin-top: 20px; text-align: center">{{ zone.name }} - {{ team.name }} - {{ pole.name }} - {{ subteam.name }}</h3>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th><p class="bold">Nom</p></th>
+                        <th><p class="bold">Prénom</p></th>
+                        {% if 'phone' in data %}<th><p class="bold">Téléphone</p></th>{% endif %}
+                        {% if 'email' in data %}<th><p class="bold">E-mail</p></th>{% endif %}
+                        {% if 'address' in data %}<th><p class="bold">Adresse</p></th>{% endif %}
+                        {% if 'permis' in data %}<th><p class="bold">Permis</p></th>{% endif %}
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                    </tr>
+
+                    {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
+                    <tr>
+                        <th><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" width="45"></th>
+                        <th><p>{{ person.firstName }}</p></th>
+                        <th><p>{{ person.lastName }}</p></th>
+                        {% if 'phone' in data %}<th><p>{{ person.phone }}</p></th>{% endif %}
+                        {% if 'email' in data %}<th><p>{{ person.email }}</p></th>{% endif %}
+                        {% if 'address' in data %}<th><p>{{ person.getAddress() }} {{ person.getZipcode() }} {{ person.getCity() }}</p></th>{% endif %}
+                        {% if 'permis' in data %}<th><p>{% if person.driverLicense %}Oui{% else %}Non{% endif %}</p></th>{% endif %}
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                    </tr>
+                    {% endfor %}
+                </table>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        {% endfor %}
+    {% elseif teams %}
+        {% for team in teams %}
+            {% for pole in poleRepository.findBy({'team_id': team.id}) %}
+                {% for subteam in subteamRepository.findBy({'pole_id': pole.id}) %}
+                    <h3 style="margin-top: 20px; text-align: center">{{ team.name }} - {{ pole.name }} - {{ subteam.name }}</h3>
+                    <table>
+                        <tr>
+                            <th></th>
+                            <th><p class="bold">Nom</p></th>
+                            <th><p class="bold">Prénom</p></th>
+                            {% if 'phone' in data %}<th><p class="bold">Téléphone</p></th>{% endif %}
+                            {% if 'email' in data %}<th><p class="bold">E-mail</p></th>{% endif %}
+                            {% if 'address' in data %}<th><p class="bold">Adresse</p></th>{% endif %}
+                            {% if 'permis' in data %}<th><p class="bold">Permis</p></th>{% endif %}
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                        </tr>
+
+                        {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
+                            <tr>
+                                <th><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" width="45"></th>
+                                <th><p>{{ person.firstName }}</p></th>
+                                <th><p>{{ person.lastName }}</p></th>
+                                {% if 'phone' in data %}<th><p>{{ person.phone }}</p></th>{% endif %}
+                                {% if 'email' in data %}<th><p>{{ person.email }}</p></th>{% endif %}
+                                {% if 'address' in data %}<th><p>{{ person.getAddress() }} {{ person.getZipcode() }} {{ person.getCity() }}</p></th>{% endif %}
+                                {% if 'permis' in data %}<th><p>{% if person.driverLicense %}Oui{% else %}Non{% endif %}</p></th>{% endif %}
+                                <th class="cochage"></th>
+                                <th class="cochage"></th>
+                                <th class="cochage"></th>
+                                <th class="cochage"></th>
+                                <th class="cochage"></th>
+                                <th class="cochage"></th>
+                                <th class="cochage"></th>
+                                <th class="cochage"></th>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    {% elseif poles %}
+        {% for pole in poles %}
+            {% for subteam in subteamRepository.findBy({'pole_id': pole.id}) %}
+                <h3 style="margin-top: 20px; text-align: center">{{ pole.name }} - {{ subteam.name }}</h3>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th><p class="bold">Nom</p></th>
+                        <th><p class="bold">Prénom</p></th>
+                        {% if 'phone' in data %}<th><p class="bold">Téléphone</p></th>{% endif %}
+                        {% if 'email' in data %}<th><p class="bold">E-mail</p></th>{% endif %}
+                        {% if 'address' in data %}<th><p class="bold">Adresse</p></th>{% endif %}
+                        {% if 'permis' in data %}<th><p class="bold">Permis</p></th>{% endif %}
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                    </tr>
+
+                    {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
+                        <tr>
+                            <th><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" width="45"></th>
+                            <th><p>{{ person.firstName }}</p></th>
+                            <th><p>{{ person.lastName }}</p></th>
+                            {% if 'phone' in data %}<th><p>{{ person.phone }}</p></th>{% endif %}
+                            {% if 'email' in data %}<th><p>{{ person.email }}</p></th>{% endif %}
+                            {% if 'address' in data %}<th><p>{{ person.getAddress() }} {{ person.getZipcode() }} {{ person.getCity() }}</p></th>{% endif %}
+                            {% if 'permis' in data %}<th><p>{% if person.driverLicense %}Oui{% else %}Non{% endif %}</p></th>{% endif %}
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                            <th class="cochage"></th>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        {% endfor %}
+    {% elseif subteams %}
+        {% for subteam in subteams %}
+            <h3 style="margin-top: 20px; text-align: center">{{ subteam.name }}</h3>
+            <table>
+                <tr>
+                    <th></th>
+                    <th><p class="bold">Nom</p></th>
+                    <th><p class="bold">Prénom</p></th>
+                    {% if 'phone' in data %}<th><p class="bold">Téléphone</p></th>{% endif %}
+                    {% if 'email' in data %}<th><p class="bold">E-mail</p></th>{% endif %}
+                    {% if 'address' in data %}<th><p class="bold">Adresse</p></th>{% endif %}
+                    {% if 'permis' in data %}<th><p class="bold">Permis</p></th>{% endif %}
+                    <th class="cochage"></th>
+                    <th class="cochage"></th>
+                    <th class="cochage"></th>
+                    <th class="cochage"></th>
+                    <th class="cochage"></th>
+                    <th class="cochage"></th>
+                    <th class="cochage"></th>
+                    <th class="cochage"></th>
+                </tr>
+
+                {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
+                    <tr>
+                        <th><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" width="45"></th>
+                        <th><p>{{ person.firstName }}</p></th>
+                        <th><p>{{ person.lastName }}</p></th>
+                        {% if 'phone' in data %}<th><p>{{ person.phone }}</p></th>{% endif %}
+                        {% if 'email' in data %}<th><p>{{ person.email }}</p></th>{% endif %}
+                        {% if 'address' in data %}<th><p>{{ person.getAddress() }} {{ person.getZipcode() }} {{ person.getCity() }}</p></th>{% endif %}
+                        {% if 'permis' in data %}<th><p>{% if person.driverLicense %}Oui{% else %}Non{% endif %}</p></th>{% endif %}
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                        <th class="cochage"></th>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+    {% endif %}
 </div>
+
+<script type="application/javascript">
+    window.print();
+</script>

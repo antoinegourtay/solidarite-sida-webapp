@@ -15,7 +15,7 @@
     </div>
      <div class="print_buttons"> 
         <a class="button" id="btn_print" data-href="{{ printingRouter }}" href="{{ printingRouter }}">Imprimer Trombinoscope</a> 
-        <a class="button">Imprimer Feuille d'appel</a> 
+        <a class="button" id="btn_callsheet" data-href="{{ callsheetRouter }}" href="{{ callsheetRouter }}">Imprimer Feuille d'appel</a> 
     </div> 
 </div>
 {% endblock %}
@@ -71,6 +71,9 @@
     function buildParams() {
         let link = $('#btn_print').attr('data-href');
         $('#btn_print').attr('href', link + '&data='+ queryParams.join(','));
+
+        let linkTwo = $('#btn_callsheet').attr('data-href');
+        $('#btn_callsheet').attr('href', linkTwo + '&data='+ queryParams.join(','));
     }
 </script>
 {% endblock %}
