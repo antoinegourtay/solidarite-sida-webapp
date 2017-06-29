@@ -5,7 +5,7 @@
 {% block controls %}{% endblock %}
 
 {% block content %}
-
+<div class="trombi">
 {# VOLONTARIAT #}
 {% if zones %}
     {% for zone in zones %}
@@ -18,16 +18,18 @@
                     <h4>{{ subteam.name }}</h4>
                     <div class="equipe_container">
                         <div class="equipe">
-                            <div class="equipe_person">
+                            <div class="equipe_person trombi">
                                 {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                                     <div class="person_card">
-                                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg">
-                                        <div class="person_info">
+                                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
+                                        <div class="person_info_subteam">
                                             <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
                                             {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                                <p class="person_poste">Chef d'équipe</p>
+                                                <p class="person_poste_benevole">Chef d'équipe</p>
                                             {% elseif subteamHasAdjointRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                                <p class="person_poste">Adjoint</p>
+                                                <p class="person_poste_benevole">Adjoint</p>
+                                            {% else %}
+                                                <p class="person_poste_benevole">Bénévole</p>
                                             {% endif %}
                                             {% if 'email' in data %}<p class="person_email ">Email: {{ person.getEmail() }}</p>{% endif %}
                                             {% if 'phone' in data %}<p class="person_phone">Tél: {{ person.getPhone() }}</p>{% endif %}
@@ -53,16 +55,18 @@
                 <h4>{{ subteam.name }}</h4>
                 <div class="equipe_container">
                     <div class="equipe">
-                        <div class="equipe_person">
+                        <div class="equipe_person trombi">
                             {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                                 <div class="person_card">
                                     <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
-                                    <div class="person_info">
+                                    <div class="person_info_subteam">
                                         <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
                                         {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                            <p class="person_poste">Chef d'équipe</p>
+                                            <p class="person_poste_benevole">Chef d'équipe</p>
                                         {% elseif subteamHasAdjointRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                            <p class="person_poste">Adjoint</p>
+                                            <p class="person_poste_benevole">Adjoint</p>
+                                        {% else %}
+                                            <p class="person_poste_benevole">Bénévole</p>
                                         {% endif %}
                                         {% if 'email' in data %}<p class="person_email ">Email: {{ person.getEmail() }}</p>{% endif %}
                                         {% if 'phone' in data %}<p class="person_phone">Tél: {{ person.getPhone() }}</p>{% endif %}
@@ -84,16 +88,18 @@
             <h4>{{ subteam.name }}</h4>
             <div class="equipe_container">
                 <div class="equipe">
-                    <div class="equipe_person">
+                    <div class="equipe_person trombi">
                         {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                             <div class="person_card">
                                 <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
-                                <div class="person_info">
+                                <div class="person_info_subteam">
                                     <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
                                     {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                        <p class="person_poste">Chef d'équipe</p>
+                                        <p class="person_poste_benevole">Chef d'équipe</p>
                                     {% elseif subteamHasAdjointRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                        <p class="person_poste">Adjoint</p>
+                                        <p class="person_poste_benevole">Adjoint</p>
+                                    {% else %}
+                                        <p class="person_poste_benevole">Bénévole</p>
                                     {% endif %}
                                     {% if 'email' in data %}<p class="person_email ">Email: {{ person.getEmail() }}</p>{% endif %}
                                     {% if 'phone' in data %}<p class="person_phone">Tél: {{ person.getPhone() }}</p>{% endif %}
@@ -112,16 +118,18 @@
         <h4>{{ subteam.name }}</h4>
         <div class="equipe_container">
             <div class="equipe">
-                <div class="equipe_person">
+                <div class="equipe_person trombi">
                     {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                         <div class="person_card">
                             <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
-                            <div class="person_info">
+                            <div class="person_info_subteam">
                                 <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
                                 {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                    <p class="person_poste">Chef d'équipe</p>
+                                    <p class="person_poste_benevole">Chef d'équipe</p>
                                 {% elseif subteamHasAdjointRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
-                                    <p class="person_poste">Adjoint</p>
+                                    <p class="person_poste_benevole">Adjoint</p>
+                                {% else %}
+                                    <p class="person_poste_benevole">Bénévole</p>
                                 {% endif %}
                                 {% if 'email' in data %}<p class="person_email ">Email: {{ person.getEmail() }}</p>{% endif %}
                                 {% if 'phone' in data %}<p class="person_phone">Tél: {{ person.getPhone() }}</p>{% endif %}
@@ -139,6 +147,7 @@
         <h3>Une erreur est survenue</h3>
     </div>
 {% endif %}
+</div>
 {% endblock %}
 
 {% block javascript %}
