@@ -37,7 +37,7 @@
 
                     {% for i, person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                     <tr {% if i % 9 == 0 %}style="page-break-after: always; page-break-inside: avoid"{% endif %}>
-                        <th class="personne_image"><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" width="45"></th>
+                        <th class="personne_image"><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" height="45"></th>
                         <th><p>{{ person.firstName }}</p></th>
                         <th><p>{{ person.lastName }}</p></th>
                         {% if 'phone' in data %}<th><p>{{ person.phone }}</p></th>{% endif %}
@@ -85,7 +85,7 @@
 
                         {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                             <tr>
-                                <th class="personne_image"><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" width="45"></th>
+                                <th class="personne_image"><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" height="45"></th>
                                 <th class="personne_nom"><p>{{ person.firstName }}</p></th>
                                 <th class="personne_prenom"><p>{{ person.lastName }}</p></th>
                                 {% if 'phone' in data %}<th class="personne_telephone"><p>{{ person.phone }}</p></th>{% endif %}
@@ -131,7 +131,7 @@
 
                     {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                         <tr>
-                            <th class="personne_image"><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" width="45"></th>
+                            <th class="personne_image"><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" height="45"></th>
                             <th><p>{{ person.firstName }}</p></th>
                             <th><p>{{ person.lastName }}</p></th>
                             {% if 'phone' in data %}<th><p>{{ person.phone }}</p></th>{% endif %}
@@ -175,7 +175,7 @@
 
                 {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                     <tr>
-                        <th class="personne_image"><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" width="45"></th>
+                        <th class="personne_image"><img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg" height="45"></th>
                         <th><p>{{ person.firstName }}</p></th>
                         <th><p>{{ person.lastName }}</p></th>
                         {% if 'phone' in data %}<th><p>{{ person.phone }}</p></th>{% endif %}

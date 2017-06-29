@@ -21,7 +21,7 @@
                             <div class="equipe_person trombi">
                                 {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                                     <div class="person_card">
-                                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
+                                        <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg">
                                         <div class="person_info_subteam">
                                             <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
                                             {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
@@ -58,7 +58,7 @@
                         <div class="equipe_person trombi">
                             {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                                 <div class="person_card">
-                                    <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
+                                    <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg">
                                     <div class="person_info_subteam">
                                         <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
                                         {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
@@ -91,7 +91,7 @@
                     <div class="equipe_person trombi">
                         {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                             <div class="person_card">
-                                <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
+                                <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg">
                                 <div class="person_info_subteam">
                                     <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
                                     {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
@@ -121,7 +121,7 @@
                 <div class="equipe_person trombi">
                     {% for person in peopleRepository.findBy({'subteam_id': subteam.id}) %}
                         <div class="person_card">
-                            <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getFirstName }} {{ person.getLastName }}.jpg">
+                            <img class="img" onerror="this.src='/images/defaultPicture.png'" src="/images/benevoles/{{ person.getId }}.jpg">
                             <div class="person_info_subteam">
                                 <span>{{ person.getFirstName() }} {{ person.getLastName() }}</span>
                                 {% if subteamHasChiefRepository.findBy({'people_id': person.getId(), 'subteam_id': subteam.id}) is not empty %}
