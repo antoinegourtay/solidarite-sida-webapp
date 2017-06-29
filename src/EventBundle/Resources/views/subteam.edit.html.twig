@@ -128,7 +128,7 @@
                     const adjointClass = people.adjoint ? 'active' : '';
                     $('#subteam_people').append(`
                     <div class="person_card_repartition_selected" data-id="${people.id}">
-                        <img onerror="this.src='/images/defaultPicture.png'" class="person_photo_repartition_selected" src="/images/benevoles/${people.firstName} ${people.lastName}.jpg">
+                        <img onerror="this.src='/images/defaultPicture.png'" class="person_photo_repartition_selected" src="/images/benevoles/${people.id}.jpg">
                         <h5>${people.name}</h5>
                         <button class="repartition_adjoint adjoint ${adjointClass}"></button>
                         <button class="repartition_croix delete"></button>
@@ -144,7 +144,7 @@
                 result.people.forEach(function(people) {
                     $('#available_people').append(`
                     <div class="person_card_repartition" data-id="${people.id}">
-                        <img onerror="this.src='/images/defaultPicture.png'" class="person_photo_repartition" src="/images/benevoles/${people.firstName} ${people.lastName}.jpg">
+                        <img onerror="this.src='/images/defaultPicture.png'" class="person_photo_repartition" src="/images/benevoles/${people.id}.jpg">
                         <h5>${people.name}</h5>
                     </div>
                 `);
